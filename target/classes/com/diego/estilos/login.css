@@ -1,0 +1,38 @@
+GridPane{
+    -fx-background-color:#E3E3E3;
+}   
+
+BorderPane{
+	-fx-background-image: url("../img/background.jpg");
+}
+
+.label{
+    -fx-text-fill:white;
+}
+
+.button{
+    -fx-font-weight: bold;
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#3f474f;
+}
+
+.button:hover{
+    -fx-font-weight: bold;
+    -fx-background-color:#5a1265;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#FFFFFF;
+}
+
+.text-field {
+    -fx-background-color: #000000 , #E3E3E3 , #E3E3E3;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+    -fx-prompt-text-fill: #444444;
+    -fx-text-fill:black;
+}
+.text-field:focused {
+    -fx-background-color: #d43c9b , #E3E3E3 , #E3E3E3;
+}

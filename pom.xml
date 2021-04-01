@@ -51,7 +51,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>com.diego.FinDeCicloDGM.App</mainClass>
+                    <mainClass>com.diego.FinDeCicloDGM.Lanzador</mainClass>
                 </configuration>
             </plugin>
         </plugins>

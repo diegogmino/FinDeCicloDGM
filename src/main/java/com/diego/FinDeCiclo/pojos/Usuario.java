@@ -39,11 +39,19 @@ public class Usuario {
 	@Column
 	private String apellidos;
 	
+	@Column
+	private int rango;
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Libro> libros;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Musica> musica;
+	
+	
+	public Usuario() {
+		super();
+	}
 
 	public Usuario(String nombreUsuario, String contrasena, String email, Date fechaNacimiento, String nombre, String apellidos) {
 		super();
@@ -103,6 +111,14 @@ public class Usuario {
 
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
+	}
+
+	public int getRango() {
+		return rango;
+	}
+
+	public void setRango(int rango) {
+		this.rango = rango;
 	}
 
 	public List<Libro> getLibros() {
