@@ -1,0 +1,98 @@
+GridPane{
+    -fx-background-color:#E3E3E3;
+}   
+
+.transition-pane{
+	-fx-background-image: url("../img/background.jpg");
+}
+
+.label{
+    -fx-text-fill:black;
+}
+
+.button{
+    -fx-font-weight: bold;
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#3f474f;
+}
+
+.button:hover{
+    -fx-font-weight: bold;
+    -fx-background-color:#5a1265;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#FFFFFF;
+}
+
+.text-field {
+    -fx-background-color: #000000 , #E3E3E3 , #E3E3E3;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+    -fx-prompt-text-fill: #444444;
+    -fx-text-fill:black;
+}
+.text-field:focused {
+    -fx-background-color: #d43c9b , #E3E3E3 , #E3E3E3;
+}
+
+.date-picker:focused{
+	-fx-background-color: transparent;
+}
+
+.date-picker{
+	-fx-accent:#d43c9b;
+}
+
+.date-picker .combo-box {
+	-fx-background-insets:0px ;
+	-fx-border-width: 0px;
+}
+
+.date-picker .text-field{
+	-fx-background-radius:0px ;
+	-fx-border-color: transparent;
+}
+
+.date-picker .arrow-button{
+	-fx-background-radius:0px ;
+	-fx-background-color: #5a1265;
+}
+
+.date-picker .arrow-button .arrow{
+	-fx-background-radius:0px ;
+	-fx-background-color: #FFFFFF;
+}
+
+.date-picker .arrow-button:hover .arrow{
+	-fx-background-radius:0px ;
+	-fx-background-color: #d43c9b;
+}
+
+.date-picker .button {
+	-fx-background-color: transparent;
+	-fx-border-color:transparent;
+	-fx-pref-height: 35px;
+	-fx-pref-width: 35px;
+}
+
+.date-picker .button:hover {
+	-fx-border-color:transparent;
+	-fx-pref-height: 35px;
+	-fx-pref-width: 35px;
+}
+
+.date-picker .button .arrow:pressed {
+	-fx-border-color:transparent;
+	-fx-pref-height: 35px;
+	-fx-pref-width: 35px;
+}
+
+.date-picker .cell:hover {
+	-fx-background-color: #d43c9b;
+}
+
+.date-picker .cell:focused {
+	-fx-background-color:#5a1265;
+}

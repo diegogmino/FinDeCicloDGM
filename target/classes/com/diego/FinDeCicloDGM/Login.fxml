@@ -2,94 +2,152 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../estilos/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.LoginControlador">
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../estilos/loginPane.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.LoginControlador">
    <children>
-      <BorderPane prefHeight="650.0" prefWidth="705.0">
-         <center>
-            <ImageView fitHeight="240.0" fitWidth="322.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../../../img/logo_login.png" />
-               </image>
-               <BorderPane.margin>
-                  <Insets top="-10.0" />
-               </BorderPane.margin></ImageView>
-         </center>
-         <top>
-            <Label text="¿No tienes cuenta con nosotros?" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="650.0" prefWidth="500.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="369.3333435058594" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="187.33334350585938" minHeight="10.0" prefHeight="161.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="345.0" minHeight="0.0" prefHeight="57.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="345.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="345.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="245.99999618530273" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="345.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="345.0" minHeight="10.0" prefHeight="171.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="usuario" prefHeight="25.0" prefWidth="340.0" promptText="Usuario" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="80.0" right="100.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="contrasena" promptText="Contraseña" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="80.0" right="100.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </PasswordField>
+            <Label ellipsisString="" prefHeight="80.0" prefWidth="191.0" style="-fx-text-fill: black;" text="Registro">
                <font>
                   <Font name="Yu Gothic Medium" size="30.0" />
                </font>
-               <BorderPane.margin>
-                  <Insets top="32.0" />
-               </BorderPane.margin>
+               <GridPane.margin>
+                  <Insets left="80.0" top="20.0" />
+               </GridPane.margin>
             </Label>
-         </top>
-         <bottom>
-            <Button mnemonicParsing="false" onAction="#crearCuenta" prefHeight="39.0" prefWidth="150.0" text="Crear cuenta" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="50.0" />
-               </BorderPane.margin>
+            <TextField fx:id="email" prefHeight="25.0" prefWidth="340.0" promptText="Email" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="80.0" right="100.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="nombre" prefHeight="25.0" prefWidth="340.0" promptText="Nombre" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="80.0" right="100.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="apellidos" prefHeight="25.0" prefWidth="340.0" promptText="Apellidos" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="80.0" right="100.0" />
+               </GridPane.margin>
+            </TextField>
+            <DatePicker fx:id="nacimiento" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="80.0" />
+               </GridPane.margin>
+            </DatePicker>
+            <Button mnemonicParsing="false" onAction="#crearCuenta" text="Crear cuenta" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets bottom="40.0" left="80.0" />
+               </GridPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#mostrarIniciarSesion" text="Volver" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets bottom="40.0" left="220.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane alignment="CENTER_RIGHT" layoutX="700.0" prefHeight="650.0" prefWidth="500.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="369.3333435058594" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="187.33334350585938" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="101.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="245.99999618530273" minHeight="10.0" prefHeight="101.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="332.0" minHeight="10.0" prefHeight="289.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="140.0" styleClass="loginButton" text="Iniciar sesión" textAlignment="CENTER" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="100.0" left="80.0" />
+               </GridPane.margin>
                <font>
                   <Font name="Yu Gothic Medium" size="20.0" />
                </font>
             </Button>
-         </bottom></BorderPane>
-      <GridPane prefWidth="500.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="369.3333435058594" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="187.33334350585938" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="101.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="245.99999618530273" minHeight="10.0" prefHeight="101.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="332.0" minHeight="10.0" prefHeight="289.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="140.0" styleClass="loginButton" text="Login" textAlignment="CENTER" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets bottom="100.0" left="170.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Yu Gothic Medium" size="20.0" />
-               </font></Button>
-            <TextField fx:id="usuario" prefHeight="25.0" prefWidth="340.0" promptText="Usuario" GridPane.rowIndex="1">
+            <TextField fx:id="usuarioLogin" prefHeight="25.0" prefWidth="340.0" promptText="Usuario" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="80.0" right="100.0" />
                </GridPane.margin>
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
-               </font></TextField>
-            <PasswordField fx:id="contrasena" promptText="Contraseña" GridPane.rowIndex="2">
+               </font>
+            </TextField>
+            <PasswordField fx:id="contrasenaLogin" promptText="Contraseña" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="80.0" right="100.0" />
                </GridPane.margin>
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
-               </font></PasswordField>
-            <Label alignment="CENTER" prefHeight="111.0" prefWidth="500.0" style="-fx-text-fill: black;" text="Iniciar sesion" textAlignment="CENTER">
+               </font>
+            </PasswordField>
+            <Label prefHeight="111.0" prefWidth="500.0" text="Iniciar sesión">
                <font>
                   <Font name="Yu Gothic Medium" size="30.0" />
                </font>
                <GridPane.margin>
-                  <Insets top="20.0" />
+                  <Insets left="80.0" top="20.0" />
                </GridPane.margin>
             </Label>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#mostrarCrearCuenta" prefHeight="40.0" prefWidth="147.0" styleClass="loginButton" text="Crea una cuenta" textAlignment="CENTER" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Yu Gothic Medium" size="20.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="100.0" left="250.0" />
+               </GridPane.margin>
+            </Button>
          </children>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
       </GridPane>
+      <VBox id="vbox" fx:id="vbox" prefHeight="650.0" prefWidth="700.0" styleClass="transition-pane" />
    </children>
-</HBox>
+</Pane>

@@ -1,31 +1,108 @@
 package com.diego.FinDeCicloDGM;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.diego.FinDeCiclo.pojos.Usuario;
 import com.diego.FinDeCicloDGM.dao.UsuarioDao;
 
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class LoginControlador extends ControladorConNavegabilidad implements Initializable {
     
+	@FXML
+    public Pane root;
+
     @FXML
-    TextField usuario ;
+    private TextField usuario;
+
+    @FXML
+    private PasswordField contrasena;
+
+    @FXML
+    private TextField email;
+
+    @FXML
+    private TextField nombre;
+
+    @FXML
+    private TextField apellidos;
+
+    @FXML
+    private DatePicker nacimiento;
+
+    @FXML
+    private TextField usuario1;
+
+    @FXML
+    private PasswordField contrasena1;
+
+    @FXML
+    public VBox vbox;
     
-    @FXML
-    TextField contrasena ;
+    private Parent fxml;
     
     UsuarioDao usuarioDao;
     Usuario usuarioEncontrado;
+
+    @FXML
+    void mostrarCrearCuenta() {
+    	
+        TranslateTransition translate = new TranslateTransition(Duration.seconds(2), vbox);
+        translate.setToX(vbox.getLayoutX() + (root.getPrefWidth() - vbox.getPrefWidth()));
+        translate.play();
+        
+        translate.setOnFinished((e)->{
+        	try {
+        		fxml = FXMLLoader.load(getClass().getResource("CrearCuenta.fxml"));
+        		vbox.getChildren().removeAll();
+        		vbox.getChildren().setAll(fxml);
+        	} catch (IOException ex) {
+        		ex.printStackTrace();
+        	}
+        });
+        
+        
+    	
+    }
+
+    @FXML
+    void mostrarIniciarSesion(ActionEvent event) {
+
+        TranslateTransition translate = new TranslateTransition(Duration.seconds(2), vbox);
+        translate.setToX(root.getLayoutX());
+        translate.play();
+        
+        translate.setOnFinished((e)->{
+        	try {
+        		fxml = FXMLLoader.load(getClass().getResource("IniciarSesion.fxml"));
+        		vbox.getChildren().removeAll();
+        		vbox.getChildren().setAll(fxml);
+        	} catch (IOException ex) {
+        		ex.printStackTrace();
+        	}
+        });
+    	
+    }
+
     
     public void login() {
         
@@ -88,14 +165,24 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
    }
     
     public void crearCuenta() {
-        this.layout.mostrarComoPantallaActual("registro");
+        
+    	System.out.println("registro");
+    	
     }
     
-    @Override
+   @Override
    public void initialize(URL location, ResourceBundle resources) {
-       
+    	
        usuarioDao = new UsuarioDao();
        usuarioEncontrado = new Usuario();
+ 
+       try {
+		fxml = FXMLLoader.load(getClass().getResource("IniciarSesion.fxml"));
+		vbox.getChildren().removeAll();
+		vbox.getChildren().setAll(fxml);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
        
    }
     
