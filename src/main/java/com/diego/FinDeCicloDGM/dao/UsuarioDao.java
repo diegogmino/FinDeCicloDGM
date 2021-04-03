@@ -28,7 +28,7 @@ public class UsuarioDao {
 
 		session.getTransaction().begin();
 		
-			
+			//Consulta para comprobar si un usuario ya está en la base de datos
 		
 		session.getTransaction().commit();
 
@@ -36,6 +36,14 @@ public class UsuarioDao {
 		sf.close();
 		
 		return null;
+		
+	}
+	
+	public boolean insertarUsuario (Usuario usuario) {
+		
+		
+		
+		return true;
 		
 	}
 

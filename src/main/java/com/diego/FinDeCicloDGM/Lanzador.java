@@ -18,7 +18,7 @@ public class Lanzador extends Application {
         layoutPane.mostrarComoPantallaActual("login");
         
         Scene escena = new Scene(layoutPane, 1200 , 650);
-        primaryStage.setTitle("Gestor de colección de libros");
+        primaryStage.setTitle("Gestor de colecciones");
         primaryStage.setResizable(false);
         //primaryStage.getIcons().add(new Image("/img/libro.png"));
         primaryStage.setScene(escena);

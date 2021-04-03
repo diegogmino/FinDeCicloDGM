@@ -2,6 +2,8 @@ package com.diego.FinDeCicloDGM;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import com.diego.FinDeCiclo.pojos.Usuario;
@@ -15,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
@@ -29,13 +32,13 @@ import javafx.util.Duration;
 public class LoginControlador extends ControladorConNavegabilidad implements Initializable {
     
 	@FXML
-    public Pane root;
+    private Pane root;
 
     @FXML
-    private TextField usuario;
+    private TextField usuarioRegistro;
 
     @FXML
-    private PasswordField contrasena;
+    private PasswordField contrasenaRegistro;
 
     @FXML
     private TextField email;
@@ -47,22 +50,37 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     private TextField apellidos;
 
     @FXML
-    private DatePicker nacimiento;
+    private DatePicker fechaNacimiento;
 
     @FXML
-    private TextField usuario1;
+    private PasswordField repetirContrasena;
 
     @FXML
-    private PasswordField contrasena1;
+    private TextField usuarioLogin;
 
     @FXML
-    public VBox vbox;
+    private PasswordField contrasenaLogin;
+
+    @FXML
+    private VBox vbox;
+    
+    @FXML
+    private Button crearCuenta;
+    
+    @FXML
+    private Button iniciarSesion;
     
     private Parent fxml;
     
-    UsuarioDao usuarioDao;
-    Usuario usuarioEncontrado;
+    private LocalDate date = LocalDate.parse("1900-01-01");
+    
+    private UsuarioDao usuarioDao;
+    private Usuario usuarioEncontrado;
+    
+    private boolean usuarioRegistroEs = false, contrasenaRegistroEs = false, repetirContrasenaEs = false, emailEs = false, nombreEs = false, apellidosEs = false, 
+    		usuarioLoginEs = false, contrasenaLoginEs = false;
 
+    // Método que ejecuta la animación y muestra el FXML que acompaña a la vista del registro
     @FXML
     void mostrarCrearCuenta() {
     	
@@ -84,6 +102,7 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     	
     }
 
+    // Método que ejecuta la animación y muestra el FXML que acompaña a la vista del login 
     @FXML
     void mostrarIniciarSesion(ActionEvent event) {
 
@@ -96,6 +115,8 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
         		fxml = FXMLLoader.load(getClass().getResource("IniciarSesion.fxml"));
         		vbox.getChildren().removeAll();
         		vbox.getChildren().setAll(fxml);
+        		// Llamamos al método de limpiar campos cuando la animación termine, para que el usuario no vea desaparecer la información de repente
+        		limpiarCamposRegistro();
         	} catch (IOException ex) {
         		ex.printStackTrace();
         	}
@@ -103,12 +124,12 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     	
     }
 
-    
-    public void login() {
+    // Método que comprueba si el usuario introducido existe y le permite entrar en la aplicación
+    public void iniciarSesion() {
         
         boolean logear = false;
 
-        usuarioEncontrado = usuarioDao.existeUsuario(usuario.getText(), contrasena.getText());
+        usuarioEncontrado = usuarioDao.existeUsuario(usuarioLogin.getText(), contrasenaLogin.getText());
          
          if((usuarioEncontrado.getNombre() != null) && (usuarioEncontrado.getRango() == 1)) {
              
@@ -118,8 +139,8 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
               this.layout.mostrarComoPantallaActual("libros");
               this.layout.getStylesheets().addAll(getClass().getResource("..\\..\\..\\estilos\\libros.css").toExternalForm());
               
-              usuario.clear();
-              contrasena.clear();
+              usuarioLogin.clear();
+              contrasenaLogin.clear();
               
          }  else if((usuarioEncontrado.getNombre() != null) && (usuarioEncontrado.getRango() == 2)) {
              
@@ -129,8 +150,8 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
              this.layout.mostrarComoPantallaActual("librosAdmin");
              this.layout.getStylesheets().addAll(getClass().getResource("..\\..\\..\\estilos\\libros.css").toExternalForm());
              
-             usuario.clear();
-             contrasena.clear();
+             usuarioLogin.clear();
+             contrasenaLogin.clear();
              
          } else {
              Alert usuarioNoEncontrado = lanzarPopup("Error", "No existe ningún usuario que corresponda a los valores introducidos. Por favor, inténtelo de nuevo", 2);
@@ -139,6 +160,112 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
   
     }
     
+    // Método para crear un usuario nuevo e insertarlo en la base de datos
+    public void registro() {
+    	
+    	Date fecha;
+    	
+    	// Comprobamos si el usuario ha introducido una fecha, ya que no es un campo obligatorio
+    	if(fechaNacimiento.getValue() == null) {
+    		fecha = Date.valueOf(date);
+    	} else {
+    		fecha = Date.valueOf(fechaNacimiento.getValue());
+    	}
+    	
+    	Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fecha, nombre.getText(), apellidos.getText());
+    	
+    	if(usuarioDao.insertarUsuario(usuario)) {
+    		mostrarIniciarSesion(null);
+    	} else {
+    		System.out.println("Error al insertar el usuario");
+    	}
+    	
+    	
+    }
+    
+    private void limpiarCamposRegistro() {
+    	// Método que limpia los campos del formulario de registro
+    	
+    	nombre.clear();
+    	apellidos.clear();
+    	fechaNacimiento.setValue(null);
+    	usuarioRegistro.clear();
+    	contrasenaRegistro.clear();
+    	repetirContrasena.clear();
+    	email.clear();
+    	
+    	crearCuenta.setDisable(true);
+    	
+    }
+    
+    public void escribirNombre() {
+    	// Método que escucha cada vez que se pulsa una tecla en el campo de nombre y comprueba si está vacio o no
+    	nombreEs = !nombre.getText().isEmpty();
+    	activarCrearCuenta();
+    }
+    
+    public void escribirApellidos() {
+    	// Método que escucha cada vez que se pulsa una tecla en el campo de apellidos y comprueba si está vacio o no
+    	apellidosEs = !apellidos.getText().isEmpty();
+    	activarCrearCuenta();
+    }
+    
+    public void escribirUsuarioRegistro() {
+    	// Método que escucha cada vez que se pulsa una tecla en el campo de usuario y comprueba si está vacio o no
+    	usuarioRegistroEs = !usuarioRegistro.getText().isEmpty();
+    	activarCrearCuenta();
+    }
+    
+    public void escribirContrasenaRegistro() {
+    	// Método que escucha cada vez que se pulsa una tecla en el campo de contraseña y comprueba si está vacio o no
+    	contrasenaRegistroEs = !contrasenaRegistro.getText().isEmpty();
+    	activarCrearCuenta();
+    }
+    
+    public void escribirRepetirContrasena() {
+    	// Método que escucha cada vez que se pulsa una tecla en el campo de repetir contraseña y comprueba si está vacio o no
+    	repetirContrasenaEs = !repetirContrasena.getText().isEmpty();
+    	activarCrearCuenta();
+    }
+    
+    public void escribirEmail() {
+    	// Método que escucha cada vez que se pulsa una tecla en el campo de email y comprueba si está vacio o no
+    	emailEs = !email.getText().isEmpty();
+    	activarCrearCuenta();
+    }
+    
+    private void activarCrearCuenta() {
+    	// Método que comprueba si todos los campos del registro están cubiertos y activa o desactiva el botón en consecuencia
+    	if((nombreEs == true) && (apellidosEs == true) && (usuarioRegistroEs == true) && (contrasenaRegistroEs == true) && (repetirContrasenaEs == true) && (emailEs == true)) {
+    		crearCuenta.setDisable(false);
+    	} else {
+    		crearCuenta.setDisable(true);
+    	}
+    	
+    }
+    
+    public void escribirUsuarioLogin() {
+    	// Método que escucha cada vez que se pulsa una tecla en el campo de usuario del login y comprueba si está vacio o no
+    	usuarioLoginEs = !usuarioLogin.getText().isEmpty();
+    	activarIniciarSesion();
+    }
+    
+    public void escribirContrasenaLogin() {
+    	// Método que escucha cada vez que se pulsa una tecla en el campo de contraseña del login y comprueba si está vacio o no
+    	contrasenaLoginEs = !contrasenaLogin.getText().isEmpty();
+    	activarIniciarSesion();
+    }
+    
+    private void activarIniciarSesion() {
+    	// Método que comprueba si todos los campos del login están cubiertos y activa o desactiva el botón en consecuencia
+    	if((usuarioLoginEs == true) && (contrasenaLoginEs == true)) {
+    		iniciarSesion.setDisable(false);
+    	} else {
+    		iniciarSesion.setDisable(true);
+    	}
+    	
+    }
+     
      public Alert lanzarPopup(String titulo, String contenido, int tipo) {
        // Método para crear un popup con los string recibidos y devolverlo 
        Alert popup = null;
@@ -164,17 +291,14 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
             
    }
     
-    public void crearCuenta() {
-        
-    	System.out.println("registro");
-    	
-    }
-    
    @Override
    public void initialize(URL location, ResourceBundle resources) {
     	
        usuarioDao = new UsuarioDao();
        usuarioEncontrado = new Usuario();
+       
+       crearCuenta.setDisable(true);
+       iniciarSesion.setDisable(true);
  
        try {
 		fxml = FXMLLoader.load(getClass().getResource("IniciarSesion.fxml"));
