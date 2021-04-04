@@ -28,7 +28,6 @@ public class PrincipalPruebas {
 			
 			usuario.anhadirLibro(libro1);
 			usuario.anhadirMusica(musica1);
-			
 			session.save(libro1);
 			session.save(musica1);
 			session.save(usuario);

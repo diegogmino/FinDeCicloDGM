@@ -39,11 +39,24 @@ public class UsuarioDao {
 		
 	}
 	
-	public boolean insertarUsuario (Usuario usuario) {
+	public boolean insertarUsuario(Usuario usuario) {
 		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
 		
+			session.save(usuario);
+		
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
 		
 		return true;
+		
 		
 	}
 

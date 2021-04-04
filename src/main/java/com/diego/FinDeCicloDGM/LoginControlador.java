@@ -172,14 +172,19 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     		fecha = Date.valueOf(fechaNacimiento.getValue());
     	}
     	
-    	Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fecha, nombre.getText(), apellidos.getText());
-    	
-    	if(usuarioDao.insertarUsuario(usuario)) {
-    		mostrarIniciarSesion(null);
+    	if(contrasenaRegistro.getText().equals(repetirContrasena.getText())) {
+    		
+    		Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fecha, nombre.getText(), apellidos.getText());
+        	
+        	if(usuarioDao.insertarUsuario(usuario)) {
+        		mostrarIniciarSesion(null);
+        	} else {
+        		System.out.println("Error al insertar el usuario");
+        	}
+    		
     	} else {
-    		System.out.println("Error al insertar el usuario");
+    		System.out.println("Las contraseñas no coinciden");
     	}
-    	
     	
     }
     
