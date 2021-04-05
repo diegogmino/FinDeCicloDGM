@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import com.diego.FinDeCiclo.hilos.HiloIniciarSesion;
+import com.diego.FinDeCiclo.hilos.HiloRegistro;
 import com.diego.FinDeCiclo.pojos.Usuario;
 import com.diego.FinDeCicloDGM.dao.UsuarioDao;
 
@@ -21,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -70,6 +73,12 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     @FXML
     private Button iniciarSesion;
     
+    @FXML
+    private ProgressIndicator procesandoLogin;
+    
+    @FXML
+    private ProgressIndicator procesandoRegistro;
+    
     private Parent fxml;
     
     private LocalDate date = LocalDate.parse("1900-01-01");
@@ -93,18 +102,18 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
         		fxml = FXMLLoader.load(getClass().getResource("CrearCuenta.fxml"));
         		vbox.getChildren().removeAll();
         		vbox.getChildren().setAll(fxml);
+        		// Llamamos al método que limpia los campos de iniciar sesión después de que acabe la animación
+        		limpiarCamposLogin();
         	} catch (IOException ex) {
         		ex.printStackTrace();
         	}
-        });
-        
-        
+        }); 
     	
     }
 
     // Método que ejecuta la animación y muestra el FXML que acompaña a la vista del login 
     @FXML
-    void mostrarIniciarSesion(ActionEvent event) {
+    public void mostrarIniciarSesion(ActionEvent event) {
 
         TranslateTransition translate = new TranslateTransition(Duration.seconds(2), vbox);
         translate.setToX(root.getLayoutX());
@@ -117,6 +126,7 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
         		vbox.getChildren().setAll(fxml);
         		// Llamamos al método de limpiar campos cuando la animación termine, para que el usuario no vea desaparecer la información de repente
         		limpiarCamposRegistro();
+        		procesandoRegistro.setVisible(false);
         	} catch (IOException ex) {
         		ex.printStackTrace();
         	}
@@ -126,65 +136,24 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
 
     // Método que comprueba si el usuario introducido existe y le permite entrar en la aplicación
     public void iniciarSesion() {
+        // Método que inicia sesión en la aplicacion usando hilos
+    	
+    	procesandoLogin.setVisible(true);
+    	
+        HiloIniciarSesion iniciarSesion = new HiloIniciarSesion(usuarioLogin.getText(), contrasenaLogin.getText(), procesandoLogin);
+        iniciarSesion.start();
         
-        boolean logear = false;
-
-        usuarioEncontrado = usuarioDao.existeUsuario(usuarioLogin.getText(), contrasenaLogin.getText());
-         
-         if((usuarioEncontrado.getNombre() != null) && (usuarioEncontrado.getRango() == 1)) {
-             
-             Alert usuarioEncontrado = lanzarPopup("Bienvenid@", "Login completado con éxito", 1);
-             usuarioEncontrado.showAndWait();
-             
-              this.layout.mostrarComoPantallaActual("libros");
-              this.layout.getStylesheets().addAll(getClass().getResource("..\\..\\..\\estilos\\libros.css").toExternalForm());
-              
-              usuarioLogin.clear();
-              contrasenaLogin.clear();
-              
-         }  else if((usuarioEncontrado.getNombre() != null) && (usuarioEncontrado.getRango() == 2)) {
-             
-             Alert usuarioEncontrado = lanzarPopup("Bienvenid@", "Login completado con éxito", 1);
-             usuarioEncontrado.showAndWait();
-             
-             this.layout.mostrarComoPantallaActual("librosAdmin");
-             this.layout.getStylesheets().addAll(getClass().getResource("..\\..\\..\\estilos\\libros.css").toExternalForm());
-             
-             usuarioLogin.clear();
-             contrasenaLogin.clear();
-             
-         } else {
-             Alert usuarioNoEncontrado = lanzarPopup("Error", "No existe ningún usuario que corresponda a los valores introducidos. Por favor, inténtelo de nuevo", 2);
-             usuarioNoEncontrado.showAndWait();
-         }
   
     }
     
     // Método para crear un usuario nuevo e insertarlo en la base de datos
     public void registro() {
+    	// Método que registra un usuario en la base de datos usando hilos
     	
-    	Date fecha;
+    	procesandoRegistro.setVisible(true);
     	
-    	// Comprobamos si el usuario ha introducido una fecha, ya que no es un campo obligatorio
-    	if(fechaNacimiento.getValue() == null) {
-    		fecha = Date.valueOf(date);
-    	} else {
-    		fecha = Date.valueOf(fechaNacimiento.getValue());
-    	}
-    	
-    	if(contrasenaRegistro.getText().equals(repetirContrasena.getText())) {
-    		
-    		Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fecha, nombre.getText(), apellidos.getText());
-        	
-        	if(usuarioDao.insertarUsuario(usuario)) {
-        		mostrarIniciarSesion(null);
-        	} else {
-        		System.out.println("Error al insertar el usuario");
-        	}
-    		
-    	} else {
-    		System.out.println("Las contraseñas no coinciden");
-    	}
+    	HiloRegistro hiloRegistro = new HiloRegistro(usuarioRegistro, contrasenaRegistro, repetirContrasena, nombre, apellidos, fechaNacimiento, email, this);
+    	hiloRegistro.start();
     	
     }
     
@@ -201,6 +170,13 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     	
     	crearCuenta.setDisable(true);
     	
+    }
+    
+    private void limpiarCamposLogin() {
+    	// Método que limpia los campos del iniciar sesion
+    	
+    	usuarioLogin.clear();
+    	contrasenaLogin.clear();
     }
     
     public void escribirNombre() {
@@ -301,6 +277,9 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     	
        usuarioDao = new UsuarioDao();
        usuarioEncontrado = new Usuario();
+       
+       procesandoLogin.setVisible(false);
+       procesandoRegistro.setVisible(false);
        
        crearCuenta.setDisable(true);
        iniciarSesion.setDisable(true);

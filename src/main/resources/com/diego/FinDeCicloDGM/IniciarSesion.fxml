@@ -25,7 +25,7 @@
             <Insets left="125.0" top="10.0" />
          </VBox.margin>
       </ImageView>
-      <Label alignment="CENTER" prefHeight="36.0" prefWidth="700.0" text="Pulsa en &quot;Crea una cuenta&quot; y empiza a coleccionar.">
+      <Label alignment="CENTER" prefHeight="36.0" prefWidth="700.0" text="Pulsa en «Crea una cuenta» y empieza a coleccionar.">
          <font>
             <Font name="Yu Gothic Medium" size="25.0" />
          </font>

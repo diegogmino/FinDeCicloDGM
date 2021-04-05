@@ -10,6 +10,10 @@ GridPane{
     -fx-text-fill:black;
 }
 
+.procesando{
+	-fx-progress-color:#5a1265;
+}
+
 .button{
     -fx-font-weight: bold;
     -fx-background-color:#FFFFFF;

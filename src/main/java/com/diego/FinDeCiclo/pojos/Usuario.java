@@ -64,6 +64,13 @@ public class Usuario {
 		libros = new ArrayList<Libro>();
 		musica = new ArrayList<Musica>();
 	}
+	
+
+	public Usuario(String nombreUsuario, String contrasena) {
+		super();
+		this.nombreUsuario = nombreUsuario;
+		this.contrasena = contrasena;
+	}
 
 	public String getNombreUsuario() {
 		return nombreUsuario;

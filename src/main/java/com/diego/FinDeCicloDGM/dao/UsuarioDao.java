@@ -1,5 +1,9 @@
 package com.diego.FinDeCicloDGM.dao;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -19,7 +23,7 @@ public class UsuarioDao {
 		
 	}
 	
-	public Usuario existeUsuario(String usuario, String contrasena) {
+	public static Usuario existeUsuario(String usuario, String contrasena) {
 		
 		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
 		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
@@ -28,18 +32,26 @@ public class UsuarioDao {
 
 		session.getTransaction().begin();
 		
-			//Consulta para comprobar si un usuario ya está en la base de datos
+			Query query = session.createQuery("SELECT u FROM Usuario u WHERE nombreUsuario LIKE :usu AND contrasena LIKE MD5(:pass)");
+			List<Usuario> usuarios = query.setParameter("usu", usuario).setParameter("pass", contrasena).getResultList();
+			
 		
 		session.getTransaction().commit();
 
 		session.close();
 		sf.close();
 		
-		return null;
+		if(!usuarios.isEmpty()) {
+			return usuarios.get(0);
+		} else {
+			Usuario usuarioVacio = new Usuario();
+			return usuarioVacio;
+		}
+		
 		
 	}
 	
-	public boolean insertarUsuario(Usuario usuario) {
+	public static boolean insertarUsuario(Usuario usuario) {
 		
 		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
 		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
