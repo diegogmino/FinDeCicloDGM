@@ -19,10 +19,10 @@
       </Label>
       <ImageView fitHeight="450.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/logo_login.png" />
+            <Image url="@../img/libro_icono.png" />
          </image>
          <VBox.margin>
-            <Insets left="125.0" top="10.0" />
+            <Insets left="125.0" top="40.0" />
          </VBox.margin>
       </ImageView>
       <Label alignment="CENTER" prefHeight="36.0" prefWidth="700.0" text="Accede a todas tus colecciones desde la comodidad de">
@@ -30,7 +30,7 @@
             <Font name="Yu Gothic Medium" size="25.0" />
          </font>
          <VBox.margin>
-            <Insets top="10.0" />
+            <Insets top="40.0" />
          </VBox.margin>
       </Label>
       <Label alignment="CENTER" prefHeight="36.0" prefWidth="700.0" text="una sola aplicación.">

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../estilos/seleccionColeccion.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.SelectorColeccionControlador">
+   <children>
+      <Label layoutX="214.0" layoutY="55.0" text="Escoge la colección que quieras visualizar">
+         <font>
+            <Font name="Yu Gothic Medium" size="40.0" />
+         </font></Label>
+      <Pane fx:id="librosPane" layoutX="80.0" layoutY="158.0" prefHeight="335.0" prefWidth="335.0" styleClass="selector_pane" />
+      <Pane fx:id="musicaPane" layoutX="433.0" layoutY="158.0" prefHeight="335.0" prefWidth="335.0" styleClass="selector_pane" />
+      <Pane fx:id="masColeccionesPane" layoutX="786.0" layoutY="158.0" prefHeight="335.0" prefWidth="335.0" styleClass="selector_pane" />
+      <Button fx:id="botonLibros" layoutX="203.0" layoutY="513.0" mnemonicParsing="false" onAction="#cargarLibros" prefHeight="45.0" prefWidth="90.0" text="Libros" />
+      <Button fx:id="botonMusica" layoutX="555.0" layoutY="513.0" mnemonicParsing="false" onAction="#cargarMusica" prefHeight="45.0" prefWidth="90.0" text="Música" />
+      <Button fx:id="botonMas" layoutX="779.0" layoutY="513.0" mnemonicParsing="false" onAction="#cargarMasColecciones" prefHeight="45.0" prefWidth="350.0" text="Más colecciones en futuras actualizaciones" />
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</Pane>

@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.diego.FinDeCiclo.hilos.HiloIniciarSesion;
 import com.diego.FinDeCiclo.hilos.HiloRegistro;
@@ -12,6 +13,7 @@ import com.diego.FinDeCiclo.pojos.Usuario;
 import com.diego.FinDeCicloDGM.dao.UsuarioDao;
 
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
@@ -74,10 +77,10 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     private Button iniciarSesion;
     
     @FXML
-    private ProgressIndicator procesandoLogin;
+    private ProgressIndicator procesandoRegistro;
     
     @FXML
-    private ProgressIndicator procesandoRegistro;
+    private ProgressIndicator procesandoLogin;
     
     private Parent fxml;
     
@@ -85,6 +88,7 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     
     private UsuarioDao usuarioDao;
     private Usuario usuarioEncontrado;
+    
     
     private boolean usuarioRegistroEs = false, contrasenaRegistroEs = false, repetirContrasenaEs = false, emailEs = false, nombreEs = false, apellidosEs = false, 
     		usuarioLoginEs = false, contrasenaLoginEs = false;
@@ -136,19 +140,21 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
 
     // Método que comprueba si el usuario introducido existe y le permite entrar en la aplicación
     public void iniciarSesion() {
-        // Método que inicia sesión en la aplicacion usando hilos
-    	
+
     	procesandoLogin.setVisible(true);
     	
-        HiloIniciarSesion iniciarSesion = new HiloIniciarSesion(usuarioLogin.getText(), contrasenaLogin.getText(), procesandoLogin);
-        iniciarSesion.start();
-        
+    	HiloIniciarSesion hiloSesion = new HiloIniciarSesion(usuarioLogin.getText(), contrasenaLogin.getText(), procesandoLogin, this);
+    	hiloSesion.start();
   
     }
     
-    // Método para crear un usuario nuevo e insertarlo en la base de datos
+    // Método que cambia la pantalla actual por la de selectorColeccion
+    public void mostrarSelectorColeccion() {
+    	this.layout.mostrarComoPantallaActual("selectorColeccion");
+    }
+    
+    // Método para crear un usuario nuevo e insertarlo en la base de datos usando hilos
     public void registro() {
-    	// Método que registra un usuario en la base de datos usando hilos
     	
     	procesandoRegistro.setVisible(true);
     	
@@ -156,6 +162,7 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     	hiloRegistro.start();
     	
     }
+
     
     private void limpiarCamposRegistro() {
     	// Método que limpia los campos del formulario de registro
@@ -261,12 +268,12 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
        popup.setContentText(contenido);
        popup.initStyle(StageStyle.DECORATED); 
        Stage stage = (Stage) popup.getDialogPane().getScene().getWindow();
-       stage.getIcons().add(new Image("/img/libro.png"));
+       //stage.getIcons().add(new Image("/img/libro.png"));
        
        DialogPane dialogPane = popup.getDialogPane();
-        dialogPane.getStylesheets().add(
-        getClass().getResource("popup.css").toExternalForm());
-        dialogPane.getStyleClass().add("popup");
+        //dialogPane.getStylesheets().add(
+        //getClass().getResource("popup.css").toExternalForm());
+        //dialogPane.getStyleClass().add("popup");
        
         return popup;
             

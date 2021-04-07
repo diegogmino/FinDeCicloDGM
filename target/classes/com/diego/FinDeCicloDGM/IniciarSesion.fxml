@@ -17,20 +17,20 @@
             <Insets top="30.0" />
          </VBox.margin>
       </Label>
-      <ImageView fitHeight="450.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="430.0" fitWidth="421.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/logo_login.png" />
+            <Image url="@../img/musica_icono.png" />
          </image>
          <VBox.margin>
-            <Insets left="125.0" top="10.0" />
+            <Insets left="125.0" top="40.0" />
          </VBox.margin>
       </ImageView>
-      <Label alignment="CENTER" prefHeight="36.0" prefWidth="700.0" text="Pulsa en «Crea una cuenta» y empieza a coleccionar.">
+      <Label alignment="CENTER" prefHeight="36.0" prefWidth="700.0" text="Pulsa en «Crear una cuenta» y empieza a coleccionar.">
          <font>
             <Font name="Yu Gothic Medium" size="25.0" />
          </font>
          <VBox.margin>
-            <Insets top="10.0" />
+            <Insets top="40.0" />
          </VBox.margin>
       </Label>
    </children>

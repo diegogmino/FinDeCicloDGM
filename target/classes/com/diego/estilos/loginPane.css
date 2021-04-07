@@ -3,7 +3,7 @@ GridPane{
 }   
 
 .transition-pane{
-	-fx-background-image: url("../img/background.jpg");
+	-fx-background-image: url("../img/fondo.jpg");
 }
 
 .label{

@@ -162,7 +162,7 @@
                   <Insets left="80.0" top="20.0" />
                </GridPane.margin>
             </Label>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#mostrarCrearCuenta" prefHeight="40.0" prefWidth="147.0" styleClass="loginButton" text="Crea una cuenta" textAlignment="CENTER" GridPane.rowIndex="3">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#mostrarCrearCuenta" prefHeight="40.0" prefWidth="152.0" styleClass="loginButton" text="Crear una cuenta" textAlignment="CENTER" GridPane.rowIndex="3">
                <font>
                   <Font name="Yu Gothic Medium" size="20.0" />
                </font>
@@ -172,7 +172,7 @@
             </Button>
             <ProgressIndicator fx:id="procesandoLogin" styleClass="procesando" GridPane.rowIndex="3">
                <GridPane.margin>
-                  <Insets bottom="95.0" left="420.0" />
+                  <Insets bottom="100.0" left="420.0" />
                </GridPane.margin>
             </ProgressIndicator>
          </children>

@@ -1,23 +1,7 @@
 VBox{
-	-fx-background-image: url("../img/background.jpg");
+	-fx-background-image: url("../img/fondo.jpg");
 }
 
 .label{
     -fx-text-fill:white;
-}
-
-.button{
-    -fx-font-weight: bold;
-    -fx-background-color:#FFFFFF;
-    -fx-background-radius:22;
-    -fx-font-size:16;
-    -fx-text-fill:#3f474f;
-}
-
-.button:hover{
-    -fx-font-weight: bold;
-    -fx-background-color:#5a1265;
-    -fx-background-radius:22;
-    -fx-font-size:16;
-    -fx-text-fill:#FFFFFF;
 }

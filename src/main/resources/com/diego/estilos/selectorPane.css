@@ -1,7 +1,4 @@
-VBox{
+Pane{
 	-fx-background-image: url("../img/fondo.jpg");
-}
-
-.label{
-    -fx-text-fill:white;
+	-fx-background-radius:10px;
 }
