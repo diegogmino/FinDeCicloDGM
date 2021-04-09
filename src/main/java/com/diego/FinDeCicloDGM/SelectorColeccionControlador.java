@@ -44,7 +44,7 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
 		
 		botonLibros.setDisable(true);
 		
-		TranslateTransition translate = new TranslateTransition(Duration.seconds(2), librosPane);
+		TranslateTransition translate = new TranslateTransition(Duration.seconds(1), librosPane);
         translate.setToX(-450);
         translate.play();
         
@@ -58,7 +58,7 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
 		
 		botonMusica.setDisable(true);
 		
-		TranslateTransition translate = new TranslateTransition(Duration.seconds(2), musicaPane);
+		TranslateTransition translate = new TranslateTransition(Duration.seconds(1), musicaPane);
         translate.setToY(-500);
         translate.play();
 		
@@ -72,7 +72,7 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
 		
 		botonMas.setDisable(true);
 		
-		TranslateTransition translate = new TranslateTransition(Duration.seconds(2), masColeccionesPane);
+		TranslateTransition translate = new TranslateTransition(Duration.seconds(1), masColeccionesPane);
         translate.setToX(450);
         translate.play();
         

@@ -1,0 +1,16 @@
+VBox{
+	-fx-background-image: url("../img/fondo.jpg");
+}
+
+BorderPane{
+	-fx-background-color:#E3E3E3;
+}
+
+.button{
+	-fx-background-color:transparent;
+	-fx-text-fill:#FFFFFF;
+}
+
+.button:hover{
+	-fx-background-color:rgba(212, 60, 155, 0.5);
+}
