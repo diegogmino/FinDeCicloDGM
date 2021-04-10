@@ -37,13 +37,10 @@ public class Libro {
 	private int numeroEdicion;
 	
 	@Column
-	private String sinopsis;
-	
-	@Column
 	private String portada;
 
 	public Libro(Long isbn, String titulo, String autor, int paginas, String genero, boolean leido, Date fechaLectura,
-			String editorial, int numeroEdicion, String sinopsis, String portada) {
+			String editorial, int numeroEdicion, String portada) {
 		super();
 		this.isbn = isbn;
 		this.titulo = titulo;
@@ -54,7 +51,6 @@ public class Libro {
 		this.fechaLectura = fechaLectura;
 		this.editorial = editorial;
 		this.numeroEdicion = numeroEdicion;
-		this.sinopsis = sinopsis;
 		this.portada = portada;
 	}
 
@@ -128,14 +124,6 @@ public class Libro {
 
 	public void setNumeroEdicion(int numeroEdicion) {
 		this.numeroEdicion = numeroEdicion;
-	}
-
-	public String getSinopsis() {
-		return sinopsis;
-	}
-
-	public void setSinopsis(String sinopsis) {
-		this.sinopsis = sinopsis;
 	}
 
 	public String getPortada() {

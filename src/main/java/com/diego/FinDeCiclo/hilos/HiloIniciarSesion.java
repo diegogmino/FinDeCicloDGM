@@ -1,7 +1,9 @@
 package com.diego.FinDeCiclo.hilos;
 
+import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Usuario;
 import com.diego.FinDeCicloDGM.LoginControlador;
+import com.diego.FinDeCicloDGM.SelectorColeccionControlador;
 import com.diego.FinDeCicloDGM.dao.UsuarioDao;
 
 import javafx.application.Platform;
@@ -35,7 +37,10 @@ public class HiloIniciarSesion extends Thread {
         	System.out.println("El usuario es: " + usuarioEncontrado.getNombre());
         	// El Platform.runLater evita el error "Not on FX application thread; currentThread = Thread-3" que ocurria al intentar cambiar de pantalla
         	Platform.runLater(()->{
+        		Informacion.nombreUsuario = usuarioEncontrado.getNombreUsuario();
+
         		controlador.mostrarSelectorColeccion();
+        		
     		});
         	
         	procesando.setVisible(false);

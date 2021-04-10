@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.diego.FinDeCiclo.pojos.Informacion;
+
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
@@ -36,10 +39,13 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
     @FXML
     private Button botonMas;
     
+    @FXML
+    private TextField textoBienvenida;
+    
     private Parent fxmlLibro;
     private Parent fxmlMusica;
     private Parent fxmlMasColecciones;
-
+    
 	public void cargarLibros() {
 		
 		botonLibros.setDisable(true);
@@ -66,6 +72,13 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
         	this.layout.mostrarComoPantallaActual("coleccionMusica");
         });
         
+	}
+	
+	public void cargarInformacion() {
+		
+		textoBienvenida.setText("Buenas");
+		textoBienvenida.setEditable(false);
+		
 	}
 	
 	public void cargarMasColecciones() {

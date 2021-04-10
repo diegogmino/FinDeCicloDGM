@@ -1,5 +1,7 @@
 package com.diego.FinDeCicloDGM;
 
+import com.diego.FinDeCiclo.pojos.Informacion;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +20,7 @@ public class Lanzador extends Application {
         layoutPane.cargarPantalla("coleccionLibros", ColeccionLibrosControlador.class.getResource("ColeccionLibros.fxml"));
         layoutPane.cargarPantalla("coleccionMusica", ColeccionMusicaControlador.class.getResource("ColeccionMusica.fxml"));
         layoutPane.cargarPantalla("masColecciones", MasColeccionesControlador.class.getResource("MasColecciones.fxml")); 
+        layoutPane.cargarPantalla("nuevoLibro", NuevoLibroControlador.class.getResource("NuevoLibro.fxml"));
         
         layoutPane.mostrarComoPantallaActual("login");
         
@@ -27,6 +30,8 @@ public class Lanzador extends Application {
         //primaryStage.getIcons().add(new Image("/img/libro.png"));
         primaryStage.setScene(escena);
         primaryStage.show();
+        
+        Informacion.stage = primaryStage;
         
     }
     public static void main(String[]  args){

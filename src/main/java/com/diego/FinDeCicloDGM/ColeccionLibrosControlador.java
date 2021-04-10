@@ -3,6 +3,8 @@ package com.diego.FinDeCicloDGM;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.diego.FinDeCiclo.hilos.HiloAnhadirLibro;
+
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +20,13 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
     @FXML
     private VBox barraNavegacion;
 	
+    public void añadirLibro() {
+    	
+    	HiloAnhadirLibro hilo = new HiloAnhadirLibro();
+    	hilo.start();
+    	
+    }
+    
 	public void mostrarBarraNavegacion() {
 		
 		TranslateTransition translate = new TranslateTransition(Duration.seconds(1), barraNavegacion);

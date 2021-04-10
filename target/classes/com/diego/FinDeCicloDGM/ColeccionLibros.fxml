@@ -82,6 +82,7 @@
                   </Button>
                </children>
             </VBox>
+            <Button layoutX="80.0" layoutY="13.0" mnemonicParsing="false" onAction="#añadirLibro" text="Añadir" />
          </children>
       </Pane>
    </left>
