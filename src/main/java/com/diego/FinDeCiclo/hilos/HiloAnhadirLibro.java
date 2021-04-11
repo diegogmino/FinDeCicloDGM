@@ -36,7 +36,7 @@ public class HiloAnhadirLibro extends Thread {
 			final Stage dialog = new Stage();
 			dialog.initModality(Modality.NONE);
 	        dialog.initOwner(Informacion.stage);
-	        Scene dialogScene = new Scene(layoutPane, 500 , 650);
+	        Scene dialogScene = new Scene(layoutPane, 800 , 650);
 	        
 	        dialog.setTitle("Nuevo libro");
 	        dialog.setResizable(false);

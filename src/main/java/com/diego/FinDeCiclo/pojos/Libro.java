@@ -22,6 +22,9 @@ public class Libro {
 	private int paginas;
 	
 	@Column
+	private int precio;
+	
+	@Column
 	private String genero;
 	
 	@Column
@@ -39,13 +42,14 @@ public class Libro {
 	@Column
 	private String portada;
 
-	public Libro(Long isbn, String titulo, String autor, int paginas, String genero, boolean leido, Date fechaLectura,
+	public Libro(Long isbn, String titulo, String autor, int paginas, int precio, String genero, boolean leido, Date fechaLectura,
 			String editorial, int numeroEdicion, String portada) {
 		super();
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.paginas = paginas;
+		this.precio = precio;
 		this.genero = genero;
 		this.leido = leido;
 		this.fechaLectura = fechaLectura;
@@ -84,6 +88,14 @@ public class Libro {
 
 	public void setPaginas(int paginas) {
 		this.paginas = paginas;
+	}
+
+	public int getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(int precio) {
+		this.precio = precio;
 	}
 
 	public String getGenero() {

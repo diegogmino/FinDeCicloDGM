@@ -30,6 +30,10 @@ BorderPane{
     -fx-text-fill:#FFFFFF;
 }
 
+.procesando{
+	-fx-progress-color:#5a1265;
+}
+
 .date-picker:focused{
 	-fx-background-color: transparent;
 }
@@ -102,6 +106,14 @@ BorderPane{
 	-fx-background-radius:0px ;
 	-fx-background-color: #FFFFFF;
 }	
+
+.combo-box .list-view .list-cell:filled:hover {
+    -fx-background-color: #d43c9b;
+}
+
+.combo-box .list-view .list-cell:filled:selected {
+    -fx-background-color: #5a1265;
+}
 
 .check-box .box {
 
