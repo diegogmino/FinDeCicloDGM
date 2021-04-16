@@ -1,7 +1,6 @@
 package com.diego.FinDeCiclo.pojos;
 
-import java.sql.Date;
-
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,7 +30,7 @@ public class Libro {
 	private boolean leido;
 	
 	@Column
-	private Date fechaLectura;
+	private LocalDate fechaLectura;
 	
 	@Column
 	private String editorial;
@@ -42,7 +41,7 @@ public class Libro {
 	@Column
 	private String portada;
 
-	public Libro(Long isbn, String titulo, String autor, int paginas, int precio, String genero, boolean leido, Date fechaLectura,
+	public Libro(Long isbn, String titulo, String autor, int paginas, int precio, String genero, boolean leido, LocalDate fechaLectura,
 			String editorial, int numeroEdicion, String portada) {
 		super();
 		this.isbn = isbn;
@@ -114,11 +113,11 @@ public class Libro {
 		this.leido = leido;
 	}
 
-	public Date getFechaLectura() {
+	public LocalDate getFechaLectura() {
 		return fechaLectura;
 	}
 
-	public void setFechaLectura(Date fechaLectura) {
+	public void setFechaLectura(LocalDate fechaLectura) {
 		this.fechaLectura = fechaLectura;
 	}
 

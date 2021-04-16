@@ -5,9 +5,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
+
+import com.diego.FinDeCiclo.pojos.Libro;
+import com.diego.FinDeCicloDGM.dao.LibroDao;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -71,8 +75,26 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
     
     private boolean portadaValida = false;
     
+    LocalDate date = LocalDate.parse("1900-01-01");
 	
 	public void guardarLibro() {
+		
+		Libro libro;
+		
+		if(fechaLectura == null) {
+			libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
+					genero.getValue(), leido.isSelected(), date, editorial.getText(), Integer.parseInt(numeroEdicion.getText()), portada.getText());
+		} else {
+			libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
+					genero.getValue(), leido.isSelected(), fechaLectura.getValue(), editorial.getText(), Integer.parseInt(numeroEdicion.getText()), portada.getText());
+		}
+		
+		
+		if(LibroDao.insertarLibro(libro)) {
+			System.out.println("Libro insertado");
+		} else {
+			System.out.println("Error al insertar el libro");
+		}
 		
 	}
 	
@@ -83,7 +105,7 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		autor.clear();
 		paginas.clear();
 		precio.clear();
-		editorial.clear();
+		editorial.clear();   
 		genero.setValue("Género");;
 		numeroEdicion.clear();
 		leido.setSelected(false);
@@ -110,7 +132,7 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 	    	activarGuardarLibro();
 	    	// Cargamos la imagen de portada no válida en el ImageView
 	    	try {
-				imagenPortada.setImage(new Image(getClass().getResource("../img/portada_prueba.jpg").toURI().toString()));
+				imagenPortada.setImage(new Image(getClass().getResource("../img/portada_no_valida.png").toURI().toString()));
 			} catch (URISyntaxException e1) {}
 	    	
 	    } catch (IOException e) {
@@ -118,7 +140,7 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 	    	activarGuardarLibro();
 	    	// Cargamos la imagen de portada no válida en el ImageView
 	    	try {
-				imagenPortada.setImage(new Image(getClass().getResource("../img/portada_prueba.jpg").toURI().toString()));
+				imagenPortada.setImage(new Image(getClass().getResource("../img/portada_no_valida.png").toURI().toString()));
 			} catch (URISyntaxException e1) {}
 	    }
 		
@@ -128,7 +150,7 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		
 		if((!isbn.getText().isEmpty()) && (!titulo.getText().isEmpty()) && (!autor.getText().isEmpty()) && (!paginas.getText().isEmpty())
 				&& (!precio.getText().isEmpty()) && (!editorial.getText().isEmpty()) && (genero.getValue() != null) && (!numeroEdicion.getText().isEmpty())
-				&& (!portada.getText().isEmpty())) {
+				&& (!portada.getText().isEmpty()) && portadaValida == true) {
 			
 			guardarLibro.setDisable(false);
 		} else {
@@ -145,7 +167,6 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 			btnComprobarPortada.setDisable(true);
 		}
 		
-		activarGuardarLibro();
 		
 	}
 	
@@ -155,6 +176,7 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 			fechaLectura.setDisable(false);
 		} else {
 			fechaLectura.setDisable(true);
+			fechaLectura.setValue(null);
 		}
 	}
 	

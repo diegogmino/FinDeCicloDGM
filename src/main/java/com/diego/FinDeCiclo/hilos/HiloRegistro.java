@@ -22,7 +22,6 @@ public class HiloRegistro extends Thread {
 	private TextField email;
 	private LoginControlador controlador;
 	
-	private LocalDate date = LocalDate.parse("1900-01-01");
 
 	
 	public HiloRegistro(TextField usuarioRegistro, PasswordField contrasenaRegistro, PasswordField repetirContrasena, TextField nombre, TextField apellidos,
@@ -40,19 +39,10 @@ public class HiloRegistro extends Thread {
 	}
 	
 	public void run() {
-		
-		Date fecha;
-    	
-    	// Comprobamos si el usuario ha introducido una fecha, ya que no es un campo obligatorio
-    	if(fechaNacimiento.getValue() == null) {
-    		fecha = Date.valueOf(date);
-    	} else {
-    		fecha = Date.valueOf(fechaNacimiento.getValue());
-    	}
     	
     	if(contrasenaRegistro.getText().equals(repetirContrasena.getText())) {
     		
-    		Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fecha, nombre.getText(), apellidos.getText());
+    		Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fechaNacimiento.getValue(), nombre.getText(), apellidos.getText());
         	
         	if(UsuarioDao.insertarUsuario(usuario)) {
         		controlador.mostrarIniciarSesion(null);

@@ -1,6 +1,7 @@
 package com.diego.FinDeCiclo.pojos;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Usuario {
 	private String email;
 	
 	@Column
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	
 	@CreationTimestamp
 	private Date fechaAlta;
@@ -53,7 +54,7 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(String nombreUsuario, String contrasena, String email, Date fechaNacimiento, String nombre, String apellidos) {
+	public Usuario(String nombreUsuario, String contrasena, String email, LocalDate fechaNacimiento, String nombre, String apellidos) {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.contrasena = contrasena;
@@ -96,11 +97,11 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

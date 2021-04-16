@@ -20,7 +20,6 @@ public class UsuarioDao {
 	}
 
 	private void crearTablasSiNoExisten() {
-		// TODO Auto-generated method stub
 		
 	}
 	
