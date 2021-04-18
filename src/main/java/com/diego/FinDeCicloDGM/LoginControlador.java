@@ -158,7 +158,7 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     	
     	procesandoRegistro.setVisible(true);
     	
-    	HiloRegistro hiloRegistro = new HiloRegistro(usuarioRegistro, contrasenaRegistro, repetirContrasena, nombre, apellidos, fechaNacimiento, email, this);
+    	HiloRegistro hiloRegistro = new HiloRegistro(usuarioRegistro, contrasenaRegistro, repetirContrasena, nombre, apellidos, fechaNacimiento, email, this, procesandoRegistro);
     	hiloRegistro.start();
     	
     }

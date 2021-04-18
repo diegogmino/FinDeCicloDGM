@@ -1,7 +1,6 @@
 package com.diego.FinDeCiclo.hilos;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import com.diego.FinDeCiclo.pojos.Usuario;
 import com.diego.FinDeCicloDGM.LoginControlador;
@@ -9,6 +8,7 @@ import com.diego.FinDeCicloDGM.dao.UsuarioDao;
 
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 
 public class HiloRegistro extends Thread {
@@ -21,11 +21,12 @@ public class HiloRegistro extends Thread {
 	private DatePicker fechaNacimiento;
 	private TextField email;
 	private LoginControlador controlador;
+	private ProgressIndicator procesando;
 	
 
 	
 	public HiloRegistro(TextField usuarioRegistro, PasswordField contrasenaRegistro, PasswordField repetirContrasena, TextField nombre, TextField apellidos,
-			DatePicker fechaNacimiento, TextField email, LoginControlador controlador) {
+			DatePicker fechaNacimiento, TextField email, LoginControlador controlador, ProgressIndicator procesando) {
 		
 		this.usuarioRegistro = usuarioRegistro;
 		this.contrasenaRegistro = contrasenaRegistro;
@@ -35,6 +36,7 @@ public class HiloRegistro extends Thread {
 		this.fechaNacimiento = fechaNacimiento;
 		this.email = email;
 		this.controlador = controlador;
+		this.procesando = procesando;
 		
 	}
 	
@@ -42,17 +44,32 @@ public class HiloRegistro extends Thread {
     	
     	if(contrasenaRegistro.getText().equals(repetirContrasena.getText())) {
     		
-    		Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fechaNacimiento.getValue(), nombre.getText(), apellidos.getText());
-        	
-        	if(UsuarioDao.insertarUsuario(usuario)) {
-        		controlador.mostrarIniciarSesion(null);
-        	} else {
-        		System.out.println("Error al insertar el usuario");
-        	}
+    		if(isValidEmail(email.getText())) {
+    			Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fechaNacimiento.getValue(), nombre.getText(), apellidos.getText());
+            	
+            	if(UsuarioDao.insertarUsuario(usuario)) {
+            		controlador.mostrarIniciarSesion(null);
+            	} else {
+            		System.out.println("Error al insertar el usuario");
+            		procesando.setVisible(false);
+            	}
+    		} else {
+    			System.out.println("Introduce un email válido");
+    			procesando.setVisible(false);
+    		}
     		
     	} else {
     		System.out.println("Las contraseñas no coinciden");
+    		procesando.setVisible(false);
     	}
 	}
+	
+	public static boolean isValidEmail(String email) {
+	       // Creamos una instancia de EmailVAlidator
+	       EmailValidator validator = EmailValidator.getInstance();
+
+	       // Comprobamos si el email pasado por parámetro es válido
+	       return validator.isValid(email);
+	   }
 	
 }

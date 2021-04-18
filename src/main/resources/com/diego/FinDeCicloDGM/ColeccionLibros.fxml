@@ -21,6 +21,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
+            <Button layoutX="80.0" layoutY="13.0" mnemonicParsing="false" onAction="#añadirLibro" text="Añadir" />
             <VBox fx:id="barraNavegacion" layoutX="-160.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="160.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#ocultarBarraNavegacion" prefHeight="30.0" prefWidth="30.0">
@@ -82,7 +83,6 @@
                   </Button>
                </children>
             </VBox>
-            <Button layoutX="80.0" layoutY="13.0" mnemonicParsing="false" onAction="#añadirLibro" text="Añadir" />
          </children>
       </Pane>
    </left>

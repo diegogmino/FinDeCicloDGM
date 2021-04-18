@@ -7,12 +7,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import javax.imageio.ImageIO;
-
+import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Libro;
 import com.diego.FinDeCicloDGM.dao.LibroDao;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -20,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
@@ -92,6 +91,9 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		
 		if(LibroDao.insertarLibro(libro)) {
 			System.out.println("Libro insertado");
+			LibroDao.anhadirLibroUsuario(libro, Informacion.usuario);
+			System.out.println("Libro añadido a usuario");
+			
 		} else {
 			System.out.println("Error al insertar el libro");
 		}
@@ -192,6 +194,15 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		btnComprobarPortada.setDisable(true);
 		
 		fechaLectura.setDisable(true);
+		
+		// Bloquea las fechas futuras
+		fechaLectura.setDayCellFactory(param -> new DateCell() {
+	        @Override
+	        public void updateItem(LocalDate date, boolean empty) {
+	            super.updateItem(date, empty);
+	            setDisable(empty || date.compareTo(LocalDate.now()) > 0 );
+	        }
+	    });
 		
 		// Bloquear valores no numericos en el campo del ISBN-13
 	    isbn.textProperty().addListener(new ChangeListener<String>() {

@@ -41,6 +41,10 @@ public class UsuarioDao {
 		session.close();
 		sf.close();
 		
+		for(Usuario usuarioLista : usuarios) {
+			System.out.println(usuarioLista.getNombre());
+		}
+		
 		if(!usuarios.isEmpty()) {
 			return usuarios.get(0);
 		} else {

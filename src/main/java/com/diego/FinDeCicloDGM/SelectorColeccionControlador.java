@@ -39,9 +39,6 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
     @FXML
     private Button botonMas;
     
-    @FXML
-    private TextField textoBienvenida;
-    
     private Parent fxmlLibro;
     private Parent fxmlMusica;
     private Parent fxmlMasColecciones;
@@ -72,13 +69,6 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
         	this.layout.mostrarComoPantallaActual("coleccionMusica");
         });
         
-	}
-	
-	public void cargarInformacion() {
-		
-		textoBienvenida.setText("Buenas");
-		textoBienvenida.setEditable(false);
-		
 	}
 	
 	public void cargarMasColecciones() {

@@ -33,11 +33,13 @@ public class HiloIniciarSesion extends Thread {
 
         if(usuarioEncontrado.getNombreUsuario() == null) {
         	System.out.println("Usuario no encontrado");
+        	procesando.setVisible(false);
+        	
         } else {
         	System.out.println("El usuario es: " + usuarioEncontrado.getNombre());
         	// El Platform.runLater evita el error "Not on FX application thread; currentThread = Thread-3" que ocurria al intentar cambiar de pantalla
         	Platform.runLater(()->{
-        		Informacion.nombreUsuario = usuarioEncontrado.getNombreUsuario();
+        		Informacion.usuario = usuarioEncontrado;
 
         		controlador.mostrarSelectorColeccion();
         		

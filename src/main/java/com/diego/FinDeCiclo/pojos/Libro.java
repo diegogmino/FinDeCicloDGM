@@ -40,6 +40,10 @@ public class Libro {
 	
 	@Column
 	private String portada;
+	
+	public Libro() {
+		super();
+	}
 
 	public Libro(Long isbn, String titulo, String autor, int paginas, int precio, String genero, boolean leido, LocalDate fechaLectura,
 			String editorial, int numeroEdicion, String portada) {

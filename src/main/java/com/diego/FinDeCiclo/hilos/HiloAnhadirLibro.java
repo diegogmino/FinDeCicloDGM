@@ -3,6 +3,7 @@ package com.diego.FinDeCiclo.hilos;
 import java.io.IOException;
 
 import com.diego.FinDeCiclo.pojos.Informacion;
+import com.diego.FinDeCicloDGM.BuscarLibroControlador;
 import com.diego.FinDeCicloDGM.LayoutPane;
 import com.diego.FinDeCicloDGM.LoginControlador;
 import com.diego.FinDeCicloDGM.NuevoLibroControlador;
@@ -25,13 +26,14 @@ public class HiloAnhadirLibro extends Thread {
 		
 		try {
 			layoutPane.cargarPantalla("nuevoLibro", NuevoLibroControlador.class.getResource("NuevoLibro.fxml"));
+			layoutPane.cargarPantalla("buscarLibro", BuscarLibroControlador.class.getResource("BuscarLibro.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		Platform.runLater(()->{
 
-			layoutPane.mostrarComoPantallaActual("nuevoLibro");
+			layoutPane.mostrarComoPantallaActual("buscarLibro");
 			
 			final Stage dialog = new Stage();
 			dialog.initModality(Modality.NONE);
