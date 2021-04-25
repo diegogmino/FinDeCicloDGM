@@ -44,6 +44,8 @@ public class HiloAnhadirLibro extends Thread {
 	        dialog.setResizable(false);
 	        dialog.setScene(dialogScene);
 	        dialog.show();
+	        
+	        Informacion.dialogoAnhadirLibro = dialog;
     		
 		});
 		

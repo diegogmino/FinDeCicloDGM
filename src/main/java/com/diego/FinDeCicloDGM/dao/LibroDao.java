@@ -144,5 +144,26 @@ public class LibroDao {
 		return libros;
 		
 	}
+	
+	public static List<Libro> buscarTodos() {
+
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+
+			Query query = session.createQuery("SELECT l FROM Libro l");
+			List<Libro> libros = query.getResultList();
+		
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+		
+		return libros;
+		
+	}
 
 }

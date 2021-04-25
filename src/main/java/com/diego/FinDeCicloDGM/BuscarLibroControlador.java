@@ -1,5 +1,6 @@
 package com.diego.FinDeCicloDGM;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,14 +8,20 @@ import java.util.ResourceBundle;
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Libro;
 import com.diego.FinDeCicloDGM.dao.LibroDao;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class BuscarLibroControlador extends ControladorConNavegabilidad implements Initializable {
 
@@ -87,6 +94,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     	autor.clear();
     	titulo.clear();
     	genero.setValue(null);
+    	portadaImageView.setImage(null);
     	activarBuscar();
     	
     }
@@ -101,7 +109,18 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     }
     
     public void agregarAColeccion() {
-    	LibroDao.anhadirLibroUsuario(libroEncontrado, Informacion.usuario);
+    	
+    	if(Informacion.libroSeleccionado.getIsbn() != null) {
+    		LibroDao.anhadirLibroUsuario(Informacion.libroSeleccionado, Informacion.usuario);
+    		Informacion.libroSeleccionado = new Libro();
+    		Informacion.dialogoAnhadirLibro.close();
+    	} else {
+    		LibroDao.anhadirLibroUsuario(libroEncontrado, Informacion.usuario);
+    		Informacion.dialogoAnhadirLibro.close();
+    	}
+    	
+    	
+    	
     }
     
     public void buscar() {
@@ -109,51 +128,101 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     	if(!isbn.getText().isEmpty()) {
     		
     		libroEncontrado = LibroDao.buscarLibroISBN(isbn.getText());
-    		System.out.println("Libro: " + libroEncontrado.getTitulo());
     		
+    		if(libroEncontrado.getIsbn() != null) {
+    			portadaImageView.setImage(new Image(libroEncontrado.getPortada()));
+    			agregarAColeccion.setDisable(false);
+    		} else {
+    			aportarLibro.setDisable(false);
+    		}
+
     	} else if(!titulo.getText().isEmpty()) {
     		
     		librosEncontrados = LibroDao.buscarLibroTitulo(titulo.getText());
-    		for(Libro l : librosEncontrados) {
-    			System.out.println("Libro: " + l.getTitulo());
-    		}
     		
+    		if(!librosEncontrados.isEmpty()) {
+    			Informacion.libros = librosEncontrados;
+    			lanzarDialogo();
+    		} else {
+    			aportarLibro.setDisable(false);
+    			// mostrar imagen de libro no encontrado
+    		}
+
     	} else if(!autor.getText().isEmpty()) {
     		
     		librosEncontrados = LibroDao.buscarLibroAutor(autor.getText());
-    		for(Libro l : librosEncontrados) {
-    			System.out.println("Libro: " + l.getTitulo());
+    		
+    		if(!librosEncontrados.isEmpty()) {
+    			Informacion.libros = librosEncontrados;
+    			lanzarDialogo();
+    		} else {
+    			aportarLibro.setDisable(false);
+    			// mostrar imagen de libro no encontrado
     		}
     		
     	} else if(genero.getValue() != null) {
     		
     		librosEncontrados = LibroDao.buscarLibroGenero(genero.getValue());
-    		for(Libro l : librosEncontrados) {
-    			System.out.println("Libro: " + l.getTitulo());
-    		}
     		
+    		if(!librosEncontrados.isEmpty()) {
+    			Informacion.libros = librosEncontrados;
+    			lanzarDialogo();
+    		} else {
+    			aportarLibro.setDisable(false);
+    			// mostrar imagen de libro no encontrado
+    		}
     	}
-    	
-    	/*
-    	
-    	if(libroEncontrado.getIsbn() == null) {
-    		System.out.println("No existe el libro introducido");
-    		aportarLibro.setDisable(false);
-    	} else {
-    		portadaImageView.setImage(new Image(libroEncontrado.getPortada()));
-    		agregarAColeccion.setDisable(false);
-    	}
-    	
-    	*/
     	
     }
     
-    public void aportarLibro() {
+    private void lanzarDialogo() {
+		
+    	LayoutPane layoutPane = new LayoutPane();
+    	
+    	try {
+			layoutPane.cargarPantalla("elegirLibro", ElegirLibroControlador.class.getResource("ElegirLibro.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	layoutPane.mostrarComoPantallaActual("elegirLibro");
+    	final Stage dialog = new Stage();
+		dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(Informacion.dialogoAnhadirLibro);
+        Scene dialogScene = new Scene(layoutPane, 700 , 400);
+        dialog.setTitle("Elegir libro");
+        dialog.setResizable(false);
+        dialog.setScene(dialogScene);
+        
+        Informacion.dialogoSeleccionarLibro = dialog;
+        
+        dialog.showAndWait();
+        
+        if(Informacion.libroSeleccionado.getIsbn() != null) {
+        	portadaImageView.setImage(new Image(Informacion.libroSeleccionado.getPortada()));
+        	agregarAColeccion.setDisable(false);
+        }
+
+	}
+
+
+	public void aportarLibro() {
     	this.layout.mostrarComoPantallaActual("nuevoLibro");
     }
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		// Bloquear valores no numericos en el campo del ISBN-13
+	    isbn.textProperty().addListener(new ChangeListener<String>() {
+	    	@Override
+	    	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	    		if (!newValue.matches("\\d*")) {
+	    			isbn.setText(newValue.replaceAll("[^\\d]", ""));
+	    		}
+	    	}
+	     });
+	    
 		
 		genero.getItems().removeAll(genero.getItems());
 		genero.getItems().addAll("Aventuras", "Ciencia ficción", "Drama", "Fantasía", "Gótico", "Humor", "Novela negra", "Realismo", "Romántico", "Terror");

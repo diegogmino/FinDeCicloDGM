@@ -42,12 +42,10 @@ public class Libro {
 	private String portada;
 	
 	public Libro() {
-		super();
 	}
 
 	public Libro(Long isbn, String titulo, String autor, int paginas, int precio, String genero, boolean leido, LocalDate fechaLectura,
 			String editorial, int numeroEdicion, String portada) {
-		super();
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.autor = autor;
@@ -59,6 +57,14 @@ public class Libro {
 		this.editorial = editorial;
 		this.numeroEdicion = numeroEdicion;
 		this.portada = portada;
+	}
+
+	public Libro(Long isbn, String titulo, String autor, String genero) {
+		super();
+		this.isbn = isbn;
+		this.titulo = titulo;
+		this.autor = autor;
+		this.genero = genero;
 	}
 
 	public Long getIsbn() {

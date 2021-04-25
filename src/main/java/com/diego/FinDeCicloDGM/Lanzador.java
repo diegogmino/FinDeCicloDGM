@@ -30,7 +30,6 @@ public class Lanzador extends Application {
         //primaryStage.getIcons().add(new Image("/img/libro.png"));
         primaryStage.setScene(escena);
         primaryStage.show();
-        
         Informacion.stage = primaryStage;
         
     }

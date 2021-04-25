@@ -93,6 +93,7 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 			System.out.println("Libro insertado");
 			LibroDao.anhadirLibroUsuario(libro, Informacion.usuario);
 			System.out.println("Libro añadido a usuario");
+			Informacion.dialogoAnhadirLibro.close();
 			
 		} else {
 			System.out.println("Error al insertar el libro");

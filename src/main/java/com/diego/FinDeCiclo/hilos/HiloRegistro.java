@@ -1,11 +1,14 @@
 package com.diego.FinDeCiclo.hilos;
 
+import java.time.LocalDate;
+
 import org.apache.commons.validator.routines.EmailValidator;
 
 import com.diego.FinDeCiclo.pojos.Usuario;
 import com.diego.FinDeCicloDGM.LoginControlador;
 import com.diego.FinDeCicloDGM.dao.UsuarioDao;
 
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
@@ -22,7 +25,6 @@ public class HiloRegistro extends Thread {
 	private TextField email;
 	private LoginControlador controlador;
 	private ProgressIndicator procesando;
-	
 
 	
 	public HiloRegistro(TextField usuarioRegistro, PasswordField contrasenaRegistro, PasswordField repetirContrasena, TextField nombre, TextField apellidos,
@@ -41,7 +43,7 @@ public class HiloRegistro extends Thread {
 	}
 	
 	public void run() {
-    	
+		
     	if(contrasenaRegistro.getText().equals(repetirContrasena.getText())) {
     		
     		if(isValidEmail(email.getText())) {
