@@ -3,6 +3,7 @@ package com.diego.FinDeCiclo.pojos;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class Informacion {
@@ -13,6 +14,7 @@ public class Informacion {
 	public static Stage dialogoSeleccionarLibro = null;
 	public static List<Libro> libros = new ArrayList<Libro>();
 	public static Libro libroSeleccionado = new Libro();
+	public static Button refrescar;
 
 
 }

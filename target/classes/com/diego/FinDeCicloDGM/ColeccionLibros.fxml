@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,7 +13,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../estilos/coleccionLibros.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.ColeccionLibrosControlador">
    <left>
-      <Pane fx:id="root" prefHeight="625.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="625.0" prefWidth="160.0" BorderPane.alignment="CENTER">
          <children>
             <Button alignment="TOP_LEFT" layoutX="6.0" layoutY="6.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#mostrarBarraNavegacion" prefHeight="30.0" prefWidth="30.0">
                <graphic>
@@ -21,7 +23,24 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button layoutX="80.0" layoutY="13.0" mnemonicParsing="false" onAction="#añadirLibro" text="Añadir" />
+            <Button alignment="TOP_LEFT" layoutX="105.0" layoutY="9.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#añadirLibro" prefHeight="30.0" prefWidth="30.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/add.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="refrescar" alignment="TOP_LEFT" layoutX="60.0" layoutY="9.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#refrescar" prefHeight="30.0" prefWidth="30.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <VBox fx:id="barraNavegacion" layoutX="-160.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="160.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#ocultarBarraNavegacion" prefHeight="30.0" prefWidth="30.0">
@@ -86,4 +105,37 @@
          </children>
       </Pane>
    </left>
+   <center>
+      <ScrollPane fx:id="root" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <content>
+            <Pane fx:id="labelPane" prefHeight="538.0" prefWidth="1035.0">
+               <children>
+                  <Label fx:id="refrescarLabel" layoutX="198.0" layoutY="268.0" prefHeight="36.0" prefWidth="640.0" text="Pulsa      para cargar o refrescar tu colección">
+                     <font>
+                        <Font name="Yu Gothic Medium" size="30.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="refrescarIconoLabel" fitHeight="150.0" fitWidth="32.0" layoutX="284.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/refresh.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="noLibroLabel" layoutX="29.0" layoutY="269.0" text="No tienes ningún libro en la colección. Pulsa      para añadir el primero.">
+                     <font>
+                        <Font name="Yu Gothic Medium" size="30.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="anhadirLibroIconoLabel" fitHeight="37.0" fitWidth="44.0" layoutX="648.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/add.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </content>
+      </ScrollPane>
+   </center>
 </BorderPane>

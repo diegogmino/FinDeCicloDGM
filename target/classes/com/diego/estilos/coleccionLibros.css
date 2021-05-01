@@ -6,6 +6,10 @@ BorderPane{
 	-fx-background-color:#E3E3E3;
 }
 
+ScrollPane{
+	-fx-background-color:#E3E3E3;
+}
+
 .button{
 	-fx-background-color:transparent;
 	-fx-text-fill:#FFFFFF;

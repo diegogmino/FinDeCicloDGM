@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -22,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
@@ -295,9 +297,32 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
 		fxml = FXMLLoader.load(getClass().getResource("IniciarSesion.fxml"));
 		vbox.getChildren().removeAll();
 		vbox.getChildren().setAll(fxml);
-	} catch (IOException e) {
+       } catch (IOException e) {
 		e.printStackTrace();
-	}
+       }
+       
+       LocalDate fechaBloqueo = LocalDate.now().minusYears(18);
+       
+       
+       // Muestra en el calendario la fecha actual menos 16 años
+       fechaNacimiento.showingProperty().addListener((observableValue, wasFocused, isNowFocus) -> {
+    	    if (isNowFocus && fechaNacimiento.getValue() == null) {
+    	    	fechaNacimiento.setValue(fechaBloqueo);
+    	        Platform.runLater(()->{
+    	        	fechaNacimiento.getEditor().clear();
+    	        });
+    	    }
+    	});
+       
+    // Bloquea las fechas mayores que la fecha actual menos 16 años para evitar que los menores de dicha 
+    // edad puedan darse de alta en la aplicación
+    fechaNacimiento.setDayCellFactory(param -> new DateCell() {
+    	@Override
+    	public void updateItem(LocalDate date, boolean empty) {
+    		super.updateItem(date, empty);
+    		setDisable(empty || date.compareTo(fechaBloqueo) > 0 );
+    	}
+    });
        
    }
     

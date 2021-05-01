@@ -165,5 +165,28 @@ public class LibroDao {
 		return libros;
 		
 	}
+	
+	public static List<Libro> buscarLibrosPorUsuario(Usuario usuario) {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+
+			Query query = session.createQuery("SELECT u FROM Usuario u WHERE nombreUsuario LIKE :usu");
+			List<Usuario> usuarios = query.setParameter("usu", usuario.getNombreUsuario()).getResultList();
+			Usuario usuarioEncontrado = usuarios.get(0);
+			List<Libro> libros = usuarioEncontrado.getLibros();
+		
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+		
+		return libros;
+		
+	}
 
 }
