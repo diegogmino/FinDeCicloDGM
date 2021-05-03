@@ -4,6 +4,7 @@
     -fx-background-radius: 0;
     -fx-prompt-text-fill: #444444;
     -fx-text-fill:black;
+    -fx-accent: #d43c9b;
 }
 
 .text-field:focused {

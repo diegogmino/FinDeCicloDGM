@@ -10,6 +10,10 @@ GridPane{
     -fx-text-fill:black;
 }
 
+.error{
+	-fx-text-fill:red;
+}
+
 .procesando{
 	-fx-progress-color:#5a1265;
 }
@@ -30,12 +34,22 @@ GridPane{
     -fx-text-fill:#FFFFFF;
 }
 
+.button:hover:pressed{
+    -fx-font-weight: bold;
+    -fx-background-color:#d43c9b;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#FFFFFF;
+}
+
+
 .text-field {
     -fx-background-color: #000000 , #E3E3E3 , #E3E3E3;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-background-radius: 0;
     -fx-prompt-text-fill: #444444;
     -fx-text-fill:black;
+    -fx-accent: #d43c9b;
 }
 .text-field:focused {
     -fx-background-color: #d43c9b , #E3E3E3 , #E3E3E3;

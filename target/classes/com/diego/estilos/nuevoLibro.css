@@ -8,6 +8,7 @@ BorderPane{
     -fx-background-radius: 0;
     -fx-prompt-text-fill: #444444;
     -fx-text-fill:black;
+    -fx-accent: #d43c9b;
 }
 
 .text-field:focused {
@@ -25,6 +26,14 @@ BorderPane{
 .button:hover{
     -fx-font-weight: bold;
     -fx-background-color:#5a1265;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#FFFFFF;
+}
+
+.button:hover:pressed{
+    -fx-font-weight: bold;
+    -fx-background-color:#d43c9b;
     -fx-background-radius:22;
     -fx-font-size:16;
     -fx-text-fill:#FFFFFF;

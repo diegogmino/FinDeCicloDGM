@@ -15,7 +15,7 @@
    <left>
       <Pane prefHeight="625.0" prefWidth="160.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="TOP_LEFT" layoutX="6.0" layoutY="6.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#mostrarBarraNavegacion" prefHeight="30.0" prefWidth="30.0">
+            <Button alignment="TOP_LEFT" layoutX="6.0" layoutY="6.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#mostrarBarraNavegacion" prefHeight="30.0" prefWidth="30.0" styleClass="botonNavBar">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -23,7 +23,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button alignment="TOP_LEFT" layoutX="105.0" layoutY="9.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#añadirLibro" prefHeight="30.0" prefWidth="30.0">
+            <Button alignment="TOP_LEFT" layoutX="105.0" layoutY="9.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#añadirLibro" prefHeight="30.0" prefWidth="30.0" styleClass="botonNavBar">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -32,7 +32,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="refrescar" alignment="TOP_LEFT" layoutX="60.0" layoutY="9.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#refrescar" prefHeight="30.0" prefWidth="30.0">
+            <Button fx:id="refrescar" alignment="TOP_LEFT" layoutX="60.0" layoutY="9.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#refrescar" prefHeight="30.0" prefWidth="30.0" styleClass="botonNavBar">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,7 +43,7 @@
             </Button>
             <VBox fx:id="barraNavegacion" layoutX="-160.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="160.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#ocultarBarraNavegacion" prefHeight="30.0" prefWidth="30.0">
+                  <Button mnemonicParsing="false" onAction="#ocultarBarraNavegacion" prefHeight="30.0" prefWidth="30.0" styleClass="botonNavBar">
                      <VBox.margin>
                         <Insets left="3.0" top="10.0" />
                      </VBox.margin>
@@ -55,7 +55,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button ellipsisString="" mnemonicParsing="false" onAction="#mostrarMusica" prefHeight="60.0" prefWidth="160.0" text="Música                 ">
+                  <Button ellipsisString="" mnemonicParsing="false" onAction="#mostrarMusica" prefHeight="60.0" prefWidth="160.0" styleClass="botonNavBar" text="Música                 ">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -70,7 +70,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#mostrarOtrasColecciones" prefHeight="60.0" prefWidth="160.0" text="Más colecciones">
+                  <Button mnemonicParsing="false" onAction="#mostrarOtrasColecciones" prefHeight="60.0" prefWidth="160.0" styleClass="botonNavBar" text="Más colecciones">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -85,7 +85,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="56.0" prefWidth="160.0" text="Cerrar sesión    ">
+                  <Button mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="56.0" prefWidth="160.0" styleClass="botonNavBar" text="Cerrar sesión    ">
                      <VBox.margin>
                         <Insets top="425.0" />
                      </VBox.margin>

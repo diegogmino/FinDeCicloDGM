@@ -1,5 +1,6 @@
 package com.diego.FinDeCicloDGM;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -110,27 +111,72 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     
     public void agregarAColeccion() {
     	
+    	List<Libro> librosUsuario = LibroDao.buscarLibrosPorUsuario(Informacion.usuario);
+    	
+    	
+    	// Informacion.libroSeleccionado hace referencia a un libro seleccionado a través del TableView del dialogo de selección
     	if(Informacion.libroSeleccionado.getIsbn() != null) {
-    		LibroDao.anhadirLibroUsuario(Informacion.libroSeleccionado, Informacion.usuario);
-    		Informacion.libroSeleccionado = new Libro();
-    		Informacion.dialogoAnhadirLibro.close();
+    		
+    		boolean encontrado = comprobarLibroColeccion(librosUsuario, Informacion.libroSeleccionado);
+    		
+    		if(!encontrado) {
+    			
+    			LibroDao.anhadirLibroUsuario(Informacion.libroSeleccionado, Informacion.usuario);
+        		Informacion.libroSeleccionado = new Libro();
+        		Informacion.dialogoAnhadirLibro.close();
+        		
+    		} else {
+    			System.out.println("Ya tienes este libro en tu colección");
+    		}
+    		
+    		
+    		
     	} else {
-    		LibroDao.anhadirLibroUsuario(libroEncontrado, Informacion.usuario);
-    		Informacion.dialogoAnhadirLibro.close();
+
+    		// libroEncontrado es la variable donde se guarda el libro resultante de la búsqueda por isbn
+    		boolean encontrado = comprobarLibroColeccion(librosUsuario, libroEncontrado);
+    		
+    		if(!encontrado) {
+    			
+    			LibroDao.anhadirLibroUsuario(libroEncontrado, Informacion.usuario);
+        		Informacion.dialogoAnhadirLibro.close();
+        		
+    		} else {
+    			System.out.println("Ya tienes este libro en tu colección");
+    		}
+
     	}
     	
-    	
-    	
     }
-    
-    public void buscar() {
+
+	private boolean comprobarLibroColeccion(List<Libro> librosUsuario, Libro libroAGuardar) {
+		
+		int encontrado = 0;
+		
+		for(Libro libro : librosUsuario) {
+    		if(libro.getIsbn().equals(libroAGuardar.getIsbn())) {
+    			encontrado++;
+    		} 
+    	}
+		
+		if(encontrado == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
+	public void buscar() {
     	
     	if(!isbn.getText().isEmpty()) {
     		
     		libroEncontrado = LibroDao.buscarLibroISBN(isbn.getText());
     		
     		if(libroEncontrado.getIsbn() != null) {
-    			portadaImageView.setImage(new Image(libroEncontrado.getPortada()));
+    			File portada = new File(libroEncontrado.getPortada());
+
+    			portadaImageView.setImage(new Image(portada.toURI().toString()));
     			agregarAColeccion.setDisable(false);
     		} else {
     			aportarLibro.setDisable(false);
@@ -142,7 +188,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		
     		if(!librosEncontrados.isEmpty()) {
     			Informacion.libros = librosEncontrados;
-    			lanzarDialogo();
+    			lanzarDialogoSeleccion();
     		} else {
     			aportarLibro.setDisable(false);
     			// mostrar imagen de libro no encontrado
@@ -154,7 +200,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		
     		if(!librosEncontrados.isEmpty()) {
     			Informacion.libros = librosEncontrados;
-    			lanzarDialogo();
+    			lanzarDialogoSeleccion();
     		} else {
     			aportarLibro.setDisable(false);
     			// mostrar imagen de libro no encontrado
@@ -166,7 +212,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		
     		if(!librosEncontrados.isEmpty()) {
     			Informacion.libros = librosEncontrados;
-    			lanzarDialogo();
+    			lanzarDialogoSeleccion();
     		} else {
     			aportarLibro.setDisable(false);
     			// mostrar imagen de libro no encontrado
@@ -175,7 +221,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     	
     }
     
-    private void lanzarDialogo() {
+    private void lanzarDialogoSeleccion() {
 		
     	LayoutPane layoutPane = new LayoutPane();
     	
@@ -199,7 +245,9 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
         dialog.showAndWait();
         
         if(Informacion.libroSeleccionado.getIsbn() != null) {
-        	portadaImageView.setImage(new Image(Informacion.libroSeleccionado.getPortada()));
+        	
+        	File portada = new File(Informacion.libroSeleccionado.getPortada());
+			portadaImageView.setImage(new Image(portada.toURI().toString()));
         	agregarAColeccion.setDisable(false);
         }
 

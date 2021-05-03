@@ -1,6 +1,7 @@
 package com.diego.FinDeCicloDGM;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -78,14 +79,18 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 	
 	public void guardarLibro() {
 		
+		procesando.setVisible(true);
+		
 		Libro libro;
+		
+		String directorioPortada = descagarPortada();
 		
 		if(fechaLectura == null) {
 			libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
-					genero.getValue(), leido.isSelected(), date, editorial.getText(), Integer.parseInt(numeroEdicion.getText()), portada.getText());
+					genero.getValue(), leido.isSelected(), date, editorial.getText(), Integer.parseInt(numeroEdicion.getText()), directorioPortada);
 		} else {
 			libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
-					genero.getValue(), leido.isSelected(), fechaLectura.getValue(), editorial.getText(), Integer.parseInt(numeroEdicion.getText()), portada.getText());
+					genero.getValue(), leido.isSelected(), fechaLectura.getValue(), editorial.getText(), Integer.parseInt(numeroEdicion.getText()), directorioPortada);
 		}
 		
 		
@@ -99,8 +104,36 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 			System.out.println("Error al insertar el libro");
 		}
 		
+		procesando.setVisible(false);
+		
 	}
 	
+	private String descagarPortada() {
+		// Método para descargar la imagen introducida en el campo de portada y guardarla en el directorio pertinente para luego poder acceder a ellas, 
+		// simulando que es el servidor privado de la aplicación.
+		BufferedImage image;
+		String ruta = null;
+		
+		try {
+			
+			image = ImageIO.read(new URL(portada.getText()));
+			// Con .replaceAll("\\s+", "") elimino todos los espacios en blanco del título
+			ruta = "portadas\\" + isbn.getText() + "_" + titulo.getText().replaceAll("\\s+", "") +".png";
+			ImageIO.write(image , "png", new File(ruta));
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ruta;
+		
+		
+	}
+
 	public void limpiarCampos() {
 	// Método que limpia los campos de la ventana
 		isbn.clear();
@@ -124,6 +157,9 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 	
 	public void comprobarPortada() {
 	// Método que comprueba si la url de una imagen es válida
+		
+		procesando.setVisible(true);
+		
 	    try {  
 	        BufferedImage image = ImageIO.read(new URL(portada.getText()));  
 	        portadaValida = true;
@@ -146,6 +182,8 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 				imagenPortada.setImage(new Image(getClass().getResource("../img/portada_no_valida.png").toURI().toString()));
 			} catch (URISyntaxException e1) {}
 	    }
+	    
+	    procesando.setVisible(false);
 		
 	}
 	

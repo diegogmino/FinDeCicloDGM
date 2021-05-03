@@ -23,5 +23,13 @@ Pane{
     -fx-background-color:#5a1265;
     -fx-background-radius:22;
     -fx-font-size:16;
-    -fx-text-fill:#FFFFFF;    
+    -fx-text-fill:#FFFFFF;
+}
+
+.button:hover:pressed{
+    -fx-font-weight: bold;
+    -fx-background-color:#d43c9b;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#FFFFFF;
 }

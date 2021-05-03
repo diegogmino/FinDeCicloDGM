@@ -15,6 +15,7 @@ public class Informacion {
 	public static List<Libro> libros = new ArrayList<Libro>();
 	public static Libro libroSeleccionado = new Libro();
 	public static Button refrescar;
+	public static Libro libroMostrarFichaTecnica = new Libro();
 
 
 }

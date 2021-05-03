@@ -45,7 +45,7 @@ public class LibroDao {
 		Session session = sf.openSession();
 
 		session.getTransaction().begin();
-			
+		
 			usuario.anhadirLibro(libro);
 			session.saveOrUpdate(usuario);
 		

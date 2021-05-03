@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Lanzador extends Application {
+	
     public void start (Stage primaryStage) throws Exception{
         
         LayoutPane layoutPane = new LayoutPane();
@@ -21,6 +22,7 @@ public class Lanzador extends Application {
         layoutPane.cargarPantalla("coleccionMusica", ColeccionMusicaControlador.class.getResource("ColeccionMusica.fxml"));
         layoutPane.cargarPantalla("masColecciones", MasColeccionesControlador.class.getResource("MasColecciones.fxml")); 
         layoutPane.cargarPantalla("nuevoLibro", NuevoLibroControlador.class.getResource("NuevoLibro.fxml"));
+        layoutPane.cargarPantalla("fichaTecnicaLibro", FichaTecnicaLibroControlador.class.getResource("FichaTecnicaLibro.fxml"));
         
         layoutPane.mostrarComoPantallaActual("login");
         

@@ -84,6 +84,9 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     @FXML
     private ProgressIndicator procesandoLogin;
     
+    @FXML
+    private Label mensajeError;
+    
     private Parent fxml;
     
     private LocalDate date = LocalDate.parse("1900-01-01");
@@ -145,8 +148,12 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
 
     	procesandoLogin.setVisible(true);
     	
-    	HiloIniciarSesion hiloSesion = new HiloIniciarSesion(usuarioLogin.getText(), contrasenaLogin.getText(), procesandoLogin, this);
+    	HiloIniciarSesion hiloSesion = new HiloIniciarSesion(usuarioLogin, contrasenaLogin, procesandoLogin, this, iniciarSesion, mensajeError);
     	hiloSesion.start();
+    	
+    	iniciarSesion.setDisable(true);
+    	usuarioLoginEs = false;
+    	contrasenaLoginEs = false;
   
     }
     
@@ -284,6 +291,8 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
    @Override
    public void initialize(URL location, ResourceBundle resources) {
     	
+	   mensajeError.setVisible(false);
+	   
        usuarioDao = new UsuarioDao();
        usuarioEncontrado = new Usuario();
        

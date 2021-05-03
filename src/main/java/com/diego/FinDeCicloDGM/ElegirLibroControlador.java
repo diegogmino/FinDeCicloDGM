@@ -47,8 +47,8 @@ public class ElegirLibroControlador extends ControladorConNavegabilidad implemen
         tabla.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         ObservableList<TableColumn<Libro, ?>> columnas = tabla.getColumns();
         columnas.get(0).setMaxWidth(1f * Integer.MAX_VALUE * 17);
-        columnas.get(1).setMaxWidth(1f * Integer.MAX_VALUE * 48);
-        columnas.get(2).setMaxWidth(1f * Integer.MAX_VALUE *25);
+        columnas.get(1).setMaxWidth(1f * Integer.MAX_VALUE * 45);
+        columnas.get(2).setMaxWidth(1f * Integer.MAX_VALUE *23);
         columnas.get(3).setMaxWidth(1f * Integer.MAX_VALUE * 15);
         
     }

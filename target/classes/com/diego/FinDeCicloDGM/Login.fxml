@@ -175,6 +175,14 @@
                   <Insets bottom="100.0" left="420.0" />
                </GridPane.margin>
             </ProgressIndicator>
+            <Label fx:id="mensajeError" styleClass="error" text="Usuario y/o contraseña incorrectos" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="250.0" left="80.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
       <VBox id="vbox" fx:id="vbox" prefHeight="650.0" prefWidth="700.0" styleClass="transition-pane" />

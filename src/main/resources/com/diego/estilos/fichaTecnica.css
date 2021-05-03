@@ -1,0 +1,57 @@
+Pane{
+	-fx-background-color:#E3E3E3;
+}
+
+.button{
+	-fx-background-color:transparent;
+	-fx-text-fill:#FFFFFF;
+}
+
+.button:hover{
+	-fx-background-color:rgba(212, 60, 155, 0.5);
+}
+
+.button:hover:pressed{
+	-fx-background-color:rgba(212, 60, 155, 0.3);
+}
+
+.text-field {
+    -fx-background-color: #000000 , #E3E3E3 , #E3E3E3;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+    -fx-prompt-text-fill: #444444;
+    -fx-text-fill:black;
+    -fx-accent: #d43c9b;
+}
+
+.text-field:focused {
+    -fx-background-color: #d43c9b , #E3E3E3 , #E3E3E3;
+}
+
+.nombre-libro {
+    -fx-background-color: #E3E3E3 , #E3E3E3 , #E3E3E3;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+    -fx-prompt-text-fill: #444444;
+    -fx-text-fill:black;
+}
+
+.check-box .box {
+
+	-fx-background-color: white;
+	-fx-border-color:grey;
+	-fx-border-radius:3px; 
+
+}
+
+.check-box:selected .mark {
+
+	-fx-background-color: white;
+
+}
+
+.check-box:selected .box {
+
+	-fx-background-color: #5a1265;
+	
+}

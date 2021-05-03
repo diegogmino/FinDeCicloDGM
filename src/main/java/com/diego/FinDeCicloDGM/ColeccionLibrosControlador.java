@@ -1,6 +1,8 @@
 package com.diego.FinDeCicloDGM;
 
 import javafx.scene.control.ScrollPane;
+
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -13,15 +15,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 public class ColeccionLibrosControlador extends ControladorConNavegabilidad implements Initializable {
@@ -51,6 +53,7 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
     private ImageView anhadirLibroIconoLabel;
     
     private TilePane tile;
+    private Node contenido;
 	
     public void añadirLibro() {
     	
@@ -106,8 +109,21 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
         translate.play();
         
         translate.setOnFinished((e)->{
+        	
         	this.layout.mostrarComoPantallaActual("login");
+        	
+        	refrescar.setDisable(false);
+        	
+        	tile.getChildren().clear();
+    		root.setContent(contenido);
+    		labelPane.setVisible(true);
+    		refrescarIconoLabel.setVisible(true);
+    		refrescarLabel.setVisible(true);
+
         });
+        
+		
+		
 		
 	}
 	
@@ -129,12 +145,18 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 			
 			tile.getChildren().clear();
 			refrescar.setDisable(true);
-			labelPane.setVisible(false);
+			
+			refrescarIconoLabel.setVisible(false);
+			refrescarLabel.setVisible(false);
+			noLibroLabel.setVisible(false);
+			anhadirLibroIconoLabel.setVisible(false);
+			
+			//labelPane.setVisible(false);
 			
 			for(Libro libro : libros) {
-				ImageView imageView;
-	            imageView = createImageView(libro);
-	            tile.getChildren().addAll(imageView);
+				Button libroBoton;
+	            libroBoton = createImageView(libro);
+	            tile.getChildren().addAll(libroBoton);
 			}
 			
 			root.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -146,24 +168,38 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 
 	}
 	
-	private ImageView createImageView(Libro libro) {
-		ImageView imageView = new ImageView(libro.getPortada());
-		imageView.setFitWidth(220);
-		imageView.setFitHeight(320);
-		imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	private Button createImageView(Libro libro) {
+		
+		File portada = new File(libro.getPortada());
+		ImageView imageView = new ImageView(new Image(portada.toURI().toString()));
+		
+		imageView.setFitWidth(210);
+		imageView.setFitHeight(310);
+		
+		Button boton = new Button();
+		boton.getStyleClass().add("boton-libro");
+		boton.setGraphic(imageView);
+		boton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
-			public void handle(MouseEvent mouseEvent) {
-				if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-					if(mouseEvent.getClickCount() == 2){
-						System.out.println("Titulo: " + libro.getTitulo());
-					}
-				}
+			public void handle(MouseEvent event) {
+				
+				Informacion.libroMostrarFichaTecnica = libro;
+				mostrarPantallaFichaTecnica();
+				
+				System.out.println("Titulo: " + libro.getTitulo());
+				
 			}
+			
 		});
 		
-		return imageView;
 		
+		return boton;
+		
+	}
+	
+	public void mostrarPantallaFichaTecnica() {
+		this.layout.mostrarComoPantallaActual("fichaTecnicaLibro");
 	}
 
 	@Override
@@ -173,10 +209,11 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 		anhadirLibroIconoLabel.setVisible(false);
 		
 		tile = new TilePane();
-		tile.setPadding(new Insets(25, 35, 25, 35));
+		tile.setPadding(new Insets(20, 25, 25, 20));
         tile.setHgap(25);
         tile.setVgap(25);
         labelPane.setVisible(true);
+        contenido = root.getContent();
 		
 	}
 

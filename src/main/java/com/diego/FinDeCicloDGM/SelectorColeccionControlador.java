@@ -53,7 +53,10 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
         
         translate.setOnFinished((e)->{
         	this.layout.mostrarComoPantallaActual("coleccionLibros");
-        }); 
+        	librosPane.setTranslateX(0);
+        });
+        
+        botonLibros.setDisable(false);
 		
 	}
 	
