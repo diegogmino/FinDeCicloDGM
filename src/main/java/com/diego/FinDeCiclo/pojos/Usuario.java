@@ -153,10 +153,17 @@ public class Usuario {
 		libros.add(l);
 	}
 	
+	public void eliminarLibro(Libro l) {
+		libros.remove(l);
+	}
+	
 	public void anhadirMusica(Musica m) {
 		musica.add(m);
 	}
 	
-	
+	public void eliminarMusica(Musica m) {
+		musica.remove(m);
+	}
+
 
 }

@@ -36,6 +36,55 @@ public class LibroDao {
 		
 		
 	}
+	
+	public static void actualizarLibro(Libro libro) {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+		
+			session.saveOrUpdate(libro);
+		
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+		
+	}
+	
+	public static void eliminarLibroUsuario(Libro libro, Usuario usuario) {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+		
+			int i = 0;
+			List<Libro> libros = usuario.getLibros();
+			
+			for(Libro libroEliminar : libros) {
+				if(libroEliminar.getIsbn().equals(libro.getIsbn())) {
+					libros.remove(i);
+					break;
+				} else {
+					i++;
+				}
+			}
+			
+			usuario.setLibros(libros);
+			session.saveOrUpdate(usuario);
+			
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+
+	}
 
 	public static void anhadirLibroUsuario(Libro libro, Usuario usuario) {
 		

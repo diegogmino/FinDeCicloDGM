@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.diego.FinDeCiclo.pojos.Informacion;
+import com.diego.FinDeCiclo.pojos.Libro;
+import com.diego.FinDeCicloDGM.dao.LibroDao;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,6 +60,12 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
     
     @FXML
     private Button cargar;
+    
+    @FXML
+    private Button editar;
+    
+    @FXML
+    private Button guardar;
 	
 	public void volver() {
 		this.layout.mostrarComoPantallaActual("coleccionLibros");
@@ -66,6 +74,8 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		texto.setVisible(true);
 		iconoRefrescar.setVisible(true);
 		cargar.setDisable(false);
+		editar.setDisable(false);
+		guardar.setVisible(false);
 		
 	}
 	
@@ -115,6 +125,63 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		
 	}
 	
+	public void eliminarLibroColeccion() {
+		LibroDao.eliminarLibroUsuario(Informacion.libroMostrarFichaTecnica, Informacion.usuario);
+		this.layout.mostrarComoPantallaActual("coleccionLibros");
+	}
+	
+	private void cambiarInformacionEditar() {
+		// Método que carga la información en los TextField sin las palabras concatenadas por código para editar más cómodamente
+		isbn.setText(Informacion.libroMostrarFichaTecnica.getIsbn().toString());
+		titulo.setText(Informacion.libroMostrarFichaTecnica.getTitulo());
+		autor.setText(Informacion.libroMostrarFichaTecnica.getAutor());
+		paginas.setText(String.valueOf(Informacion.libroMostrarFichaTecnica.getPaginas()));
+		precio.setText(String.valueOf(Informacion.libroMostrarFichaTecnica.getPrecio()));
+		genero.setText(Informacion.libroMostrarFichaTecnica.getGenero());
+		editorial.setText(Informacion.libroMostrarFichaTecnica.getEditorial());
+		numeroEdicion.setText(String.valueOf(Informacion.libroMostrarFichaTecnica.getNumeroEdicion()));
+		nombreLibro.setText("Editar ficha de: " + Informacion.libroMostrarFichaTecnica.getTitulo());
+	}
+	
+	public void editarLibro() {
+		// Método que habilita los campos para cambiar la información del libro seleccionado
+		
+		editar.setDisable(true);
+		guardar.setVisible(true);
+		
+		cambiarInformacionEditar();
+		
+		isbn.setEditable(true);
+		titulo.setEditable(true);
+		autor.setEditable(true);
+		paginas.setEditable(true);
+		precio.setEditable(true);
+		genero.setEditable(true);
+		editorial.setEditable(true);
+		numeroEdicion.setEditable(true);
+		nombreLibro.setEditable(true);
+		
+	}
+	
+	public void actualizarLibro() {
+		
+		Libro libroActualizar = Informacion.libroMostrarFichaTecnica;
+		
+		libroActualizar.setTitulo(titulo.getText());
+		libroActualizar.setIsbn(Long.parseLong(isbn.getText()));
+		libroActualizar.setAutor(autor.getText());
+		libroActualizar.setGenero(genero.getText());
+		libroActualizar.setPaginas(Integer.parseInt(paginas.getText()));
+		libroActualizar.setEditorial(editorial.getText());
+		libroActualizar.setNumeroEdicion(Integer.parseInt(numeroEdicion.getText()));
+		libroActualizar.setPrecio(Integer.parseInt(precio.getText()));
+		
+		LibroDao.actualizarLibro(libroActualizar);
+		
+		volver();
+		
+	}
+	
 	private void ocultarCampos() {
 		isbn.setVisible(false);
 		titulo.setVisible(false);
@@ -157,6 +224,7 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ocultarCampos();
+		guardar.setVisible(false);
 	}
 
 }

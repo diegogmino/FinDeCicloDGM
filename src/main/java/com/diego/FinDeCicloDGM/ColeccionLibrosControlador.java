@@ -119,6 +119,9 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
     		labelPane.setVisible(true);
     		refrescarIconoLabel.setVisible(true);
     		refrescarLabel.setVisible(true);
+    		noLibroLabel.setVisible(false);
+    		anhadirLibroIconoLabel.setVisible(false);
+    		
 
         });
         
@@ -200,6 +203,7 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 	
 	public void mostrarPantallaFichaTecnica() {
 		this.layout.mostrarComoPantallaActual("fichaTecnicaLibro");
+		refrescar.setDisable(false);
 	}
 
 	@Override

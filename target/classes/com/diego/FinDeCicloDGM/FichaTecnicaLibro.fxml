@@ -28,6 +28,33 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button fx:id="borrar" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#eliminarLibroColeccion" prefHeight="50.0" prefWidth="52.0">
+         <graphic>
+            <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/eliminar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="editar" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#editarLibro" prefHeight="50.0" prefWidth="52.0">
+         <graphic>
+            <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/editar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="guardar" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" onAction="#actualizarLibro" prefHeight="50.0" prefWidth="52.0">
+         <graphic>
+            <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/guardar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
       <TextField fx:id="isbn" layoutX="150.0" layoutY="225.0" prefHeight="25.0" prefWidth="189.0" promptText="ISBN">
          <font>
             <Font name="Yu Gothic Medium" size="14.0" />

@@ -28,7 +28,7 @@ ScrollPane{
 }
 
 .boton-libro:hover{
-	-fx-opacity: 0.5;
+	-fx-opacity: 0.7;
 }
 
 .boton-libro:hover:pressed{

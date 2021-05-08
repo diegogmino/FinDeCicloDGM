@@ -47,14 +47,24 @@ public class HiloRegistro extends Thread {
     	if(contrasenaRegistro.getText().equals(repetirContrasena.getText())) {
     		
     		if(isValidEmail(email.getText())) {
-    			Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fechaNacimiento.getValue(), nombre.getText(), apellidos.getText());
-            	
-            	if(UsuarioDao.insertarUsuario(usuario)) {
-            		controlador.mostrarIniciarSesion(null);
-            	} else {
-            		System.out.println("Error al insertar el usuario");
-            		procesando.setVisible(false);
-            	}
+    			
+    			if(UsuarioDao.existeNombreDeUsuario(usuarioRegistro.getText())) {
+    				System.out.println("El usuario introducido ya existe, introduce uno distinto");
+    				procesando.setVisible(false);
+    				
+    			} else {
+    				
+    				Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fechaNacimiento.getValue(), nombre.getText(), apellidos.getText());
+                	
+    				if(UsuarioDao.insertarUsuario(usuario)) {
+                		controlador.mostrarIniciarSesion(null);
+                	} else {
+                		System.out.println("Error al insertar el usuario, vuelve a intentarlo más tarde");
+                		procesando.setVisible(false);
+                	}
+                	
+    			}
+    			
     		} else {
     			System.out.println("Introduce un email válido");
     			procesando.setVisible(false);
@@ -67,7 +77,7 @@ public class HiloRegistro extends Thread {
 	}
 	
 	public static boolean isValidEmail(String email) {
-	       // Creamos una instancia de EmailVAlidator
+	       // Creamos una instancia de EmailValidator
 	       EmailValidator validator = EmailValidator.getInstance();
 
 	       // Comprobamos si el email pasado por parámetro es válido

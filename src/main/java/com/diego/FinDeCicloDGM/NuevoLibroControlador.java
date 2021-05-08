@@ -79,32 +79,44 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 	
 	public void guardarLibro() {
 		
-		procesando.setVisible(true);
+		Libro libroBuscar = LibroDao.buscarLibroISBN(isbn.getText());
 		
-		Libro libro;
-		
-		String directorioPortada = descagarPortada();
-		
-		if(fechaLectura == null) {
-			libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
-					genero.getValue(), leido.isSelected(), date, editorial.getText(), Integer.parseInt(numeroEdicion.getText()), directorioPortada);
-		} else {
-			libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
-					genero.getValue(), leido.isSelected(), fechaLectura.getValue(), editorial.getText(), Integer.parseInt(numeroEdicion.getText()), directorioPortada);
-		}
-		
-		
-		if(LibroDao.insertarLibro(libro)) {
-			System.out.println("Libro insertado");
-			LibroDao.anhadirLibroUsuario(libro, Informacion.usuario);
-			System.out.println("Libro añadido a usuario");
-			Informacion.dialogoAnhadirLibro.close();
+		if(libroBuscar.getIsbn().equals(null)) {
+			
+			procesando.setVisible(true);
+			
+			Libro libro;
+			
+			String directorioPortada = descagarPortada();
+			
+			if(fechaLectura == null) {
+				libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
+						genero.getValue(), leido.isSelected(), date, editorial.getText(), Integer.parseInt(numeroEdicion.getText()), directorioPortada);
+			} else {
+				libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
+						genero.getValue(), leido.isSelected(), fechaLectura.getValue(), editorial.getText(), Integer.parseInt(numeroEdicion.getText()), directorioPortada);
+			}
+			
+			
+			if(LibroDao.insertarLibro(libro)) {
+				System.out.println("Libro insertado");
+				LibroDao.anhadirLibroUsuario(libro, Informacion.usuario);
+				System.out.println("Libro añadido a usuario");
+				Informacion.dialogoAnhadirLibro.close();
+				
+			} else {
+				System.out.println("Error al insertar el libro");
+			}
+			
+			procesando.setVisible(false);
+			
 			
 		} else {
-			System.out.println("Error al insertar el libro");
+			
+			System.out.println("El ISBN-13 introducido ya está registrado");
+			
 		}
 		
-		procesando.setVisible(false);
 		
 	}
 	
@@ -130,7 +142,6 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		}
 		
 		return ruta;
-		
 		
 	}
 

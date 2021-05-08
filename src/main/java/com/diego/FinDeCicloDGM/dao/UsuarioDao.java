@@ -52,6 +52,30 @@ public class UsuarioDao {
 			return usuarioVacio;
 		}
 		
+	}
+	
+	public static boolean existeNombreDeUsuario(String usuario) {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+		
+			Query query = session.createQuery("SELECT u FROM Usuario u WHERE nombreUsuario LIKE :usu");
+			List<Usuario> usuarios = query.setParameter("usu", usuario).getResultList();
+		
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+		
+		if(usuarios.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 		
 	}
 	
