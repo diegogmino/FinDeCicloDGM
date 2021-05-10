@@ -38,16 +38,13 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
     private TextField genero;
 
     @FXML
-    private TextField fechaLectura;
-
-    @FXML
     private TextField editorial;
 
     @FXML
-    private TextField numeroEdicion;
-
-    @FXML
     private TextField nombreLibro;
+    
+    @FXML
+    private TextField tapa;
 
     @FXML
     private ImageView portada;
@@ -86,10 +83,9 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		paginas.clear();
 		precio.clear();
 		genero.clear();
-		fechaLectura.clear();
 		editorial.clear();
-		numeroEdicion.clear();
 		nombreLibro.clear();
+		tapa.clear();
 		portada.setImage(null);
 		
 	}
@@ -109,15 +105,8 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		precio.setText("Precio: " +String.valueOf(Informacion.libroMostrarFichaTecnica.getPrecio()) + " €");
 		genero.setText(Informacion.libroMostrarFichaTecnica.getGenero());
 		
-		if(!Informacion.libroMostrarFichaTecnica.isLeido()) {
-			fechaLectura.setVisible(false);
-		} else {
-			fechaLectura.setVisible(true);
-			fechaLectura.setText(Informacion.libroMostrarFichaTecnica.getFechaLectura().toString());
-		}
-		
-		editorial.setText("Editorial: " + Informacion.libroMostrarFichaTecnica.getEditorial());
-		numeroEdicion.setText("Número edición: " + String.valueOf(Informacion.libroMostrarFichaTecnica.getNumeroEdicion()));
+		editorial.setText(Informacion.libroMostrarFichaTecnica.getEditorial());
+		tapa.setText(String.valueOf(Informacion.libroMostrarFichaTecnica.getTapa()));
 		nombreLibro.setText("Ficha de: " + Informacion.libroMostrarFichaTecnica.getTitulo());
 
 		File imgPortada = new File(Informacion.libroMostrarFichaTecnica.getPortada());
@@ -132,14 +121,8 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 	
 	private void cambiarInformacionEditar() {
 		// Método que carga la información en los TextField sin las palabras concatenadas por código para editar más cómodamente
-		isbn.setText(Informacion.libroMostrarFichaTecnica.getIsbn().toString());
-		titulo.setText(Informacion.libroMostrarFichaTecnica.getTitulo());
-		autor.setText(Informacion.libroMostrarFichaTecnica.getAutor());
 		paginas.setText(String.valueOf(Informacion.libroMostrarFichaTecnica.getPaginas()));
 		precio.setText(String.valueOf(Informacion.libroMostrarFichaTecnica.getPrecio()));
-		genero.setText(Informacion.libroMostrarFichaTecnica.getGenero());
-		editorial.setText(Informacion.libroMostrarFichaTecnica.getEditorial());
-		numeroEdicion.setText(String.valueOf(Informacion.libroMostrarFichaTecnica.getNumeroEdicion()));
 		nombreLibro.setText("Editar ficha de: " + Informacion.libroMostrarFichaTecnica.getTitulo());
 	}
 	
@@ -158,7 +141,7 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		precio.setEditable(true);
 		genero.setEditable(true);
 		editorial.setEditable(true);
-		numeroEdicion.setEditable(true);
+		tapa.setEditable(true);
 		nombreLibro.setEditable(true);
 		
 	}
@@ -173,7 +156,7 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		libroActualizar.setGenero(genero.getText());
 		libroActualizar.setPaginas(Integer.parseInt(paginas.getText()));
 		libroActualizar.setEditorial(editorial.getText());
-		libroActualizar.setNumeroEdicion(Integer.parseInt(numeroEdicion.getText()));
+		libroActualizar.setTapa(tapa.getText());
 		libroActualizar.setPrecio(Integer.parseInt(precio.getText()));
 		
 		LibroDao.actualizarLibro(libroActualizar);
@@ -189,9 +172,8 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		paginas.setVisible(false);
 		precio.setVisible(false);
 		genero.setVisible(false);
-		fechaLectura.setVisible(false);
 		editorial.setVisible(false);
-		numeroEdicion.setVisible(false);
+		tapa.setVisible(false);
 		nombreLibro.setVisible(false);
 		portada.setVisible(false);
 	}
@@ -203,9 +185,8 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		paginas.setVisible(true);
 		precio.setVisible(true);
 		genero.setVisible(true);
-		fechaLectura.setVisible(true);
 		editorial.setVisible(true);
-		numeroEdicion.setVisible(true);
+		tapa.setVisible(true);
 		nombreLibro.setVisible(true);
 		portada.setVisible(true);
 		
@@ -215,9 +196,8 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		paginas.setEditable(false);
 		precio.setEditable(false);
 		genero.setEditable(false);
-		fechaLectura.setEditable(false);
 		editorial.setEditable(false);
-		numeroEdicion.setEditable(false);
+		tapa.setEditable(false);
 		nombreLibro.setEditable(false);
 	}
 	

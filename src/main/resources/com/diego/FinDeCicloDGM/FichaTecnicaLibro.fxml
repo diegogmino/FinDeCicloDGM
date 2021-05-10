@@ -85,17 +85,12 @@
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="fechaLectura" layoutX="420.0" layoutY="525.0" prefHeight="27.0" prefWidth="190.0" promptText="Fecha lectura">
-         <font>
-            <Font name="Yu Gothic Medium" size="14.0" />
-         </font>
-      </TextField>
       <TextField fx:id="editorial" layoutX="150.0" layoutY="426.0" prefHeight="25.0" prefWidth="190.0" promptText="Editorial">
          <font>
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="numeroEdicion" layoutX="420.0" layoutY="426.0" prefHeight="27.0" prefWidth="190.0" promptText="Número de edición">
+      <TextField fx:id="tapa" layoutX="420.0" layoutY="426.0" prefHeight="27.0" prefWidth="190.0" promptText="Tipo de tapa">
          <font>
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>

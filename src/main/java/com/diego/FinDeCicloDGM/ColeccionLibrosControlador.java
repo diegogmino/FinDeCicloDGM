@@ -1,9 +1,11 @@
 package com.diego.FinDeCicloDGM;
 
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 
 import java.io.File;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import com.diego.FinDeCiclo.hilos.HiloAnhadirLibro;
@@ -51,6 +53,12 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 
     @FXML
     private ImageView anhadirLibroIconoLabel;
+    
+    @FXML
+    private TextField valorTotal;
+    
+    @FXML
+    private TextField totalLibros;
     
     private TilePane tile;
     private Node contenido;
@@ -122,12 +130,11 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
     		noLibroLabel.setVisible(false);
     		anhadirLibroIconoLabel.setVisible(false);
     		
+    		valorTotal.setText("Valor total: 0 €");
+			totalLibros.setText("Nº de libros: 0");
 
         });
-        
-		
-		
-		
+
 	}
 	
 	public void refrescar() {
@@ -136,6 +143,9 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 		
 		if(libros.isEmpty()) {
 			
+			tile.getChildren().clear();
+			root.setContent(contenido);
+			
 			refrescar.setDisable(true);
 			
 			refrescarIconoLabel.setVisible(false);
@@ -143,6 +153,9 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 			
 			noLibroLabel.setVisible(true);
 			anhadirLibroIconoLabel.setVisible(true);
+			
+			valorTotal.setText("Valor total: 0 €");
+			totalLibros.setText("Nº de libros: 0");
 			
 		} else {
 			
@@ -154,13 +167,21 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 			noLibroLabel.setVisible(false);
 			anhadirLibroIconoLabel.setVisible(false);
 			
-			//labelPane.setVisible(false);
+			double precioTotal = 0;
+			int numeroLibros = 0;
 			
 			for(Libro libro : libros) {
 				Button libroBoton;
 	            libroBoton = createImageView(libro);
 	            tile.getChildren().addAll(libroBoton);
+	            precioTotal = precioTotal + libro.getPrecio();
+	            numeroLibros++;
 			}
+			
+			DecimalFormat df = new DecimalFormat("#####.##");
+			
+			valorTotal.setText("Valor total: " + df.format(precioTotal) + " €");
+			totalLibros.setText("Nº de libros: " + numeroLibros);
 			
 			root.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 	        root.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -211,6 +232,12 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 		
 		noLibroLabel.setVisible(false);
 		anhadirLibroIconoLabel.setVisible(false);
+		
+		valorTotal.setText("Valor total: 0 €");
+		totalLibros.setText("Nº de libros: 0");
+		
+		valorTotal.setEditable(false);
+		totalLibros.setEditable(false);
 		
 		tile = new TilePane();
 		tile.setPadding(new Insets(20, 25, 25, 20));

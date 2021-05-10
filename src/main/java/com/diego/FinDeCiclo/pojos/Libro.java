@@ -21,22 +21,16 @@ public class Libro {
 	private int paginas;
 	
 	@Column
-	private int precio;
+	private double precio;
 	
 	@Column
 	private String genero;
 	
 	@Column
-	private boolean leido;
-	
-	@Column
-	private LocalDate fechaLectura;
+	private String tapa;
 	
 	@Column
 	private String editorial;
-	
-	@Column
-	private int numeroEdicion;
 	
 	@Column
 	private String portada;
@@ -44,18 +38,16 @@ public class Libro {
 	public Libro() {
 	}
 
-	public Libro(Long isbn, String titulo, String autor, int paginas, int precio, String genero, boolean leido, LocalDate fechaLectura,
-			String editorial, int numeroEdicion, String portada) {
+	public Libro(Long isbn, String titulo, String autor, int paginas, double precio, String genero, String tapa,
+			String editorial, String portada) {
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.paginas = paginas;
 		this.precio = precio;
 		this.genero = genero;
-		this.leido = leido;
-		this.fechaLectura = fechaLectura;
+		this.tapa = tapa;
 		this.editorial = editorial;
-		this.numeroEdicion = numeroEdicion;
 		this.portada = portada;
 	}
 
@@ -99,36 +91,12 @@ public class Libro {
 		this.paginas = paginas;
 	}
 
-	public int getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(int precio) {
-		this.precio = precio;
-	}
-
 	public String getGenero() {
 		return genero;
 	}
 
 	public void setGenero(String genero) {
 		this.genero = genero;
-	}
-
-	public boolean isLeido() {
-		return leido;
-	}
-
-	public void setLeido(boolean leido) {
-		this.leido = leido;
-	}
-
-	public LocalDate getFechaLectura() {
-		return fechaLectura;
-	}
-
-	public void setFechaLectura(LocalDate fechaLectura) {
-		this.fechaLectura = fechaLectura;
 	}
 
 	public String getEditorial() {
@@ -139,14 +107,6 @@ public class Libro {
 		this.editorial = editorial;
 	}
 
-	public int getNumeroEdicion() {
-		return numeroEdicion;
-	}
-
-	public void setNumeroEdicion(int numeroEdicion) {
-		this.numeroEdicion = numeroEdicion;
-	}
-
 	public String getPortada() {
 		return portada;
 	}
@@ -154,6 +114,24 @@ public class Libro {
 	public void setPortada(String portada) {
 		this.portada = portada;
 	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public String getTapa() {
+		return tapa;
+	}
+
+	public void setTapa(String tapa) {
+		this.tapa = tapa;
+	}
+	
+	
 	
 	
 

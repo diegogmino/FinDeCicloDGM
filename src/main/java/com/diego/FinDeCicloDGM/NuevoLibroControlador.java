@@ -48,15 +48,9 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 
     @FXML
     private ComboBox<String> genero;
-
+    
     @FXML
-    private TextField numeroEdicion;
-
-    @FXML
-    private CheckBox leido;
-
-    @FXML
-    private DatePicker fechaLectura;
+    private ComboBox<String> tapa;
 
     @FXML
     private TextField portada;
@@ -89,13 +83,9 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 			
 			String directorioPortada = descagarPortada();
 			
-			if(fechaLectura == null) {
-				libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
-						genero.getValue(), leido.isSelected(), date, editorial.getText(), Integer.parseInt(numeroEdicion.getText()), directorioPortada);
-			} else {
-				libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Integer.parseInt(precio.getText()), 
-						genero.getValue(), leido.isSelected(), fechaLectura.getValue(), editorial.getText(), Integer.parseInt(numeroEdicion.getText()), directorioPortada);
-			}
+
+			libro = new Libro(Long.parseLong(isbn.getText()), titulo.getText(), autor.getText(), Integer.parseInt(paginas.getText()), Double.parseDouble(precio.getText()), 
+						genero.getValue(), tapa.getValue(), editorial.getText(), directorioPortada);
 			
 			
 			if(LibroDao.insertarLibro(libro)) {
@@ -154,10 +144,7 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		precio.clear();
 		editorial.clear();   
 		genero.setValue("Género");;
-		numeroEdicion.clear();
-		leido.setSelected(false);
-		fechaLectura.setValue(null);
-		fechaLectura.setDisable(true);
+		tapa.setValue("Tipo de tapa");
 		portada.clear();
 		imagenPortada.setImage(null);
 		
@@ -201,7 +188,7 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 	public void activarGuardarLibro() {
 		
 		if((!isbn.getText().isEmpty()) && (!titulo.getText().isEmpty()) && (!autor.getText().isEmpty()) && (!paginas.getText().isEmpty())
-				&& (!precio.getText().isEmpty()) && (!editorial.getText().isEmpty()) && (genero.getValue() != null) && (!numeroEdicion.getText().isEmpty())
+				&& (!precio.getText().isEmpty()) && (!editorial.getText().isEmpty()) && (genero.getValue() != null) && (tapa.getValue() != null)
 				&& (!portada.getText().isEmpty()) && portadaValida == true) {
 			
 			guardarLibro.setDisable(false);
@@ -222,16 +209,6 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		
 	}
 	
-	public void activarDesactivarFecha() {
-	// Metodo que activa y desactiva el campo de la fecha
-		if (leido.isSelected()) {
-			fechaLectura.setDisable(false);
-		} else {
-			fechaLectura.setDisable(true);
-			fechaLectura.setValue(null);
-		}
-	}
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -242,17 +219,6 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		
 		guardarLibro.setDisable(true);
 		btnComprobarPortada.setDisable(true);
-		
-		fechaLectura.setDisable(true);
-		
-		// Bloquea las fechas futuras
-		fechaLectura.setDayCellFactory(param -> new DateCell() {
-	        @Override
-	        public void updateItem(LocalDate date, boolean empty) {
-	            super.updateItem(date, empty);
-	            setDisable(empty || date.compareTo(LocalDate.now()) > 0 );
-	        }
-	    });
 		
 		// Bloquear valores no numericos en el campo del ISBN-13
 	    isbn.textProperty().addListener(new ChangeListener<String>() {
@@ -276,23 +242,13 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 	    
 	    // Bloquear valores no numericos en el campo del precio
 	    precio.textProperty().addListener(new ChangeListener<String>() {
-	    	@Override
-	    	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-	    		if (!newValue.matches("\\d*")) {
-	    			precio.setText(newValue.replaceAll("[^\\d]", ""));
-	    		}
-	    	}
-	     });
-	    
-	    // Bloquear valores no numericos en el campo del número de la edición
-	    numeroEdicion.textProperty().addListener(new ChangeListener<String>() {
-	    	@Override
-	    	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-	    		if (!newValue.matches("\\d*")) {
-	    			numeroEdicion.setText(newValue.replaceAll("[^\\d]", ""));
-	    		}
-	    	}
-	     });
+	        @Override
+	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	            if (!newValue.matches("\\d*(\\.\\d*)?")) {
+	            	precio.setText(oldValue);
+	            }
+	        }
+	    });
 		
 	}
 

@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -41,6 +42,8 @@
                   </ImageView>
                </graphic>
             </Button>
+            <TextField fx:id="valorTotal" layoutX="18.0" layoutY="230.0" prefHeight="25.0" prefWidth="125.0" />
+            <TextField fx:id="totalLibros" layoutX="18.0" layoutY="300.0" prefHeight="25.0" prefWidth="125.0" />
             <VBox fx:id="barraNavegacion" layoutX="-160.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="160.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#ocultarBarraNavegacion" prefHeight="30.0" prefWidth="30.0" styleClass="botonNavBar">

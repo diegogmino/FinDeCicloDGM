@@ -10,6 +10,19 @@ ScrollPane{
 	-fx-background-color:#E3E3E3;
 }
 
+.text-field {
+    -fx-background-color: #000000 , #E3E3E3 , #E3E3E3;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+    -fx-prompt-text-fill: #444444;
+    -fx-text-fill:black;
+    -fx-accent: #d43c9b;
+}
+
+.text-field:focused {
+    -fx-background-color: #d43c9b , #E3E3E3 , #E3E3E3;
+}
+
 .botonNavBar{
 	-fx-background-color:transparent;
 	-fx-text-fill:#FFFFFF;
@@ -81,6 +94,13 @@ ScrollPane{
 
 .scroll-bar:horizontal .thumb:hover,
 .scroll-bar:vertical .thumb:hover {
+    -fx-background-color :derive(#d43c9b,10.0%);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
     -fx-background-color :derive(#d43c9b,10.0%);
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;

@@ -249,6 +249,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
         	File portada = new File(Informacion.libroSeleccionado.getPortada());
 			portadaImageView.setImage(new Image(portada.toURI().toString()));
         	agregarAColeccion.setDisable(false);
+        	aportarLibro.setDisable(true);
         }
 
 	}
