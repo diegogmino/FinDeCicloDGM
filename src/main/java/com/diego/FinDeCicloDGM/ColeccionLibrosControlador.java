@@ -94,6 +94,7 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
         
         translate.setOnFinished((e)->{
         	this.layout.mostrarComoPantallaActual("coleccionMusica");
+        	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Música");
         });
         
 	}
@@ -119,6 +120,7 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
         translate.setOnFinished((e)->{
         	
         	this.layout.mostrarComoPantallaActual("login");
+        	Informacion.stage.setTitle(Informacion.TITULO_APLICACION);
         	
         	refrescar.setDisable(false);
         	
@@ -201,7 +203,7 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 		imageView.setFitHeight(310);
 		
 		Button boton = new Button();
-		boton.getStyleClass().add("boton-libro");
+		boton.getStyleClass().add("boton-portadas");
 		boton.setGraphic(imageView);
 		boton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

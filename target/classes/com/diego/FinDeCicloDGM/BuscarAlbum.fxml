@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" stylesheets="@../estilos/buscar.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.BuscarAlbumControlador">
+   <children>
+      <TextField fx:id="ean" layoutX="537.0" layoutY="96.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="209.0">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></TextField>
+      <Button fx:id="buscar" layoutX="400.0" layoutY="446.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+      <ImageView fx:id="caratulaImageView" fitHeight="345.0" fitWidth="345.0" layoutX="20.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <RadioButton fx:id="eanRB" layoutX="380.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por EAN">
+         <toggleGroup>
+            <ToggleGroup fx:id="tgBuscar" />
+         </toggleGroup>
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></RadioButton>
+      <Button fx:id="agregarAColeccion" layoutX="400.0" layoutY="556.0" mnemonicParsing="false" onAction="#agregarAColeccion" text="Agregar a colección" />
+      <Button fx:id="aportarAlbum" layoutX="625.0" layoutY="556.0" mnemonicParsing="false" onAction="#aportarAlbum" text="Aportar álbum" />
+      <RadioButton fx:id="tituloRB" layoutX="380.0" layoutY="195.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por título" toggleGroup="$tgBuscar">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></RadioButton>
+      <TextField fx:id="titulo" layoutX="537.0" layoutY="191.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="209.0">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></TextField>
+      <RadioButton fx:id="artistaRB" layoutX="380.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por artista" toggleGroup="$tgBuscar">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="generoRB" layoutX="380.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por género" toggleGroup="$tgBuscar">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></RadioButton>
+      <TextField fx:id="artista" layoutX="537.0" layoutY="286.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="209.0">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></TextField>
+      <ComboBox fx:id="genero" layoutX="537.0" layoutY="382.0" onHidden="#activarBuscar" prefHeight="25.0" prefWidth="209.0" promptText="Géneros" />
+      <TextField fx:id="info1" layoutX="20.0" layoutY="465.0" onKeyTyped="#activarBuscar" prefHeight="27.0" prefWidth="345.0" promptText="Información del álbum">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="info2" layoutX="20.0" layoutY="513.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="345.0" promptText="Información del álbum">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="info3" layoutX="20.0" layoutY="562.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="345.0" promptText="Información del álbum">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font>
+      </TextField>
+   </children>
+</Pane>

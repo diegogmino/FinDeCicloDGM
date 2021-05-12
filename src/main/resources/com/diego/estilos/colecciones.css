@@ -36,15 +36,15 @@ ScrollPane{
 	-fx-background-color:rgba(212, 60, 155, 0.3);
 }
 
-.boton-libro{
+.boton-portadas{
 	-fx-background-color:transparent;
 }
 
-.boton-libro:hover{
+.boton-portadas:hover{
 	-fx-opacity: 0.7;
 }
 
-.boton-libro:hover:pressed{
+.boton-portadas:hover:pressed{
 	-fx-opacity: 0.3;
 }
 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" stylesheets="@../estilos/nuevoLibro.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.NuevoAlbumControlador">
+   <top>
+      <Label alignment="CENTER" text="Añadir un nuevo álbum" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Yu Gothic Medium" size="25.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="50.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imagenCaratula" fitHeight="270.0" fitWidth="270.0" layoutX="265.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <TextField fx:id="ean" layoutX="45.0" layoutY="310.0" onKeyTyped="#activarGuardarAlbum" promptText="EAN">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="titulo" layoutX="313.0" layoutY="310.0" onKeyTyped="#activarGuardarAlbum" promptText="Título">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="artista" layoutX="580.0" layoutY="310.0" onKeyTyped="#activarGuardarAlbum" promptText="Artista">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="precio" layoutX="580.0" layoutY="430.0" onKeyTyped="#activarGuardarAlbum" promptText="Precio">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="duracion" layoutX="313.0" layoutY="370.0" onKeyTyped="#activarGuardarAlbum" promptText="Duracion">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </TextField>
+            <ComboBox fx:id="genero" layoutX="45.0" layoutY="370.0" onHidden="#activarGuardarAlbum" prefHeight="25.0" prefWidth="180.0" promptText="Género" />
+            <TextField fx:id="caratula" layoutX="45.0" layoutY="490.0" onKeyTyped="#activarComprobarCaratula" prefHeight="27.0" prefWidth="712.0" promptText="URL de la carátula">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </TextField>
+            <Button fx:id="btnComprobarCaratula" layoutX="45.0" layoutY="143.0" mnemonicParsing="false" onAction="#comprobarCaratula" text="Comprobar carátula" />
+            <Button fx:id="guardarAlbum" layoutX="600.0" layoutY="70.0" mnemonicParsing="false" onAction="#guardarAlbum" text="Añadir álbum" />
+            <Button layoutX="600.0" layoutY="220.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Borrar campos" />
+            <ComboBox fx:id="formato" layoutX="580.0" layoutY="370.0" onHidden="#activarGuardarAlbum" prefHeight="25.0" prefWidth="180.0" promptText="Formato" />
+            <DatePicker fx:id="fechaPublicacion" layoutX="45.0" layoutY="430.0" onHidden="#activarGuardarAlbum" promptText="Fecha de publicación" />
+            <TextField fx:id="discografica" layoutX="313.0" layoutY="430.0" onKeyTyped="#activarGuardarAlbum" promptText="Discográfica">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+            </TextField>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

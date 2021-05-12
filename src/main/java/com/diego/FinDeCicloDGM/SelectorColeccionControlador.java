@@ -54,6 +54,7 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
         translate.setOnFinished((e)->{
         	this.layout.mostrarComoPantallaActual("coleccionLibros");
         	librosPane.setTranslateX(0);
+        	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Libros");
         });
         
         botonLibros.setDisable(false);
@@ -70,7 +71,11 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
 		
         translate.setOnFinished((e)->{
         	this.layout.mostrarComoPantallaActual("coleccionMusica");
+        	musicaPane.setTranslateY(0);
+        	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Música");
         });
+        
+        botonMusica.setDisable(false);
         
 	}
 	

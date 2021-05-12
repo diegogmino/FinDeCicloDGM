@@ -51,6 +51,7 @@ public class HiloIniciarSesion extends Thread {
         	Platform.runLater(()->{
         		Informacion.usuario = usuarioEncontrado;
         		controlador.mostrarSelectorColeccion();
+        		Informacion.stage.setTitle("Gestor de colecciones - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos());
     		});
         	
         	usuario.clear();

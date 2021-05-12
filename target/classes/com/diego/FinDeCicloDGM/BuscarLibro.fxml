@@ -7,23 +7,45 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" stylesheets="@../estilos/buscarLibro.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.BuscarLibroControlador">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" stylesheets="@../estilos/buscar.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.BuscarLibroControlador">
    <children>
-      <TextField fx:id="isbn" layoutX="537.0" layoutY="97.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="209.0" />
+      <TextField fx:id="isbn" layoutX="537.0" layoutY="96.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="209.0">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></TextField>
       <Button fx:id="buscar" layoutX="400.0" layoutY="446.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
       <ImageView fx:id="portadaImageView" fitHeight="512.0" fitWidth="348.0" layoutX="20.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" />
-      <RadioButton fx:id="isbnRB" layoutX="400.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por ISBN">
+      <RadioButton fx:id="isbnRB" layoutX="377.0" layoutY="99.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por ISBN">
          <toggleGroup>
             <ToggleGroup fx:id="tgBuscar" />
-         </toggleGroup></RadioButton>
+         </toggleGroup>
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></RadioButton>
       <Button fx:id="agregarAColeccion" layoutX="400.0" layoutY="556.0" mnemonicParsing="false" onAction="#agregarAColeccion" text="Agregar a colección" />
       <Button fx:id="aportarLibro" layoutX="625.0" layoutY="556.0" mnemonicParsing="false" onAction="#aportarLibro" text="Aportar libro" />
-      <RadioButton fx:id="tituloRB" layoutX="400.0" layoutY="195.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por título" toggleGroup="$tgBuscar" />
-      <TextField fx:id="titulo" layoutX="537.0" layoutY="192.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="209.0" />
-      <RadioButton fx:id="autorRB" layoutX="400.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por autor" toggleGroup="$tgBuscar" />
-      <RadioButton fx:id="generoRB" layoutX="400.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por género" toggleGroup="$tgBuscar" />
-      <TextField fx:id="autor" layoutX="537.0" layoutY="287.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="209.0" />
-      <ComboBox fx:id="genero" layoutX="537.0" layoutY="382.0" onHidden="#activarBuscar" prefHeight="25.0" prefWidth="209.0" />
+      <RadioButton fx:id="tituloRB" layoutX="377.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por título" toggleGroup="$tgBuscar">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></RadioButton>
+      <TextField fx:id="titulo" layoutX="537.0" layoutY="191.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="209.0">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></TextField>
+      <RadioButton fx:id="autorRB" layoutX="377.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por autor" toggleGroup="$tgBuscar">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="generoRB" layoutX="377.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por género" toggleGroup="$tgBuscar">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></RadioButton>
+      <TextField fx:id="autor" layoutX="537.0" layoutY="286.0" onKeyTyped="#activarBuscar" prefHeight="25.0" prefWidth="209.0">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font></TextField>
+      <ComboBox fx:id="genero" layoutX="537.0" layoutY="382.0" onHidden="#activarBuscar" prefHeight="25.0" prefWidth="209.0" promptText="Géneros" />
    </children>
 </Pane>

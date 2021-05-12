@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Musica {
 
 	@Id
-	private Long isbn;
+	private Long ean;
 	
 	@Column
 	private String titulo;
@@ -34,12 +34,17 @@ public class Musica {
 	private Date fechaPublicacion;
 	
 	@Column
+	private double precio;
+	
+	@Column
 	private String discografica;
+	
+	public Musica() {}
 
-	public Musica(Long isbn, String titulo, String artista, String genero, String formato, int duracion, String portada,
-			Date fechaPublicacion, String discografica) {
+	public Musica(Long ean, String titulo, String artista, String genero, String formato, int duracion, String portada,
+			Date fechaPublicacion, double precio, String discografica) {
 		super();
-		this.isbn = isbn;
+		this.ean = ean;
 		this.titulo = titulo;
 		this.artista = artista;
 		this.genero = genero;
@@ -47,15 +52,17 @@ public class Musica {
 		this.duracion = duracion;
 		this.portada = portada;
 		this.fechaPublicacion = fechaPublicacion;
+		this.precio = precio;
 		this.discografica = discografica;
 	}
 
-	public Long getIsbn() {
-		return isbn;
+
+	public Long getEan() {
+		return ean;
 	}
 
-	public void setIsbn(Long isbn) {
-		this.isbn = isbn;
+	public void setEan(Long ean) {
+		this.ean = ean;
 	}
 
 	public String getTitulo() {
@@ -120,6 +127,14 @@ public class Musica {
 
 	public void setDiscografica(String discografica) {
 		this.discografica = discografica;
+	}
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 	
 	

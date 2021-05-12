@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Libro;
 import com.diego.FinDeCicloDGM.dao.LibroDao;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;

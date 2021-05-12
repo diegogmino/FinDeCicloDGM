@@ -20,14 +20,13 @@ public class Lanzador extends Application {
         layoutPane.cargarPantalla("selectorColeccion", SelectorColeccionControlador.class.getResource("SelectorColeccion.fxml"));
         layoutPane.cargarPantalla("coleccionLibros", ColeccionLibrosControlador.class.getResource("ColeccionLibros.fxml"));
         layoutPane.cargarPantalla("coleccionMusica", ColeccionMusicaControlador.class.getResource("ColeccionMusica.fxml"));
-        layoutPane.cargarPantalla("masColecciones", MasColeccionesControlador.class.getResource("MasColecciones.fxml")); 
-        layoutPane.cargarPantalla("nuevoLibro", NuevoLibroControlador.class.getResource("NuevoLibro.fxml"));
+        layoutPane.cargarPantalla("masColecciones", MasColeccionesControlador.class.getResource("MasColecciones.fxml"));
         layoutPane.cargarPantalla("fichaTecnicaLibro", FichaTecnicaLibroControlador.class.getResource("FichaTecnicaLibro.fxml"));
         
         layoutPane.mostrarComoPantallaActual("login");
         
         Scene escena = new Scene(layoutPane, 1200 , 650);
-        primaryStage.setTitle("Gestor de colecciones");
+        primaryStage.setTitle(Informacion.TITULO_APLICACION);
         primaryStage.setResizable(false);
         //primaryStage.getIcons().add(new Image("/img/libro.png"));
         primaryStage.setScene(escena);

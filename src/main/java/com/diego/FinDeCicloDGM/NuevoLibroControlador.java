@@ -68,8 +68,6 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
     private ImageView imagenPortada;
     
     private boolean portadaValida = false;
-    
-    LocalDate date = LocalDate.parse("1900-01-01");
 	
 	public void guardarLibro() {
 		
@@ -119,8 +117,9 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		try {
 			
 			image = ImageIO.read(new URL(portada.getText()));
-			// Con .replaceAll("\\s+", "") elimino todos los espacios en blanco del título
-			ruta = "portadas\\" + isbn.getText() + "_" + titulo.getText().replaceAll("\\s+", "") +".png";
+			// Con .replaceAll elimino todos los espacios en blanco, las comas, los puntos, las interrogaciones y admiraciones del título
+			ruta = "portadas\\" + isbn.getText() + "_" + titulo.getText().replaceAll("\\s+", "").replaceAll("\\,", "").replaceAll("\\.", "").replaceAll("\\?", "")
+					.replaceAll("\\¿", "").replaceAll("¡", "").replaceAll("!", "") +".png";
 			ImageIO.write(image , "png", new File(ruta));
 			
 		} catch (MalformedURLException e) {
