@@ -140,8 +140,18 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 	}
 	
 	public void refrescar() {
-
-		List<Libro> libros = LibroDao.buscarLibrosPorUsuario(Informacion.usuario);
+		
+		List<Libro> libros = null;
+		
+		if(Informacion.usuario.getRango() == 2) {
+			// Si el usuario tiene rango 2, lo que significa ser administrador, se cargan todos los libros de la base de datos
+			libros = LibroDao.buscarTodos();
+			
+		} else {
+			// Si el usuario tiene rango 1, lo que significa ser usuario normal, se carga la colección privada perteneciente a ese usuario
+			libros = LibroDao.buscarLibrosPorUsuario(Informacion.usuario);
+			
+		}
 		
 		if(libros.isEmpty()) {
 			

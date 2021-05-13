@@ -28,7 +28,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="borrar" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#eliminarLibroColeccion" prefHeight="50.0" prefWidth="52.0">
+      <Button fx:id="eliminar" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#eliminarLibro" prefHeight="50.0" prefWidth="52.0">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>

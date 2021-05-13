@@ -63,8 +63,12 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
     
     @FXML
     private Button guardar;
+    
+    @FXML
+    private Button eliminar;
 	
 	public void volver() {
+		
 		this.layout.mostrarComoPantallaActual("coleccionLibros");
 		limpiarCampos();
 		ocultarCampos();
@@ -73,6 +77,10 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		cargar.setDisable(false);
 		editar.setDisable(false);
 		guardar.setVisible(false);
+		
+		isbn.setDisable(false);
+		editar.setVisible(false);
+		eliminar.setVisible(false);
 		
 	}
 	
@@ -92,7 +100,14 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 
 	public void cargarInformacion() {
 		
+		if(Informacion.usuario.getRango() == 2) {
+    		// Si el usuario tiene rango 2, lo que significa que es administador, tiene permisos para editar la información,
+    		// cosa que no puede hacer un usuario normal
+    		editar.setVisible(true);
+    	} 
+		
 		cargar.setDisable(true);
+		eliminar.setVisible(true);
 		
 		mostrarCampos();
 		texto.setVisible(false);
@@ -114,9 +129,17 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		
 	}
 	
-	public void eliminarLibroColeccion() {
-		LibroDao.eliminarLibroUsuario(Informacion.libroMostrarFichaTecnica, Informacion.usuario);
-		this.layout.mostrarComoPantallaActual("coleccionLibros");
+	public void eliminarLibro() {
+		
+		if(Informacion.usuario.getRango() == 2) {
+			// Si el rango del usuario es 2 se elimina el libro de la base de datos
+			LibroDao.eliminarLibroAdmin(Informacion.libroMostrarFichaTecnica);
+		} else {
+			// Si el rango del usuario no es 2, lo que significa que es 1, se elimina el libro de su colección privada
+			LibroDao.eliminarLibroUsuario(Informacion.libroMostrarFichaTecnica, Informacion.usuario);
+		}
+		
+		volver();
 	}
 	
 	private void cambiarInformacionEditar() {
@@ -134,7 +157,7 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		
 		cambiarInformacionEditar();
 		
-		isbn.setEditable(true);
+		isbn.setDisable(true);
 		titulo.setEditable(true);
 		autor.setEditable(true);
 		paginas.setEditable(true);
@@ -157,7 +180,7 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		libroActualizar.setPaginas(Integer.parseInt(paginas.getText()));
 		libroActualizar.setEditorial(editorial.getText());
 		libroActualizar.setTapa(tapa.getText());
-		libroActualizar.setPrecio(Integer.parseInt(precio.getText()));
+		libroActualizar.setPrecio(Double.parseDouble(precio.getText()));
 		
 		LibroDao.actualizarLibro(libroActualizar);
 		
@@ -205,6 +228,8 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 	public void initialize(URL location, ResourceBundle resources) {
 		ocultarCampos();
 		guardar.setVisible(false);
+		editar.setVisible(false);
+		eliminar.setVisible(false);
 	}
 
 }

@@ -146,7 +146,17 @@ public class ColeccionMusicaControlador extends ControladorConNavegabilidad impl
 	
 	public void refrescar() {
 
-		List<Musica> albumes = MusicaDao.buscarAlbumesPorUsuario(Informacion.usuario);
+		List<Musica> albumes = null;
+		
+		if(Informacion.usuario.getRango() == 2) {
+			// Si el usuario tiene rango 2, lo que significa ser administrador, se cargan todos los álbumes de la base de datos
+			albumes = MusicaDao.buscarTodos();
+			
+		} else {
+			// Si el usuario tiene rango 1, lo que significa ser usuario normal, se carga la colección privada perteneciente a ese usuario
+			albumes = MusicaDao.buscarAlbumesPorUsuario(Informacion.usuario);
+			
+		}
 		
 		if(albumes.isEmpty()) {
 			
@@ -201,7 +211,7 @@ public class ColeccionMusicaControlador extends ControladorConNavegabilidad impl
 	
 	private Button createImageView(Musica album) {
 		
-		File portada = new File(album.getPortada());
+		File portada = new File(album.getCaratula());
 		ImageView imageView = new ImageView(new Image(portada.toURI().toString()));
 		
 		imageView.setFitWidth(210);
@@ -230,7 +240,7 @@ public class ColeccionMusicaControlador extends ControladorConNavegabilidad impl
 	}
 	
 	public void mostrarPantallaFichaTecnica() {
-		this.layout.mostrarComoPantallaActual("fichaTecnicaLibro");
+		this.layout.mostrarComoPantallaActual("fichaTecnicaAlbum");
 		refrescar.setDisable(false);
 	}
 

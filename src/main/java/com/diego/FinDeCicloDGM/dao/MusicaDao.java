@@ -1,5 +1,6 @@
 package com.diego.FinDeCicloDGM.dao;
 
+import java.io.File;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -29,6 +30,83 @@ public class MusicaDao {
 		sf.close();
 		
 		return true;
+		
+	}
+	
+	public static void eliminarAlbumAdmin(Musica album) {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+		
+			List<Usuario> usuarios = UsuarioDao.buscarTodos();
+			
+			for(Usuario usuario : usuarios) {
+				eliminarAlbumUsuario(album, usuario);
+			}
+			File rutaCaratula = new File(album.getCaratula());
+			session.delete(album);
+			rutaCaratula.delete();
+			
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+		
+	}
+	
+	public static void eliminarAlbumUsuario(Musica album, Usuario usuario) {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+		
+			int i = 0;
+			List<Musica> albumes = usuario.getMusica();
+			
+			for(Musica albumEliminar : albumes) {
+				if(albumEliminar.getEan().equals(album.getEan())) {
+					albumes.remove(i);
+					break;
+				} else {
+					i++;
+				}
+			}
+			
+			usuario.setMusica(albumes);
+			session.saveOrUpdate(usuario);
+			
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+
+	}
+	
+	public static List<Musica> buscarTodos() {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+
+			Query query = session.createQuery("SELECT m FROM Musica m");
+			List<Musica> albumes = query.getResultList();
+		
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+		
+		return albumes;
 		
 	}
 	
@@ -159,6 +237,24 @@ public class MusicaDao {
 	
 		return albumes;
 	
+	}
+
+	public static void actualizarAlbum(Musica album) {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+		
+			session.saveOrUpdate(album);
+		
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+		
 	}
 
 }

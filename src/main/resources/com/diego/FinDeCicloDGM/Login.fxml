@@ -104,7 +104,7 @@
                   <Insets left="80.0" right="100.0" />
                </GridPane.margin>
             </PasswordField>
-            <Label text="Los campos acompañados de * son obligatorios." GridPane.rowIndex="9">
+            <Label fx:id="mensajeObligatorio" text="Los campos acompañados de * son obligatorios." GridPane.rowIndex="9">
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
                </font>
@@ -117,6 +117,38 @@
                   <Insets left="320.0" />
                </GridPane.margin>
             </ProgressIndicator>
+            <Label fx:id="mensajeNombreUsuario" layoutX="90.0" layoutY="616.0" styleClass="error" text="El usuario introducido ya existe" visible="false" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="80.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="mensajeErrorInsertar" layoutX="90.0" layoutY="616.0" styleClass="error" text="Error en el registro, vuelve a intentarlo más tarde" visible="false" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="80.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="mensajeEmail" layoutX="90.0" layoutY="616.0" styleClass="error" text="Introduce un email válido" visible="false" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="80.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="mensajeContrasena" layoutX="90.0" layoutY="616.0" styleClass="error" text="Las contraseñas no coinciden" visible="false" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Yu Gothic Medium" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="80.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
       <GridPane alignment="CENTER_RIGHT" layoutX="700.0" prefHeight="650.0" prefWidth="500.0">

@@ -23,6 +23,28 @@ public class UsuarioDao {
 		
 	}
 	
+	public static List<Usuario> buscarTodos() {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+		
+			Query query = session.createQuery("SELECT u FROM Usuario u");
+			List<Usuario> usuarios = query.getResultList();
+			
+		
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+		
+		return usuarios;
+		
+	}
+	
 	public static Usuario existeUsuario(String usuario, String contrasena) {
 		
 		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();

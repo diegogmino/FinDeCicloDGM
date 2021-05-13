@@ -61,7 +61,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
 	@FXML
 	private TextField autor;
     
-    Libro libroEncontrado;
+    Libro libroEncontrado = new Libro();
     List<Libro> librosEncontrados;
     
     public void activarDesactivarRB() {
@@ -178,6 +178,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     			portadaImageView.setImage(new Image(portada.toURI().toString()));
     			agregarAColeccion.setDisable(false);
     		} else {
+    			agregarAColeccion.setDisable(true);
     			aportarLibro.setDisable(false);
     		}
 
@@ -189,6 +190,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     			Informacion.libros = librosEncontrados;
     			lanzarDialogoSeleccion();
     		} else {
+    			agregarAColeccion.setDisable(true);
     			aportarLibro.setDisable(false);
     			// mostrar imagen de libro no encontrado
     		}
@@ -201,6 +203,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     			Informacion.libros = librosEncontrados;
     			lanzarDialogoSeleccion();
     		} else {
+    			agregarAColeccion.setDisable(true);
     			aportarLibro.setDisable(false);
     			// mostrar imagen de libro no encontrado
     		}
@@ -213,6 +216,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     			Informacion.libros = librosEncontrados;
     			lanzarDialogoSeleccion();
     		} else {
+    			agregarAColeccion.setDisable(true);
     			aportarLibro.setDisable(false);
     			// mostrar imagen de libro no encontrado
     		}

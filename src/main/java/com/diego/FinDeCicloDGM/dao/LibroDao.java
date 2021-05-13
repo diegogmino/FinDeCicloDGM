@@ -1,5 +1,7 @@
 package com.diego.FinDeCicloDGM.dao;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -84,6 +86,32 @@ public class LibroDao {
 		session.close();
 		sf.close();
 
+	}
+	
+	public static void eliminarLibroAdmin(Libro libro) {
+		
+		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();
+		SessionFactory sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
+
+		Session session = sf.openSession();
+
+		session.getTransaction().begin();
+		
+			List<Usuario> usuarios = UsuarioDao.buscarTodos();
+			
+			for(Usuario usuario : usuarios) {
+				eliminarLibroUsuario(libro, usuario);
+			}
+			
+			File rutaPortada = new File(libro.getPortada());
+			session.delete(libro);
+			rutaPortada.delete();
+			
+		session.getTransaction().commit();
+
+		session.close();
+		sf.close();
+		
 	}
 
 	public static void anhadirLibroUsuario(Libro libro, Usuario usuario) {

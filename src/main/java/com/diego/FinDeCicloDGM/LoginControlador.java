@@ -87,6 +87,21 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     @FXML
     private Label mensajeError;
     
+    @FXML
+    private Label mensajeNombreUsuario;
+
+    @FXML
+    private Label mensajeErrorInsertar;
+
+    @FXML
+    private Label mensajeEmail;
+
+    @FXML
+    private Label mensajeContrasena;
+    
+    @FXML
+    private Label mensajeObligatorio;
+    
     private Parent fxml;
     
     private LocalDate date = LocalDate.parse("1900-01-01");
@@ -136,10 +151,35 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
         		// Llamamos al método de limpiar campos cuando la animación termine, para que el usuario no vea desaparecer la información de repente
         		limpiarCamposRegistro();
         		procesandoRegistro.setVisible(false);
+        		
+        		// Volvemos a mostrar el mensaje por defecto y ocultamos el resto
+        		mensajeObligatorio.setVisible(true);
+        		mensajeEmail.setVisible(false);
+        		mensajeNombreUsuario.setVisible(false);
+        		mensajeErrorInsertar.setVisible(false);
+        		mensajeContrasena.setVisible(false);
+        		
+        		// Volvemos a deshabilitar el boton de crear cuenta
+        		camposEsVacios();
+        		
         	} catch (IOException ex) {
         		ex.printStackTrace();
         	}
         });
+    	
+    }
+    
+    // Método que pone las variables que hacen referencia a los campos escritos, es decir, las terminadas en Es, a false
+    private void camposEsVacios() {
+    	
+    	usuarioRegistroEs = false;
+    	contrasenaRegistroEs = false;
+    	repetirContrasenaEs = false;
+    	emailEs = false;
+    	nombreEs = false;
+    	apellidosEs = false;
+    	usuarioLoginEs = false;
+        contrasenaLoginEs = false;
     	
     }
 
@@ -167,7 +207,8 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     	
     	procesandoRegistro.setVisible(true);
     	
-    	HiloRegistro hiloRegistro = new HiloRegistro(usuarioRegistro, contrasenaRegistro, repetirContrasena, nombre, apellidos, fechaNacimiento, email, this, procesandoRegistro);
+    	HiloRegistro hiloRegistro = new HiloRegistro(usuarioRegistro, contrasenaRegistro, repetirContrasena, nombre, apellidos, fechaNacimiento, email, this, procesandoRegistro,
+    			mensajeContrasena, mensajeEmail, mensajeErrorInsertar, mensajeNombreUsuario, mensajeObligatorio);
     	hiloRegistro.start();
     	
     }

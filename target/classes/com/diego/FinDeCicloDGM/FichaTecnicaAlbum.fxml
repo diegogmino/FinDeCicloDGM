@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../estilos/fichaTecnica.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.FichaTecnicaLibroControlador">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../estilos/fichaTecnica.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.FichaTecnicaAlbumControlador">
    <children>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#volver" prefHeight="50.0" prefWidth="52.0">
          <graphic>
@@ -28,7 +28,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="eliminar" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#eliminarLibro" prefHeight="50.0" prefWidth="52.0">
+      <Button fx:id="eliminar" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#eliminarAlbum" prefHeight="50.0" prefWidth="52.0">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -37,7 +37,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="editar" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#editarLibro" prefHeight="50.0" prefWidth="52.0">
+      <Button fx:id="editar" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#editarAlbum" prefHeight="50.0" prefWidth="52.0">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -46,7 +46,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="guardar" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" onAction="#actualizarLibro" prefHeight="50.0" prefWidth="52.0">
+      <Button fx:id="guardar" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" onAction="#actualizarAlbum" prefHeight="50.0" prefWidth="52.0">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -55,7 +55,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="isbn" layoutX="150.0" layoutY="225.0" prefHeight="25.0" prefWidth="189.0" promptText="ISBN">
+      <TextField fx:id="ean" layoutX="150.0" layoutY="225.0" prefHeight="25.0" prefWidth="189.0" promptText="EAN">
          <font>
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>
@@ -65,12 +65,12 @@
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="autor" layoutX="420.0" layoutY="225.0" prefHeight="25.0" prefWidth="190.0" promptText="Autor">
+      <TextField fx:id="artista" layoutX="420.0" layoutY="225.0" prefHeight="25.0" prefWidth="190.0" promptText="Artista">
          <font>
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="paginas" layoutX="420.0" layoutY="325.0" prefHeight="27.0" prefWidth="189.0" promptText="Paginas">
+      <TextField fx:id="formato" layoutX="420.0" layoutY="325.0" prefHeight="27.0" prefWidth="189.0" promptText="Formato">
          <font>
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>
@@ -85,31 +85,36 @@
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="editorial" layoutX="150.0" layoutY="426.0" prefHeight="25.0" prefWidth="190.0" promptText="Editorial">
+      <TextField fx:id="duracion" layoutX="150.0" layoutY="426.0" prefHeight="25.0" prefWidth="190.0" promptText="Duracion">
          <font>
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="tapa" layoutX="420.0" layoutY="426.0" prefHeight="27.0" prefWidth="190.0" promptText="Tipo de tapa">
+      <TextField fx:id="fechaPublicacion" layoutX="420.0" layoutY="426.0" prefHeight="27.0" prefWidth="190.0" promptText="Fecha de publicación">
          <font>
             <Font name="Yu Gothic Medium" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="nombreLibro" alignment="CENTER" layoutX="90.0" layoutY="14.0" prefHeight="65.0" prefWidth="1021.0" promptText="Ficha" styleClass="nombre-libro">
+      <TextField fx:id="nombreAlbum" alignment="CENTER" layoutX="90.0" layoutY="14.0" prefHeight="65.0" prefWidth="1021.0" promptText="Ficha" styleClass="nombre-libro">
          <font>
             <Font size="30.0" />
          </font>
       </TextField>
-      <ImageView fx:id="portada" fitHeight="494.0" fitWidth="378.0" layoutX="733.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="texto" layoutX="246.0" layoutY="304.0" text="Pulsa     para cargar la ficha técnica del libro">
+      <ImageView fx:id="caratula" fitHeight="450.0" fitWidth="450.0" layoutX="675.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="texto" layoutX="246.0" layoutY="304.0" text="Pulsa     para cargar la ficha técnica del álbum">
          <font>
             <Font name="Yu Gothic Medium" size="35.0" />
          </font>
       </Label>
-      <ImageView fx:id="iconoRefrescar" fitHeight="35.0" fitWidth="32.0" layoutX="345.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconoRefrescar" fitHeight="35.0" fitWidth="32.0" layoutX="346.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/refresh.png" />
          </image>
       </ImageView>
+      <TextField fx:id="discografica" layoutX="420.0" layoutY="525.0" prefHeight="27.0" prefWidth="190.0" promptText="Discográfica">
+         <font>
+            <Font name="Yu Gothic Medium" size="14.0" />
+         </font>
+      </TextField>
    </children>
 </Pane>

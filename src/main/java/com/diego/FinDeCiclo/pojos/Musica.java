@@ -28,7 +28,7 @@ public class Musica {
 	private int duracion;
 	
 	@Column
-	private String portada;
+	private String caratula;
 	
 	@Column
 	private Date fechaPublicacion;
@@ -41,7 +41,7 @@ public class Musica {
 	
 	public Musica() {}
 
-	public Musica(Long ean, String titulo, String artista, String genero, String formato, int duracion, String portada,
+	public Musica(Long ean, String titulo, String artista, String genero, String formato, int duracion, String caratula,
 			Date fechaPublicacion, double precio, String discografica) {
 		super();
 		this.ean = ean;
@@ -50,7 +50,7 @@ public class Musica {
 		this.genero = genero;
 		this.formato = formato;
 		this.duracion = duracion;
-		this.portada = portada;
+		this.caratula = caratula;
 		this.fechaPublicacion = fechaPublicacion;
 		this.precio = precio;
 		this.discografica = discografica;
@@ -105,12 +105,12 @@ public class Musica {
 		this.duracion = duracion;
 	}
 
-	public String getPortada() {
-		return portada;
+	public String getCaratula() {
+		return caratula;
 	}
 
-	public void setPortada(String portada) {
-		this.portada = portada;
+	public void setCaratula(String caratula) {
+		this.caratula = caratula;
 	}
 
 	public Date getFechaPublicacion() {

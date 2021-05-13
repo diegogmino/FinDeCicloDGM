@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
@@ -45,11 +47,11 @@ public class Usuario {
 	@Column
 	private int rango;
 	
-	@ManyToMany
+	@ManyToMany(cascade = javax.persistence.CascadeType.REMOVE)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Libro> libros;
 	
-	@ManyToMany
+	@ManyToMany(cascade = javax.persistence.CascadeType.REMOVE)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Musica> musica;
 	
@@ -58,7 +60,7 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(String nombreUsuario, String contrasena, String email, LocalDate fechaNacimiento, String nombre, String apellidos) {
+	public Usuario(String nombreUsuario, String contrasena, String email, LocalDate fechaNacimiento, String nombre, String apellidos, int rango) {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.contrasena = contrasena;
@@ -66,6 +68,7 @@ public class Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+		this.rango = rango;
 		libros = new ArrayList<Libro>();
 		musica = new ArrayList<Musica>();
 	}

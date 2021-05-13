@@ -2,6 +2,7 @@ package com.diego.FinDeCiclo.hilos;
 
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Usuario;
+import com.diego.FinDeCiclo.popup.Popup;
 import com.diego.FinDeCicloDGM.LoginControlador;
 import com.diego.FinDeCicloDGM.SelectorColeccionControlador;
 import com.diego.FinDeCicloDGM.dao.UsuarioDao;
@@ -39,7 +40,7 @@ public class HiloIniciarSesion extends Thread {
 		Usuario usuarioEncontrado = UsuarioDao.existeUsuario(usuario.getText(), contrasena.getText());
 
         if(usuarioEncontrado.getNombreUsuario() == null) {
-        	System.out.println("Usuario no encontrado");
+        
         	procesando.setVisible(false);
         	usuario.clear();
     		contrasena.clear();

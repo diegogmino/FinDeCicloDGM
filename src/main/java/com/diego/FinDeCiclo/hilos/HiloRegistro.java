@@ -10,6 +10,7 @@ import com.diego.FinDeCicloDGM.dao.UsuarioDao;
 
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
@@ -25,10 +26,17 @@ public class HiloRegistro extends Thread {
 	private TextField email;
 	private LoginControlador controlador;
 	private ProgressIndicator procesando;
+	private Label mensajeContrasena;
+	private Label mensajeEmail;
+	private Label mensajeErrorInsertar;
+	private Label mensajeNombreUsuario;
+	private Label mensajeObligatorio;
+	
 
 	
 	public HiloRegistro(TextField usuarioRegistro, PasswordField contrasenaRegistro, PasswordField repetirContrasena, TextField nombre, TextField apellidos,
-			DatePicker fechaNacimiento, TextField email, LoginControlador controlador, ProgressIndicator procesando) {
+			DatePicker fechaNacimiento, TextField email, LoginControlador controlador, ProgressIndicator procesando, Label mensajeContrasena, Label mensajeEmail, 
+			Label mensajeErrorInsertar, Label mensajeNombreUsuario, Label mensajeObligatorio) {
 		
 		this.usuarioRegistro = usuarioRegistro;
 		this.contrasenaRegistro = contrasenaRegistro;
@@ -39,6 +47,11 @@ public class HiloRegistro extends Thread {
 		this.email = email;
 		this.controlador = controlador;
 		this.procesando = procesando;
+		this.mensajeContrasena = mensajeContrasena;
+		this.mensajeEmail = mensajeEmail;
+		this.mensajeErrorInsertar = mensajeErrorInsertar;
+		this.mensajeNombreUsuario = mensajeNombreUsuario;
+		this.mensajeObligatorio = mensajeObligatorio;
 		
 	}
 	
@@ -48,17 +61,31 @@ public class HiloRegistro extends Thread {
     		
     		if(isValidEmail(email.getText())) {
     			
+    			mensajeEmail.setVisible(false);
+    			
     			if(UsuarioDao.existeNombreDeUsuario(usuarioRegistro.getText())) {
+    				
+    				mensajeObligatorio.setVisible(false);
+    				mensajeErrorInsertar.setVisible(false);
+    				mensajeContrasena.setVisible(false);
+    				mensajeEmail.setVisible(false);
+    				mensajeNombreUsuario.setVisible(true);
+    				
     				System.out.println("El usuario introducido ya existe, introduce uno distinto");
     				procesando.setVisible(false);
     				
     			} else {
     				
-    				Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fechaNacimiento.getValue(), nombre.getText(), apellidos.getText());
+    				Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fechaNacimiento.getValue(), nombre.getText(), apellidos.getText(), 1);
                 	
     				if(UsuarioDao.insertarUsuario(usuario)) {
                 		controlador.mostrarIniciarSesion(null);
                 	} else {
+                		mensajeObligatorio.setVisible(false);
+                		mensajeNombreUsuario.setVisible(false);
+                		mensajeContrasena.setVisible(false);
+                		mensajeEmail.setVisible(false);
+                		mensajeErrorInsertar.setVisible(true);
                 		System.out.println("Error al insertar el usuario, vuelve a intentarlo más tarde");
                 		procesando.setVisible(false);
                 	}
@@ -66,12 +93,25 @@ public class HiloRegistro extends Thread {
     			}
     			
     		} else {
+    			mensajeObligatorio.setVisible(false);
+    			mensajeNombreUsuario.setVisible(false);
+    			mensajeContrasena.setVisible(false);
+    			mensajeErrorInsertar.setVisible(false);
+    			mensajeEmail.setVisible(true);
+    			
     			System.out.println("Introduce un email válido");
     			procesando.setVisible(false);
     		}
     		
     	} else {
+    		mensajeObligatorio.setVisible(false);
+    		mensajeEmail.setVisible(false);
+    		mensajeNombreUsuario.setVisible(false);
+    		mensajeErrorInsertar.setVisible(false);
+    		mensajeContrasena.setVisible(true);
+    		
     		System.out.println("Las contraseñas no coinciden");
+    		
     		procesando.setVisible(false);
     	}
 	}

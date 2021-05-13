@@ -79,7 +79,7 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     private TextField info3;
     
     Path rutaGeneros = Path.of("ficherosInfo\\generosAlbumes.csv");
-    Musica albumEncontrado;
+    Musica albumEncontrado = new Musica();
     List<Musica> albumesEncontrados;
     
     public void activarDesactivarRB() {
@@ -139,7 +139,7 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     			MusicaDao.anhadirAlbumUsuario(Informacion.albumSeleccionado, Informacion.usuario);
         		Informacion.albumSeleccionado = new Musica();
         		// Volver aquí cuando el dialogoAnhadirAlbum esté listo
-        		Informacion.dialogoAnhadirLibro.close();
+        		Informacion.dialogoAnhadirAlbum.close();
         		
     		} else {
     			System.out.println("Ya tienes este álbum en tu colección");
@@ -189,18 +189,23 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     		albumEncontrado = MusicaDao.buscarAlbumEAN(ean.getText());
     		
     		if(albumEncontrado.getEan() != null) {
-    			File portada = new File(albumEncontrado.getPortada());
+    			File caratula = new File(albumEncontrado.getCaratula());
 
-    			caratulaImageView.setImage(new Image(portada.toURI().toString()));
+    			caratulaImageView.setImage(new Image(caratula.toURI().toString()));
     			agregarAColeccion.setDisable(false);
     			
-    			// Cargamos en los TExtField info1, info2 e info3 toda la información que no sea el EAN para mostrarsela al usuario
+    			// Cargamos en los TextField info1, info2 e info3 toda la información que no sea el EAN para mostrarsela al usuario
     			info1.setText("Título: " + albumEncontrado.getTitulo());
     			info2.setText("Artista: " + albumEncontrado.getArtista());
     			info3.setText("Género: " + albumEncontrado.getGenero());
+    			aportarAlbum.setDisable(true);
     			
     		} else {
+    			agregarAColeccion.setDisable(true);
     			aportarAlbum.setDisable(false);
+    			info1.setText(null);
+    			info2.setText(null);
+    			info3.setText(null);
     		}
 
     	} else if(!titulo.getText().isEmpty()) {
@@ -208,16 +213,26 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     		albumesEncontrados = MusicaDao.buscarAlbumTitulo(titulo.getText());
     		
     		if(!albumesEncontrados.isEmpty()) {
+    			
     			Informacion.albumes = albumesEncontrados;
     			lanzarDialogoSeleccion();
     			
-    			// Cargamos en los TExtField info1, info2 e info3 toda la información que no sea el título para mostrarsela al usuario
-    			info1.setText("EAN: " + albumEncontrado.getEan());
-    			info2.setText("Artista: " + albumEncontrado.getArtista());
-    			info3.setText("Género: " + albumEncontrado.getGenero());
+    			if(Informacion.albumSeleccionado.getEan() != null) {
+    				
+    				// Cargamos en los TextField info1, info2 e info3 toda la información que no sea el título para mostrarsela al usuario
+        			info1.setText("EAN: " + Informacion.albumSeleccionado.getEan());
+        			info2.setText("Artista: " + Informacion.albumSeleccionado.getArtista());
+        			info3.setText("Género: " + Informacion.albumSeleccionado.getGenero());
+        			aportarAlbum.setDisable(true);
+    				
+    			}
     			
     		} else {
+    			agregarAColeccion.setDisable(true);
     			aportarAlbum.setDisable(false);
+    			info1.setText(null);
+    			info2.setText(null);
+    			info3.setText(null);
     			// mostrar imagen de libro no encontrado
     		}
 
@@ -226,16 +241,26 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     		albumesEncontrados = MusicaDao.buscarAlbumGrupo(artista.getText());
     		
     		if(!albumesEncontrados.isEmpty()) {
+
     			Informacion.albumes = albumesEncontrados;
     			lanzarDialogoSeleccion();
     			
-    			// Cargamos en los TExtField info1, info2 e info3 toda la información que no sea el artista para mostrarsela al usuario
-    			info1.setText("EAN: " + albumEncontrado.getEan());
-    			info2.setText("Título: " + albumEncontrado.getTitulo());
-    			info3.setText("Género: " + albumEncontrado.getGenero());
+    			if(Informacion.albumSeleccionado.getEan() != null) {
+    				
+    				// Cargamos en los TextField info1, info2 e info3 toda la información que no sea el artista para mostrarsela al usuario
+            		info1.setText("EAN: " + Informacion.albumSeleccionado.getEan());
+            		info2.setText("Título: " + Informacion.albumSeleccionado.getTitulo());
+            		info3.setText("Género: " + Informacion.albumSeleccionado.getGenero());
+        			aportarAlbum.setDisable(true);
+    				
+    			}
     			
     		} else {
+    			agregarAColeccion.setDisable(true);
     			aportarAlbum.setDisable(false);
+    			info1.setText(null);
+    			info2.setText(null);
+    			info3.setText(null);
     			// mostrar imagen de libro no encontrado
     		}
     		
@@ -244,16 +269,26 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     		albumesEncontrados = MusicaDao.buscarAlbumGenero(genero.getValue());
     		
     		if(!albumesEncontrados.isEmpty()) {
+    			
     			Informacion.albumes = albumesEncontrados;
     			lanzarDialogoSeleccion();
     			
-    			// Cargamos en los TExtField info1, info2 e info3 toda la información que no sea el género para mostrarsela al usuario
-    			info1.setText("EAN: " + albumEncontrado.getEan());
-    			info2.setText("Título: " + albumEncontrado.getTitulo());
-    			info3.setText("Artista: " + albumEncontrado.getArtista());
+    			if(Informacion.albumSeleccionado.getEan() != null) {
+    				
+    				// Cargamos en los TextField info1, info2 e info3 toda la información que no sea el género para mostrarsela al usuario
+        			info1.setText("EAN: " + Informacion.albumSeleccionado.getEan());
+        			info2.setText("Título: " + Informacion.albumSeleccionado.getTitulo());
+        			info3.setText("Artista: " + Informacion.albumSeleccionado.getArtista());
+        			aportarAlbum.setDisable(true);
+    				
+    			}
     			
     		} else {
+    			agregarAColeccion.setDisable(true);
     			aportarAlbum.setDisable(false);
+    			info1.setText(null);
+    			info2.setText(null);
+    			info3.setText(null);
     			// mostrar imagen de libro no encontrado
     		}
     	}
@@ -265,17 +300,17 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     	LayoutPane layoutPane = new LayoutPane();
     	
     	try {
-			layoutPane.cargarPantalla("elegirLibro", ElegirLibroControlador.class.getResource("ElegirLibro.fxml"));
+			layoutPane.cargarPantalla("elegirAlbum", ElegirAlbumControlador.class.getResource("ElegirAlbum.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     	
-    	layoutPane.mostrarComoPantallaActual("elegirLibro");
+    	layoutPane.mostrarComoPantallaActual("elegirAlbum");
     	final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(Informacion.dialogoAnhadirLibro);
         Scene dialogScene = new Scene(layoutPane, 700 , 400);
-        dialog.setTitle("Elegir libro");
+        dialog.setTitle("Elegir álbum");
         dialog.setResizable(false);
         dialog.setScene(dialogScene);
         
@@ -283,10 +318,10 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
         
         dialog.showAndWait();
         
-        if(Informacion.libroSeleccionado.getIsbn() != null) {
+        if(Informacion.albumSeleccionado.getEan() != null) {
         	
-        	File portada = new File(Informacion.libroSeleccionado.getPortada());
-			caratulaImageView.setImage(new Image(portada.toURI().toString()));
+        	File caratula = new File(Informacion.albumSeleccionado.getCaratula());
+			caratulaImageView.setImage(new Image(caratula.toURI().toString()));
         	agregarAColeccion.setDisable(false);
         	aportarAlbum.setDisable(true);
         }
@@ -331,6 +366,10 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
 		aportarAlbum.setDisable(true);
 		buscar.setDisable(true);
 		agregarAColeccion.setDisable(true);
+		
+		info1.setEditable(false);
+		info2.setEditable(false);
+		info3.setEditable(false);
 		
 	}
 
