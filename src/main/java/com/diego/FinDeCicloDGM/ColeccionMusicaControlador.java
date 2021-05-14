@@ -99,6 +99,21 @@ public class ColeccionMusicaControlador extends ControladorConNavegabilidad impl
         
         translate.setOnFinished((e)->{
         	this.layout.mostrarComoPantallaActual("coleccionLibros");
+        	// Limpiamos la pantalla de álbumes
+        	
+        	refrescar.setDisable(false);
+        	
+        	tile.getChildren().clear();
+    		root.setContent(contenido);
+    		labelPane.setVisible(true);
+    		refrescarIconoLabel.setVisible(true);
+    		refrescarLabel.setVisible(true);
+    		noDiscoLabel.setVisible(false);
+    		anhadirDiscoIconoLabel.setVisible(false);
+    		
+    		valorTotal.setText("Valor total: 0 €");
+			totalDiscos.setText("Nº de discos: 0");
+        	
         	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Libros");
         });
         
@@ -112,6 +127,23 @@ public class ColeccionMusicaControlador extends ControladorConNavegabilidad impl
         
         translate.setOnFinished((e)->{
         	this.layout.mostrarComoPantallaActual("masColecciones");
+        	
+        	// Limpiamos la pantalla de álbumes
+        	
+        	refrescar.setDisable(false);
+        	
+        	tile.getChildren().clear();
+    		root.setContent(contenido);
+    		labelPane.setVisible(true);
+    		refrescarIconoLabel.setVisible(true);
+    		refrescarLabel.setVisible(true);
+    		noDiscoLabel.setVisible(false);
+    		anhadirDiscoIconoLabel.setVisible(false);
+    		
+    		valorTotal.setText("Valor total: 0 €");
+			totalDiscos.setText("Nº de discos: 0");
+        	
+        	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Más colecciones");
         });
 		
 	}

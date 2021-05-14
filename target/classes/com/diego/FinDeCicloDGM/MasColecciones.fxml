@@ -1,16 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.MasColeccionesControlador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" stylesheets="@../estilos/colecciones.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.MasColeccionesControlador">
+   <left>
+      <Pane prefHeight="625.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="TOP_LEFT" layoutX="6.0" layoutY="6.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#mostrarBarraNavegacion" prefHeight="30.0" prefWidth="30.0" styleClass="botonNavBar">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/menu_icono_negro.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <VBox fx:id="barraNavegacion" layoutX="-160.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="160.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#ocultarBarraNavegacion" prefHeight="30.0" prefWidth="30.0" styleClass="botonNavBar">
+                     <VBox.margin>
+                        <Insets left="3.0" top="10.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/menu_icono.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button ellipsisString="" mnemonicParsing="false" onAction="#mostrarLibros" prefHeight="60.0" prefWidth="160.0" styleClass="botonNavBar" text="Libros                 ">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Yu Gothic Medium" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/libro_icono_menunav.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#mostrarMusica" prefHeight="60.0" prefWidth="160.0" styleClass="botonNavBar" text="Música                ">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Yu Gothic Medium" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/musica_icono_menunav.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="56.0" prefWidth="160.0" styleClass="botonNavBar" text="Cerrar sesión    ">
+                     <VBox.margin>
+                        <Insets top="425.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Yu Gothic Medium" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/cerrar_sesion_icono.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </left>
    <center>
-      <Label text="Más colecciones" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="372.0" layoutY="51.0" text="¡Y muchas más!">
+               <font>
+                  <Font name="Yu Gothic Medium" size="40.0" />
+               </font>
+            </Label>
+            <Pane layoutX="30.0" layoutY="175.0" prefHeight="300.0" prefWidth="300.0" styleClass="selector_pane">
+               <children>
+                  <ImageView fitHeight="230.0" fitWidth="271.0" layoutX="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/peliculas_icono.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="370.0" layoutY="175.0" prefHeight="300.0" prefWidth="300.0" styleClass="selector_pane">
+               <children>
+                  <ImageView fitHeight="242.0" fitWidth="231.0" layoutX="35.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/videojuegos_icono.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="710.0" layoutY="175.0" prefHeight="300.0" prefWidth="300.0" styleClass="selector_pane">
+               <children>
+                  <ImageView fitHeight="252.0" fitWidth="262.0" layoutX="24.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/comic_icono.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button disable="true" layoutX="136.0" layoutY="506.0" mnemonicParsing="false" styleClass="boton-no-funcional" text="Películas" />
+            <Button disable="true" layoutX="456.0" layoutY="506.0" mnemonicParsing="false" styleClass="boton-no-funcional" text="Videojuegos" />
+            <Button disable="true" layoutX="802.0" layoutY="506.0" mnemonicParsing="false" styleClass="boton-no-funcional" text="Cómic/Manga" />
+         </children>
+      </Pane>
    </center>
 </BorderPane>

@@ -23,6 +23,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -95,16 +96,25 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 				System.out.println("Album insertado");
 				MusicaDao.anhadirAlbumUsuario(album, Informacion.usuario);
 				System.out.println("Album añadido a usuario");
+				
+				Alert popup = Popup.lanzarPopup("Álbum añadido a la colección", "El álbum «" + album.getTitulo() + "» se ha añadido a tu colección "
+        				+ "correctamente", 1);
+        		popup.showAndWait();
+				
 				Informacion.dialogoAnhadirAlbum.close();
 				
 			} else {
-				System.out.println("Error al insertar el album");
+				
+				Alert popup = Popup.lanzarPopup("Error", "Error al guardar el álbum «" + album.getTitulo() + "»", 2);
+        		popup.showAndWait();
+				
 			}
 			
 			
 		} else {
 			
-			System.out.println("El ISBN-13 introducido ya está registrado");
+			Alert popup = Popup.lanzarPopup("Error", "Ya existe un álbum con el EAN introducido", 2);
+    		popup.showAndWait();
 			
 		}
 		
@@ -150,7 +160,9 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 		precio.clear();
 		discografica.clear();
 		caratula.clear();
-		imagenCaratula.setImage(null);
+		try {
+			imagenCaratula.setImage(new Image(getClass().getResource("../img/caratula_imagen.png").toURI().toString()));
+		} catch (URISyntaxException e) {}
 		
 		guardarAlbum.setDisable(true);
 		btnComprobarCaratula.setDisable(true);
@@ -172,7 +184,7 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 	    	activarGuardarAlbum();
 	    	// Cargamos la imagen de caratula no válida en el ImageView
 	    	try {
-	    		imagenCaratula.setImage(new Image(getClass().getResource("../img/portada_no_valida.png").toURI().toString()));
+	    		imagenCaratula.setImage(new Image(getClass().getResource("../img/caratula_no_valida.png").toURI().toString()));
 			} catch (URISyntaxException e1) {}
 	    	
 	    } catch (IOException e) {
@@ -180,7 +192,7 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 	    	activarGuardarAlbum();
 	    	// Cargamos la imagen de caratula no válida en el ImageView
 	    	try {
-	    		imagenCaratula.setImage(new Image(getClass().getResource("../img/portada_no_valida.png").toURI().toString()));
+	    		imagenCaratula.setImage(new Image(getClass().getResource("../img/caratula_no_valida.png").toURI().toString()));
 			} catch (URISyntaxException e1) {}
 	    }
 		

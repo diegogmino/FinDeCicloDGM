@@ -6,12 +6,13 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" stylesheets="@../estilos/nuevoLibro.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.NuevoAlbumControlador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" stylesheets="@../estilos/nuevoItem.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.NuevoAlbumControlador">
    <top>
       <Label alignment="CENTER" text="Añadir un nuevo álbum" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
@@ -25,7 +26,10 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imagenCaratula" fitHeight="270.0" fitWidth="270.0" layoutX="265.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagenCaratula" fitHeight="270.0" fitWidth="270.0" layoutX="265.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/caratula_imagen.png" />
+               </image></ImageView>
             <TextField fx:id="ean" layoutX="45.0" layoutY="310.0" onKeyTyped="#activarGuardarAlbum" promptText="EAN">
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />

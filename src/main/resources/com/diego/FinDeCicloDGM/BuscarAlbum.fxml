@@ -5,6 +5,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -16,7 +17,10 @@
             <Font name="Yu Gothic Medium" size="14.0" />
          </font></TextField>
       <Button fx:id="buscar" layoutX="674.0" layoutY="447.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
-      <ImageView fx:id="caratulaImageView" fitHeight="345.0" fitWidth="345.0" layoutX="20.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="caratulaImageView" fitHeight="345.0" fitWidth="345.0" layoutX="20.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/caratula_imagen.png" />
+         </image></ImageView>
       <RadioButton fx:id="eanRB" layoutX="380.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#activarDesactivarRB" text="Buscar por EAN">
          <toggleGroup>
             <ToggleGroup fx:id="tgBuscar" />

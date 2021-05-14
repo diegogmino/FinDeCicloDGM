@@ -94,6 +94,21 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
         
         translate.setOnFinished((e)->{
         	this.layout.mostrarComoPantallaActual("coleccionMusica");
+        	// Limpiamos la pantalla de libros
+        	
+        	refrescar.setDisable(false);
+        	
+        	tile.getChildren().clear();
+    		root.setContent(contenido);
+    		labelPane.setVisible(true);
+    		refrescarIconoLabel.setVisible(true);
+    		refrescarLabel.setVisible(true);
+    		noLibroLabel.setVisible(false);
+    		anhadirLibroIconoLabel.setVisible(false);
+    		
+    		valorTotal.setText("Valor total: 0 €");
+			totalLibros.setText("Nº de libros: 0");
+        	
         	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Música");
         });
         
@@ -107,6 +122,23 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
         
         translate.setOnFinished((e)->{
         	this.layout.mostrarComoPantallaActual("masColecciones");
+        	
+        	// Limpiamos la pantalla de libros
+        	
+        	refrescar.setDisable(false);
+        	
+        	tile.getChildren().clear();
+    		root.setContent(contenido);
+    		labelPane.setVisible(true);
+    		refrescarIconoLabel.setVisible(true);
+    		refrescarLabel.setVisible(true);
+    		noLibroLabel.setVisible(false);
+    		anhadirLibroIconoLabel.setVisible(false);
+    		
+    		valorTotal.setText("Valor total: 0 €");
+			totalLibros.setText("Nº de libros: 0");
+        	
+        	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Más colecciones");
         });
 		
 	}

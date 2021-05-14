@@ -2,6 +2,7 @@ package com.diego.FinDeCicloDGM;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.diego.FinDeCiclo.pojos.Informacion;
@@ -10,7 +11,9 @@ import com.diego.FinDeCicloDGM.dao.LibroDao;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -133,13 +136,28 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 		
 		if(Informacion.usuario.getRango() == 2) {
 			// Si el rango del usuario es 2 se elimina el libro de la base de datos
-			LibroDao.eliminarLibroAdmin(Informacion.libroMostrarFichaTecnica);
+			Alert popup = Popup.lanzarPopup("Eliminar", "Vas a eliminar este libro de la base de datos ¿Estás segur@?", 3);
+			Optional<ButtonType> resultado = popup.showAndWait();
+			
+			if (resultado.get() == ButtonType.OK) {
+				LibroDao.eliminarLibroAdmin(Informacion.libroMostrarFichaTecnica);
+				volver();
+			}
+			
+			
 		} else {
 			// Si el rango del usuario no es 2, lo que significa que es 1, se elimina el libro de su colección privada
-			LibroDao.eliminarLibroUsuario(Informacion.libroMostrarFichaTecnica, Informacion.usuario);
+			Alert popup = Popup.lanzarPopup("Eliminar", "Vas a eliminar este libro de la tu colección ¿Estás segur@?", 3);
+			Optional<ButtonType> resultado = popup.showAndWait();
+			
+			if (resultado.get() == ButtonType.OK) {
+				LibroDao.eliminarLibroUsuario(Informacion.libroMostrarFichaTecnica, Informacion.usuario);
+				volver();
+			}
+			
 		}
 		
-		volver();
+		
 	}
 	
 	private void cambiarInformacionEditar() {
@@ -171,21 +189,28 @@ public class FichaTecnicaLibroControlador extends ControladorConNavegabilidad im
 	
 	public void actualizarLibro() {
 		
-		Libro libroActualizar = Informacion.libroMostrarFichaTecnica;
+		Alert popup = Popup.lanzarPopup("Editar", "Vas a editar la información de este libro ¿Estás segur@?", 3);
+		Optional<ButtonType> resultado = popup.showAndWait();
 		
-		libroActualizar.setTitulo(titulo.getText());
-		libroActualizar.setIsbn(Long.parseLong(isbn.getText()));
-		libroActualizar.setAutor(autor.getText());
-		libroActualizar.setGenero(genero.getText());
-		libroActualizar.setPaginas(Integer.parseInt(paginas.getText()));
-		libroActualizar.setEditorial(editorial.getText());
-		libroActualizar.setTapa(tapa.getText());
-		libroActualizar.setPrecio(Double.parseDouble(precio.getText()));
-		
-		LibroDao.actualizarLibro(libroActualizar);
-		
-		volver();
-		
+		if (resultado.get() == ButtonType.OK) {
+			
+			Libro libroActualizar = Informacion.libroMostrarFichaTecnica;
+			
+			libroActualizar.setTitulo(titulo.getText());
+			libroActualizar.setIsbn(Long.parseLong(isbn.getText()));
+			libroActualizar.setAutor(autor.getText());
+			libroActualizar.setGenero(genero.getText());
+			libroActualizar.setPaginas(Integer.parseInt(paginas.getText()));
+			libroActualizar.setEditorial(editorial.getText());
+			libroActualizar.setTapa(tapa.getText());
+			libroActualizar.setPrecio(Double.parseDouble(precio.getText()));
+			
+			LibroDao.actualizarLibro(libroActualizar);
+			
+			volver();
+			
+		}
+
 	}
 	
 	private void ocultarCampos() {

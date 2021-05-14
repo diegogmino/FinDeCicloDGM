@@ -2,18 +2,25 @@ package com.diego.FinDeCicloDGM;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Libro;
 import com.diego.FinDeCicloDGM.dao.LibroDao;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
@@ -63,6 +70,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     
     Libro libroEncontrado = new Libro();
     List<Libro> librosEncontrados;
+    Path rutaGeneros = Path.of("ficherosInfo\\generosLibros.csv");
     
     public void activarDesactivarRB() {
     	
@@ -94,8 +102,11 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     	autor.clear();
     	titulo.clear();
     	genero.setValue(null);
-    	portadaImageView.setImage(null);
+    	try {
+			portadaImageView.setImage(new Image(getClass().getResource("../img/portada_imagen.png").toURI().toString()));
+		} catch (URISyntaxException e) {}
     	activarBuscar();
+    	agregarAColeccion.setDisable(true);
     	
     }
     
@@ -121,11 +132,18 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		if(!encontrado) {
     			
     			LibroDao.anhadirLibroUsuario(Informacion.libroSeleccionado, Informacion.usuario);
+        		
+        		Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro " + Informacion.libroSeleccionado.getTitulo() + " se ha añadido a tu colección "
+        				+ "correctamente", 1);
+        		popup.showAndWait();
+        		
         		Informacion.libroSeleccionado = new Libro();
         		Informacion.dialogoAnhadirLibro.close();
         		
     		} else {
-    			System.out.println("Ya tienes este libro en tu colección");
+    			
+    			Alert popup = Popup.lanzarPopup("Libro encontrado", "Ya tienes este libro en tu colección", 2);
+    			popup.showAndWait();
     		}
     		
     		
@@ -136,12 +154,19 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		boolean encontrado = comprobarLibroColeccion(librosUsuario, libroEncontrado);
     		
     		if(!encontrado) {
-    			
+
     			LibroDao.anhadirLibroUsuario(libroEncontrado, Informacion.usuario);
+    			
+        		Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro " + libroEncontrado.getTitulo() + " se ha añadido a tu colección "
+        				+ "correctamente", 1);
+        		popup.showAndWait();
+    			
         		Informacion.dialogoAnhadirLibro.close();
         		
     		} else {
-    			System.out.println("Ya tienes este libro en tu colección");
+    			
+    			Alert popup = Popup.lanzarPopup("Libro encontrado", "Ya tienes este libro en tu colección", 2);
+    			popup.showAndWait();
     		}
 
     	}
@@ -276,8 +301,14 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
 	     });
 	    
 		
-		genero.getItems().removeAll(genero.getItems());
-		genero.getItems().addAll("Aventuras", "Ciencia ficción", "Drama", "Fantasía", "Gótico", "Humor", "Novela negra", "Realismo", "Romántico", "Terror");
+	    genero.getItems().removeAll(genero.getItems());
+	    List<String> generos = null;
+	    
+	    try {
+			generos = Files.lines(rutaGeneros).collect(Collectors.toList());
+		} catch (IOException e) {}
+	    
+	    genero.setItems(FXCollections.observableArrayList(generos));
 		
 		libroEncontrado = null;
 		librosEncontrados = new ArrayList<Libro>();

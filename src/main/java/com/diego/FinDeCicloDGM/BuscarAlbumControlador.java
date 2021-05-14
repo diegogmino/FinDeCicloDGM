@@ -2,6 +2,7 @@ package com.diego.FinDeCicloDGM;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
@@ -112,8 +114,11 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     	artista.clear();
     	titulo.clear();
     	genero.setValue(null);
-    	caratulaImageView.setImage(null);
+    	try {
+			caratulaImageView.setImage(new Image(getClass().getResource("../img/caratula_imagen.png").toURI().toString()));
+		} catch (URISyntaxException e) {}
     	activarBuscar();
+    	agregarAColeccion.setDisable(true);
     	
     }
     
@@ -137,32 +142,46 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     		if(!encontrado) {
     			
     			MusicaDao.anhadirAlbumUsuario(Informacion.albumSeleccionado, Informacion.usuario);
+        		
+        		// Lanzamos el popup de confirmación
+        		
+        		Alert popup = Popup.lanzarPopup("Album añadido a la colección", "El álbum " + Informacion.albumSeleccionado.getTitulo() + " se ha añadido a tu colección "
+        				+ "correctamente", 1);
+        		popup.showAndWait();
+        		
         		Informacion.albumSeleccionado = new Musica();
-        		// Volver aquí cuando el dialogoAnhadirAlbum esté listo
         		Informacion.dialogoAnhadirAlbum.close();
         		
     		} else {
-    			System.out.println("Ya tienes este álbum en tu colección");
+    			Alert popup = Popup.lanzarPopup("Álbum encontrado", "Ya tienes este álbum en tu colección", 2);
+    			popup.showAndWait();
     		}
     		
     			
     	} else {
 
     		// albumEncontrado es la variable donde se guarda el album resultante de la búsqueda por isbn
-    		boolean encontrado = comprobarAlbumColeccion(albumesUsuario, Informacion.albumSeleccionado);
+    		boolean encontrado = comprobarAlbumColeccion(albumesUsuario, albumEncontrado);
     		
     		if(!encontrado) {
     			
     			MusicaDao.anhadirAlbumUsuario(albumEncontrado, Informacion.usuario);
-        		Informacion.dialogoAnhadirLibro.close();
+    			// Lanzamos el popup de confirmación
+    			Alert popup = Popup.lanzarPopup("Album añadido a la colección", "El álbum " + albumEncontrado.getTitulo() + " se ha añadido a tu colección "
+        				+ "correctamente", 1);
+        		popup.showAndWait();
+        		
+        		Informacion.dialogoAnhadirAlbum.close();
         		
     		} else {
-    			System.out.println("Ya tienes este álbum en tu colección");
+    			Alert popup = Popup.lanzarPopup("Álbum encontrado", "Ya tienes este álbum en tu colección", 2);
+    			popup.showAndWait();
     		}
 
     	}
     	
     }
+    
     
     private boolean comprobarAlbumColeccion(List<Musica> albumesUsuario, Musica albumAGuardar) {
 		
@@ -233,7 +252,6 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     			info1.setText(null);
     			info2.setText(null);
     			info3.setText(null);
-    			// mostrar imagen de libro no encontrado
     		}
 
     	} else if(!artista.getText().isEmpty()) {
@@ -261,7 +279,6 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     			info1.setText(null);
     			info2.setText(null);
     			info3.setText(null);
-    			// mostrar imagen de libro no encontrado
     		}
     		
     	} else if(genero.getValue() != null) {
@@ -289,7 +306,6 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     			info1.setText(null);
     			info2.setText(null);
     			info3.setText(null);
-    			// mostrar imagen de libro no encontrado
     		}
     	}
     	

@@ -2,8 +2,8 @@ package com.diego.FinDeCiclo.hilos;
 
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Usuario;
-import com.diego.FinDeCiclo.popup.Popup;
 import com.diego.FinDeCicloDGM.LoginControlador;
+import com.diego.FinDeCicloDGM.Popup;
 import com.diego.FinDeCicloDGM.SelectorColeccionControlador;
 import com.diego.FinDeCicloDGM.dao.UsuarioDao;
 

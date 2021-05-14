@@ -4,14 +4,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" stylesheets="@../estilos/nuevoLibro.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.NuevoLibroControlador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" stylesheets="@../estilos/nuevoItem.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.diego.FinDeCicloDGM.NuevoLibroControlador">
    <top>
       <Label alignment="CENTER" text="Añadir un nuevo libro" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
@@ -25,7 +25,10 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imagenPortada" fitHeight="380.0" fitWidth="273.0" layoutX="47.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagenPortada" fitHeight="380.0" fitWidth="273.0" layoutX="47.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/portada_imagen.png" />
+               </image></ImageView>
             <TextField fx:id="isbn" layoutX="340.0" layoutY="44.0" onKeyTyped="#activarGuardarLibro" promptText="ISBN-13">
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
@@ -63,9 +66,8 @@
                </font>
             </TextField>
             <Button fx:id="btnComprobarPortada" layoutX="83.0" layoutY="467.0" mnemonicParsing="false" onAction="#comprobarPortada" text="Comprobar portada" />
-            <Button fx:id="guardarLibro" layoutX="588.0" layoutY="467.0" mnemonicParsing="false" onAction="#guardarLibro" text="Añadir libro" />
+            <Button fx:id="guardarLibro" layoutX="620.0" layoutY="467.0" mnemonicParsing="false" onAction="#guardarLibro" text="Añadir libro" />
             <Button layoutX="439.0" layoutY="467.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Borrar campos" />
-            <ProgressIndicator fx:id="procesando" layoutX="729.0" layoutY="459.0" styleClass="procesando" />
             <ComboBox fx:id="tapa" layoutX="552.0" layoutY="252.0" onHidden="#activarGuardarLibro" prefHeight="25.0" prefWidth="180.0" promptText="Tipo de tapa" />
          </children>
       </Pane>
