@@ -4,6 +4,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -98,7 +99,11 @@ public class ColeccionMusicaControlador extends ControladorConNavegabilidad impl
         translate.play();
         
         translate.setOnFinished((e)->{
-        	this.layout.mostrarComoPantallaActual("coleccionLibros");
+        	
+        	try {
+				this.layout.cargarColeccionLibros(ColeccionLibrosControlador.class.getResource("ColeccionLibros.fxml"));
+			} catch (IOException e1) {}
+        	
         	// Limpiamos la pantalla de álbumes
         	
         	refrescar.setDisable(false);
@@ -257,22 +262,20 @@ public class ColeccionMusicaControlador extends ControladorConNavegabilidad impl
 			@Override
 			public void handle(MouseEvent event) {
 				
-				Informacion.albumMostrarFichaTecnica = album;
-				mostrarPantallaFichaTecnica();
-				
-				System.out.println("Titulo: " + album.getTitulo());
+				try {
+					mostrarPantallaFichaTecnica(album);
+				} catch (IOException e) {}
 				
 			}
 			
 		});
 		
-		
 		return boton;
 		
 	}
 	
-	public void mostrarPantallaFichaTecnica() {
-		this.layout.mostrarComoPantallaActual("fichaTecnicaAlbum");
+	public void mostrarPantallaFichaTecnica(Musica album) throws IOException {
+		this.layout.cargarFichaTecnicaMusica(FichaTecnicaAlbumControlador.class.getResource("FichaTecnicaAlbum.fxml"), album);
 		refrescar.setDisable(false);
 	}
 

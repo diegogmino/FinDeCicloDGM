@@ -93,9 +93,21 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 			if(LibroDao.insertarLibro(libro)) {
 				LibroDao.anhadirLibroUsuario(libro, Informacion.usuario);
 				
-				Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro «" + libro.getTitulo() + "» se ha añadido a tu colección "
-        				+ "correctamente", 1);
-        		popup.showAndWait();
+				if(Informacion.usuario.getRango() == 1) {
+					
+					Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro «" + libro.getTitulo() + "» se ha añadido a tu colección "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				} else {
+					
+					Alert popup = Popup.lanzarPopup("Libro añadido a la base de datos", "El libro «" + libro.getTitulo() + "» se ha añadido a la base de datos "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				}
+				
+				
 				
 				Informacion.dialogoAnhadirLibro.close();
 				

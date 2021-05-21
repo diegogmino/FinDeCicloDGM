@@ -133,9 +133,19 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     			
     			LibroDao.anhadirLibroUsuario(Informacion.libroSeleccionado, Informacion.usuario);
         		
-        		Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro " + Informacion.libroSeleccionado.getTitulo() + " se ha añadido a tu colección "
-        				+ "correctamente", 1);
-        		popup.showAndWait();
+    			if(Informacion.usuario.getRango() == 1) {
+					
+					Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro «" + Informacion.libroSeleccionado.getTitulo() + "» se ha añadido a tu colección "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				} else {
+					
+					Alert popup = Popup.lanzarPopup("Libro añadido a la base de datos", "El libro «" + Informacion.libroSeleccionado.getTitulo() + "» se ha añadido a la base de datos "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				}
         		
         		Informacion.libroSeleccionado = new Libro();
         		Informacion.dialogoAnhadirLibro.close();
@@ -157,9 +167,19 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
 
     			LibroDao.anhadirLibroUsuario(libroEncontrado, Informacion.usuario);
     			
-        		Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro " + libroEncontrado.getTitulo() + " se ha añadido a tu colección "
-        				+ "correctamente", 1);
-        		popup.showAndWait();
+    			if(Informacion.usuario.getRango() == 1) {
+					
+					Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro «" + libroEncontrado.getTitulo() + "» se ha añadido a tu colección "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				} else {
+					
+					Alert popup = Popup.lanzarPopup("Libro añadido a la base de datos", "El libro «" + libroEncontrado.getTitulo() + "» se ha añadido a la base de datos "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				}
     			
         		Informacion.dialogoAnhadirLibro.close();
         		

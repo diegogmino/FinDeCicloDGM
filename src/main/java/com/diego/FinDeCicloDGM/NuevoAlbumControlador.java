@@ -26,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
@@ -93,14 +94,22 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 					directorioCaratula, Date.valueOf(fechaPublicacion.getValue()), Double.parseDouble(precio.getText()), discografica.getText());
 			
 			if(MusicaDao.insertarAlbum(album)) {
-				System.out.println("Album insertado");
 				MusicaDao.anhadirAlbumUsuario(album, Informacion.usuario);
-				System.out.println("Album añadido a usuario");
 				
-				Alert popup = Popup.lanzarPopup("Álbum añadido a la colección", "El álbum «" + album.getTitulo() + "» se ha añadido a tu colección "
-        				+ "correctamente", 1);
-        		popup.showAndWait();
-				
+				if(Informacion.usuario.getRango() == 1) {
+					
+					Alert popup = Popup.lanzarPopup("Álbum añadido a la colección", "El álbum «" + album.getTitulo() + "» se ha añadido a tu colección "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				} else {
+					
+					Alert popup = Popup.lanzarPopup("Álbum añadido a la base de datos", "El álbum «" + album.getTitulo() + "» se ha añadido base de datos "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				}
+
 				Informacion.dialogoAnhadirAlbum.close();
 				
 			} else {
@@ -271,7 +280,18 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 	            }
 	        }
 	    });
+	    
+	    // Bloquea las fechas mayores que la fecha actual
+	    fechaPublicacion.setDayCellFactory(param -> new DateCell() {
+	    	@Override
+	    	public void updateItem(LocalDate date, boolean empty) {
+	    		super.updateItem(date, empty);
+	    		setDisable(empty || date.compareTo(LocalDate.now()) > 0 );
+	    	}
+	    });
+	       
+	 }
 		
-	}
-
 }
+
+

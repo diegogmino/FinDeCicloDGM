@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import com.diego.FinDeCiclo.pojos.Libro;
+import com.diego.FinDeCiclo.pojos.Musica;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Parent;
-import javafx.stage.Stage;
 
 public class LayoutPane extends BorderPane {
     
@@ -34,20 +36,68 @@ public class LayoutPane extends BorderPane {
         
     }
     
-    public void mostrarChart(int rango) {
-        this.rango = rango;
-        this.setCenter(pantallasDeLaAplicacion.get("chart"));
+    // Método que carga la ventana de ficha técnica de un libro con la información mostrada
+    public void cargarFichaTecnicaLibro(URL urlArchivoFxml, Libro libro) throws IOException {
+    	
+    	FXMLLoader cargadorPantallas = new FXMLLoader(urlArchivoFxml);
+    	Parent pantalla = cargadorPantallas.load();
+    	
+    	ControladorConNavegabilidad controladorConNavegabilidad = cargadorPantallas.getController();
+        controladorConNavegabilidad.setLayout(this);
         
+        FichaTecnicaLibroControlador fichaTecnicaControlador = cargadorPantallas.getController();
+		fichaTecnicaControlador.cargarInformacion(libro);
+        
+        this.setCenter(pantalla);
+    	
     }
     
-    public void mostrarPantallaVolver() {
+    // Método que carga la ventada de la colección de libros de un usuario con dicha colección visible
+    public void cargarColeccionLibros(URL urlArchivoFxml) throws IOException {
+    	
+    	FXMLLoader cargadorPantallas = new FXMLLoader(urlArchivoFxml);
+    	Parent pantalla = cargadorPantallas.load();
+    	
+    	ControladorConNavegabilidad controladorConNavegabilidad = cargadorPantallas.getController();
+        controladorConNavegabilidad.setLayout(this);
         
-        if(rango == 1) {
-            this.setCenter(pantallasDeLaAplicacion.get("libros"));
-        } else {
-            this.setCenter(pantallasDeLaAplicacion.get("librosAdmin"));
-        }
-
+        ColeccionLibrosControlador coleccionLibros = cargadorPantallas.getController();
+        coleccionLibros.refrescar();
+        
+        this.setCenter(pantalla);
+    	
+    }
+    
+    // Método que carga la ventana de ficha técnica de un álbum con la información mostrada
+    public void cargarFichaTecnicaMusica(URL urlArchivoFxml, Musica musica) throws IOException {
+    	
+    	FXMLLoader cargadorPantallas = new FXMLLoader(urlArchivoFxml);
+    	Parent pantalla = cargadorPantallas.load();
+    	
+    	ControladorConNavegabilidad controladorConNavegabilidad = cargadorPantallas.getController();
+        controladorConNavegabilidad.setLayout(this);
+        
+        FichaTecnicaAlbumControlador fichaTecnicaControlador = cargadorPantallas.getController();
+		fichaTecnicaControlador.cargarInformacion(musica);
+        
+        this.setCenter(pantalla);
+    	
+    }
+    
+    // Método que carga la ventada de la colección de música de un usuario con dicha colección visible
+    public void cargarColeccionMusica(URL urlArchivoFxml) throws IOException {
+    	
+    	FXMLLoader cargadorPantallas = new FXMLLoader(urlArchivoFxml);
+    	Parent pantalla = cargadorPantallas.load();
+    	
+    	ControladorConNavegabilidad controladorConNavegabilidad = cargadorPantallas.getController();
+        controladorConNavegabilidad.setLayout(this);
+        
+        ColeccionMusicaControlador coleccionMusica = cargadorPantallas.getController();
+        coleccionMusica.refrescar();
+        
+        this.setCenter(pantalla);
+    	
     }
 
 }

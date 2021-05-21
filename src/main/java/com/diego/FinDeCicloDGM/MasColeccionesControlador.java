@@ -1,5 +1,6 @@
 package com.diego.FinDeCicloDGM;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -45,7 +46,11 @@ public class MasColeccionesControlador extends ControladorConNavegabilidad imple
         translate.play();
         
         translate.setOnFinished((e)->{
-        	this.layout.mostrarComoPantallaActual("coleccionLibros");
+        	
+        	try {
+				this.layout.cargarColeccionLibros(ColeccionLibrosControlador.class.getResource("ColeccionLibros.fxml"));
+			} catch (IOException e1) {}
+        	
         	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Libros");
         });
 
@@ -58,7 +63,11 @@ public class MasColeccionesControlador extends ControladorConNavegabilidad imple
         translate.play();
         
         translate.setOnFinished((e)->{
-        	this.layout.mostrarComoPantallaActual("coleccionMusica");
+        	
+        	try {
+    			this.layout.cargarColeccionMusica(ColeccionMusicaControlador.class.getResource("ColeccionMusica.fxml"));
+    		} catch (IOException e1) {}
+        	
         	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Música");
         });
 

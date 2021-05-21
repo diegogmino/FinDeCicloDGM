@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -19,16 +18,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="cargar" layoutX="14.0" layoutY="78.0" mnemonicParsing="false" onAction="#cargarInformacion" prefHeight="50.0" prefWidth="52.0">
-         <graphic>
-            <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/refresh.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="eliminar" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" onAction="#eliminarLibro" prefHeight="50.0" prefWidth="52.0">
+      <Button fx:id="eliminar" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onAction="#eliminarLibro" prefHeight="50.0" prefWidth="52.0">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -37,7 +27,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="editar" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#editarLibro" prefHeight="50.0" prefWidth="52.0">
+      <Button fx:id="editar" layoutX="14.0" layoutY="139.0" mnemonicParsing="false" onAction="#editarLibro" prefHeight="50.0" prefWidth="52.0">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -46,7 +36,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="guardar" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" onAction="#actualizarLibro" prefHeight="50.0" prefWidth="52.0">
+      <Button fx:id="guardar" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#actualizarLibro" prefHeight="50.0" prefWidth="52.0">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -101,15 +91,5 @@
          </font>
       </TextField>
       <ImageView fx:id="portada" fitHeight="494.0" fitWidth="378.0" layoutX="733.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="texto" layoutX="246.0" layoutY="304.0" text="Pulsa     para cargar la ficha técnica del libro">
-         <font>
-            <Font name="Yu Gothic Medium" size="35.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="iconoRefrescar" fitHeight="35.0" fitWidth="32.0" layoutX="345.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/refresh.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>

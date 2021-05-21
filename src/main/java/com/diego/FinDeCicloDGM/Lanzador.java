@@ -18,11 +18,7 @@ public class Lanzador extends Application {
         LayoutPane layoutPane = new LayoutPane();
         layoutPane.cargarPantalla("login", LoginControlador.class.getResource("Login.fxml"));
         layoutPane.cargarPantalla("selectorColeccion", SelectorColeccionControlador.class.getResource("SelectorColeccion.fxml"));
-        layoutPane.cargarPantalla("coleccionLibros", ColeccionLibrosControlador.class.getResource("ColeccionLibros.fxml"));
-        layoutPane.cargarPantalla("coleccionMusica", ColeccionMusicaControlador.class.getResource("ColeccionMusica.fxml"));
         layoutPane.cargarPantalla("masColecciones", MasColeccionesControlador.class.getResource("MasColecciones.fxml"));
-        layoutPane.cargarPantalla("fichaTecnicaLibro", FichaTecnicaLibroControlador.class.getResource("FichaTecnicaLibro.fxml"));
-        layoutPane.cargarPantalla("fichaTecnicaAlbum", FichaTecnicaAlbumControlador.class.getResource("FichaTecnicaAlbum.fxml"));
         
         layoutPane.mostrarComoPantallaActual("login");
         

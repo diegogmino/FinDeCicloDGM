@@ -1,6 +1,7 @@
 package com.diego.FinDeCicloDGM;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.Optional;
@@ -20,9 +21,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class FichaTecnicaAlbumControlador extends ControladorConNavegabilidad implements Initializable {
-	
-	@FXML
-    private Button cargar;
 
     @FXML
     private Button borrar;
@@ -67,16 +65,14 @@ public class FichaTecnicaAlbumControlador extends ControladorConNavegabilidad im
     private ImageView caratula;
 
     @FXML
-    private Label texto;
-
-    @FXML
-    private ImageView iconoRefrescar;
-
-    @FXML
     private TextField discografica;
+    
+    private Musica album;
 
 
-    public void cargarInformacion() {
+    public void cargarInformacion(Musica album) {
+    	
+    	this.album = album;
     	
     	if(Informacion.usuario.getRango() == 2) {
     		// Si el usuario tiene rango 2, lo que significa que es administador, tiene permisos para editar la información,
@@ -84,25 +80,20 @@ public class FichaTecnicaAlbumControlador extends ControladorConNavegabilidad im
     		editar.setVisible(true);
     	} 
 
-    	cargar.setDisable(true);
 		eliminar.setVisible(true);
 		
-		mostrarCampos();
-		texto.setVisible(false);
-		iconoRefrescar.setVisible(false);
-		
-		ean.setText(Informacion.albumMostrarFichaTecnica.getEan().toString());
-		titulo.setText(Informacion.albumMostrarFichaTecnica.getTitulo());
-		artista.setText(Informacion.albumMostrarFichaTecnica.getArtista());
-		fechaPublicacion.setText(String.valueOf(Informacion.albumMostrarFichaTecnica.getFechaPublicacion()));
-		precio.setText("Precio: " + String.valueOf(Informacion.albumMostrarFichaTecnica.getPrecio()) + " €");
-		genero.setText(Informacion.albumMostrarFichaTecnica.getGenero());
-		formato.setText(Informacion.albumMostrarFichaTecnica.getFormato());
-		discografica.setText(Informacion.albumMostrarFichaTecnica.getDiscografica());
-		duracion.setText(String.valueOf(Informacion.albumMostrarFichaTecnica.getDuracion()) + " minutos");
-		nombreAlbum.setText("Ficha de: " + Informacion.albumMostrarFichaTecnica.getTitulo());
+		ean.setText(album.getEan().toString());
+		titulo.setText(album.getTitulo());
+		artista.setText(album.getArtista());
+		fechaPublicacion.setText(String.valueOf(album.getFechaPublicacion()));
+		precio.setText("Precio: " + String.valueOf(album.getPrecio()) + " €");
+		genero.setText(album.getGenero());
+		formato.setText(album.getFormato());
+		discografica.setText(album.getDiscografica());
+		duracion.setText(String.valueOf(album.getDuracion()) + " minutos");
+		nombreAlbum.setText("Ficha de: " + album.getTitulo());
 
-		File imgCaratula = new File(Informacion.albumMostrarFichaTecnica.getCaratula());
+		File imgCaratula = new File(album.getCaratula());
 		caratula.setImage(new Image(imgCaratula.toURI().toString()));
     	
     }
@@ -133,19 +124,17 @@ public class FichaTecnicaAlbumControlador extends ControladorConNavegabilidad im
 		Optional<ButtonType> resultado = popup.showAndWait();
 		
 		if (resultado.get() == ButtonType.OK) {
-			
-			Musica albumActualizar = Informacion.albumMostrarFichaTecnica;
 	    	
-	    	albumActualizar.setTitulo(titulo.getText());
-	    	albumActualizar.setEan(Long.parseLong(ean.getText()));
-	    	albumActualizar.setArtista(artista.getText());
-	    	albumActualizar.setFormato(formato.getText());
-	    	albumActualizar.setPrecio(Double.parseDouble(precio.getText()));
-	    	albumActualizar.setDuracion(Integer.parseInt(duracion.getText()));
-	    	albumActualizar.setDiscografica(discografica.getText());
-	    	albumActualizar.setFechaPublicacion(Date.valueOf(fechaPublicacion.getText()));
+			album.setTitulo(titulo.getText());
+			album.setEan(Long.parseLong(ean.getText()));
+			album.setArtista(artista.getText());
+			album.setFormato(formato.getText());
+			album.setPrecio(Double.parseDouble(precio.getText()));
+			album.setDuracion(Integer.parseInt(duracion.getText()));
+			album.setDiscografica(discografica.getText());
+			album.setFechaPublicacion(Date.valueOf(fechaPublicacion.getText()));
 	    	
-	    	MusicaDao.actualizarAlbum(albumActualizar);
+	    	MusicaDao.actualizarAlbum(album);
 	    	
 	    	volver();
 			
@@ -155,9 +144,9 @@ public class FichaTecnicaAlbumControlador extends ControladorConNavegabilidad im
 
     private void cambiarInformacionEditar() {
 		
-    	precio.setText(String.valueOf(Informacion.albumMostrarFichaTecnica.getPrecio()));
-    	duracion.setText(String.valueOf(Informacion.albumMostrarFichaTecnica.getDuracion()));
-    	nombreAlbum.setText("Editar ficha de: " + Informacion.albumMostrarFichaTecnica.getTitulo());
+    	precio.setText(String.valueOf(album.getPrecio()));
+    	duracion.setText(String.valueOf(album.getDuracion()));
+    	nombreAlbum.setText("Editar ficha de: " + album.getTitulo());
 		
 	}
 
@@ -169,7 +158,7 @@ public class FichaTecnicaAlbumControlador extends ControladorConNavegabilidad im
 			Optional<ButtonType> resultado = popup.showAndWait();
 			
 			if (resultado.get() == ButtonType.OK) {
-				MusicaDao.eliminarAlbumAdmin(Informacion.albumMostrarFichaTecnica);
+				MusicaDao.eliminarAlbumAdmin(album);
 		    	volver();
 			}
 			
@@ -179,7 +168,7 @@ public class FichaTecnicaAlbumControlador extends ControladorConNavegabilidad im
 			Optional<ButtonType> resultado = popup.showAndWait();
 			
 			if (resultado.get() == ButtonType.OK) {
-				MusicaDao.eliminarAlbumUsuario(Informacion.albumMostrarFichaTecnica, Informacion.usuario);
+				MusicaDao.eliminarAlbumUsuario(album, Informacion.usuario);
 		    	volver();
 			}
 
@@ -189,12 +178,11 @@ public class FichaTecnicaAlbumControlador extends ControladorConNavegabilidad im
 
     public void volver() {
 
-    	this.layout.mostrarComoPantallaActual("coleccionMusica");
+    	try {
+			this.layout.cargarColeccionMusica(ColeccionMusicaControlador.class.getResource("ColeccionMusica.fxml"));
+		} catch (IOException e1) {}
+    	
 		limpiarCampos();
-		ocultarCampos();
-		texto.setVisible(true);
-		iconoRefrescar.setVisible(true);
-		cargar.setDisable(false);
 		editar.setDisable(false);
 		guardar.setVisible(false);
 		
@@ -219,52 +207,9 @@ public class FichaTecnicaAlbumControlador extends ControladorConNavegabilidad im
 		
 	}
     
-    private void ocultarCampos() {
-    	
-		ean.setVisible(false);
-		titulo.setVisible(false);
-		artista.setVisible(false);
-		formato.setVisible(false);
-		precio.setVisible(false);
-		genero.setVisible(false);
-		duracion.setVisible(false);
-		discografica.setVisible(false);
-		fechaPublicacion.setVisible(false);
-		nombreAlbum.setVisible(false);
-		caratula.setVisible(false);
-		
-	}
-	
-	private void mostrarCampos() {
-		
-		ean.setVisible(true);
-		titulo.setVisible(true);
-		artista.setVisible(true);
-		formato.setVisible(true);
-		precio.setVisible(true);
-		genero.setVisible(true);
-		duracion.setVisible(true);
-		discografica.setVisible(true);
-		fechaPublicacion.setVisible(true);
-		nombreAlbum.setVisible(true);
-		caratula.setVisible(true);
-		
-		ean.setEditable(false);
-		titulo.setEditable(false);
-		artista.setEditable(false);
-		formato.setEditable(false);
-		precio.setEditable(false);
-		genero.setEditable(false);
-		duracion.setEditable(false);
-		discografica.setEditable(false);
-		fechaPublicacion.setEditable(false);
-		nombreAlbum.setEditable(false);
-		
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ocultarCampos();
 		guardar.setVisible(false);
 		editar.setVisible(false);
 		eliminar.setVisible(false);

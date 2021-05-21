@@ -4,6 +4,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -15,9 +16,12 @@ import com.diego.FinDeCicloDGM.dao.LibroDao;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -93,7 +97,11 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
         translate.play();
         
         translate.setOnFinished((e)->{
-        	this.layout.mostrarComoPantallaActual("coleccionMusica");
+        	
+        	try {
+    			this.layout.cargarColeccionMusica(ColeccionMusicaControlador.class.getResource("ColeccionMusica.fxml"));
+    		} catch (IOException e1) {}
+        	
         	// Limpiamos la pantalla de libros
         	
         	refrescar.setDisable(false);
@@ -252,10 +260,9 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 			@Override
 			public void handle(MouseEvent event) {
 				
-				Informacion.libroMostrarFichaTecnica = libro;
-				mostrarPantallaFichaTecnica();
-				
-				System.out.println("Titulo: " + libro.getTitulo());
+				try {
+					mostrarPantallaFichaTecnica(libro);
+				} catch (IOException e) {}
 				
 			}
 			
@@ -266,8 +273,10 @@ public class ColeccionLibrosControlador extends ControladorConNavegabilidad impl
 		
 	}
 	
-	public void mostrarPantallaFichaTecnica() {
-		this.layout.mostrarComoPantallaActual("fichaTecnicaLibro");
+	public void mostrarPantallaFichaTecnica(Libro libro) throws IOException {
+		
+		this.layout.cargarFichaTecnicaLibro(FichaTecnicaLibroControlador.class.getResource("FichaTecnicaLibro.fxml"), libro);
+		
 		refrescar.setDisable(false);
 	}
 

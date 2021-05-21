@@ -18,13 +18,11 @@ public class Informacion {
 	public static List<Libro> libros = new ArrayList<Libro>();
 	public static Libro libroSeleccionado = new Libro();
 	public static Button refrescar;
-	public static Libro libroMostrarFichaTecnica = new Libro();
 	
 	// Música
 	
 	public static Musica albumSeleccionado = new Musica();
 	public static List<Musica> albumes = new ArrayList<Musica>();
-	public static Musica albumMostrarFichaTecnica = new Musica();
 	public static Stage dialogoAnhadirAlbum = null;
 	public static Stage dialogoSeleccionarAlbum = null;
 	

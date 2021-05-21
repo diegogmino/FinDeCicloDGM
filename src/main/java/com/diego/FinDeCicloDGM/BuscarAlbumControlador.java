@@ -145,9 +145,19 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
         		
         		// Lanzamos el popup de confirmación
         		
-        		Alert popup = Popup.lanzarPopup("Album añadido a la colección", "El álbum " + Informacion.albumSeleccionado.getTitulo() + " se ha añadido a tu colección "
-        				+ "correctamente", 1);
-        		popup.showAndWait();
+    			if(Informacion.usuario.getRango() == 1) {
+					
+					Alert popup = Popup.lanzarPopup("Álbum añadido a la colección", "El álbum «" + Informacion.albumSeleccionado.getTitulo() + "» se ha añadido a tu colección "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				} else {
+					
+					Alert popup = Popup.lanzarPopup("Álbum añadido a la base de datos", "El álbum «" + Informacion.albumSeleccionado.getTitulo() + "» se ha añadido base de datos "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				}
         		
         		Informacion.albumSeleccionado = new Musica();
         		Informacion.dialogoAnhadirAlbum.close();
@@ -167,9 +177,19 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     			
     			MusicaDao.anhadirAlbumUsuario(albumEncontrado, Informacion.usuario);
     			// Lanzamos el popup de confirmación
-    			Alert popup = Popup.lanzarPopup("Album añadido a la colección", "El álbum " + albumEncontrado.getTitulo() + " se ha añadido a tu colección "
-        				+ "correctamente", 1);
-        		popup.showAndWait();
+    			if(Informacion.usuario.getRango() == 1) {
+					
+					Alert popup = Popup.lanzarPopup("Álbum añadido a la colección", "El álbum «" + albumEncontrado.getTitulo() + "» se ha añadido a tu colección "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				} else {
+					
+					Alert popup = Popup.lanzarPopup("Álbum añadido a la base de datos", "El álbum «" + albumEncontrado.getTitulo() + "» se ha añadido base de datos "
+	        				+ "correctamente", 1);
+	        		popup.showAndWait();
+					
+				}
         		
         		Informacion.dialogoAnhadirAlbum.close();
         		

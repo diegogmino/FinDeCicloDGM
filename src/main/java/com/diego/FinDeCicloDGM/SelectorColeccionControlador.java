@@ -52,7 +52,11 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
         translate.play();
         
         translate.setOnFinished((e)->{
-        	this.layout.mostrarComoPantallaActual("coleccionLibros");
+        	
+        	try {
+				this.layout.cargarColeccionLibros(ColeccionLibrosControlador.class.getResource("ColeccionLibros.fxml"));
+			} catch (IOException e1) {}
+        	
         	librosPane.setTranslateX(0);
         	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Libros");
         });
@@ -70,7 +74,11 @@ public class SelectorColeccionControlador extends ControladorConNavegabilidad im
         translate.play();
 		
         translate.setOnFinished((e)->{
-        	this.layout.mostrarComoPantallaActual("coleccionMusica");
+        	
+        	try {
+				this.layout.cargarColeccionMusica(ColeccionMusicaControlador.class.getResource("ColeccionMusica.fxml"));
+			} catch (IOException e1) {}
+        	
         	musicaPane.setTranslateY(0);
         	Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos() + " - Música");
         });
