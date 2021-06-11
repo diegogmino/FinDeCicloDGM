@@ -17,7 +17,6 @@ import javax.imageio.ImageIO;
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Musica;
 import com.diego.FinDeCicloDGM.dao.MusicaDao;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,10 +27,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class NuevoAlbumControlador extends ControladorConNavegabilidad implements Initializable {
 
@@ -76,9 +76,8 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
     
     private boolean caratulaValida = false;
     
-    LocalDate date = LocalDate.parse("1900-01-01");
-    Path rutaGeneros = Path.of("ficherosInfo\\generosAlbumes.csv");
-    Path rutaFormatos = Path.of("ficherosInfo\\formatosAlbumes.csv");
+    private Path rutaGeneros = Path.of("ficherosInfo\\generosAlbumes.csv");
+    private Path rutaFormatos = Path.of("ficherosInfo\\formatosAlbumes.csv");
 	
 	public void guardarAlbum() {
 		
@@ -100,12 +99,14 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 					
 					Alert popup = Popup.lanzarPopup("Álbum añadido a la colección", "El álbum «" + album.getTitulo() + "» se ha añadido a tu colección "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				} else {
 					
 					Alert popup = Popup.lanzarPopup("Álbum añadido a la base de datos", "El álbum «" + album.getTitulo() + "» se ha añadido base de datos "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				}
@@ -115,6 +116,7 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 			} else {
 				
 				Alert popup = Popup.lanzarPopup("Error", "Error al guardar el álbum «" + album.getTitulo() + "»", 2);
+				cargarEstilosPopup(popup);
         		popup.showAndWait();
 				
 			}
@@ -123,6 +125,7 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 		} else {
 			
 			Alert popup = Popup.lanzarPopup("Error", "Ya existe un álbum con el EAN introducido", 2);
+			cargarEstilosPopup(popup);
     		popup.showAndWait();
 			
 		}
@@ -229,6 +232,21 @@ public class NuevoAlbumControlador extends ControladorConNavegabilidad implement
 		} else {
 			btnComprobarCaratula.setDisable(true);
 		}
+		
+	}
+	
+	private void cargarEstilosPopup(Alert popup) {
+		
+		DialogPane dialogPane = popup.getDialogPane();
+		dialogPane.getStylesheets().add(
+		   getClass().getResource("../estilos/popup.css").toExternalForm());
+		dialogPane.getStyleClass().add("popup");
+		
+		Stage stage = (Stage) dialogPane.getScene().getWindow();
+		
+		try {
+			stage.getIcons().add(new Image(getClass().getResource("../img/icono.png").toURI().toString()));
+		} catch (URISyntaxException e) {}
 		
 	}
 	

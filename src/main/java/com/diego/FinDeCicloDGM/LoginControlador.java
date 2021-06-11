@@ -2,39 +2,25 @@ package com.diego.FinDeCicloDGM;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.diego.FinDeCiclo.hilos.HiloIniciarSesion;
 import com.diego.FinDeCiclo.hilos.HiloRegistro;
-import com.diego.FinDeCiclo.pojos.Usuario;
-import com.diego.FinDeCicloDGM.dao.UsuarioDao;
-
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class LoginControlador extends ControladorConNavegabilidad implements Initializable {
@@ -104,12 +90,6 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     
     private Parent fxml;
     
-    private LocalDate date = LocalDate.parse("1900-01-01");
-    
-    private UsuarioDao usuarioDao;
-    private Usuario usuarioEncontrado;
-    
-    
     private boolean usuarioRegistroEs = false, contrasenaRegistroEs = false, repetirContrasenaEs = false, emailEs = false, nombreEs = false, apellidosEs = false, 
     		usuarioLoginEs = false, contrasenaLoginEs = false;
 
@@ -137,7 +117,7 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
 
     // Método que ejecuta la animación y muestra el FXML que acompaña a la vista del login 
     @FXML
-    public void mostrarIniciarSesion(ActionEvent event) {
+    public void mostrarIniciarSesion() {
 
         TranslateTransition translate = new TranslateTransition(Duration.seconds(2), vbox);
         translate.setToX(root.getLayoutX());
@@ -188,7 +168,7 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
 
     	procesandoLogin.setVisible(true);
     	
-    	HiloIniciarSesion hiloSesion = new HiloIniciarSesion(usuarioLogin, contrasenaLogin, procesandoLogin, this, iniciarSesion, mensajeError);
+    	HiloIniciarSesion hiloSesion = new HiloIniciarSesion(usuarioLogin, contrasenaLogin, procesandoLogin, this, mensajeError);
     	hiloSesion.start();
     	
     	iniciarSesion.setDisable(true);
@@ -303,39 +283,11 @@ public class LoginControlador extends ControladorConNavegabilidad implements Ini
     	}
     	
     }
-     
-     public Alert lanzarPopup(String titulo, String contenido, int tipo) {
-       // Método para crear un popup con los string recibidos y devolverlo 
-       Alert popup = null;
-       if (tipo == 1) {
-           popup = new Alert(Alert.AlertType.INFORMATION);
-       } else if(tipo == 2) {
-           popup = new Alert(Alert.AlertType.ERROR);
-       }
-       
-       popup.setTitle(titulo);
-       popup.setHeaderText(null);
-       popup.setContentText(contenido);
-       popup.initStyle(StageStyle.DECORATED); 
-       Stage stage = (Stage) popup.getDialogPane().getScene().getWindow();
-       //stage.getIcons().add(new Image("/img/libro.png"));
-       
-       DialogPane dialogPane = popup.getDialogPane();
-        //dialogPane.getStylesheets().add(
-        //getClass().getResource("popup.css").toExternalForm());
-        //dialogPane.getStyleClass().add("popup");
-       
-        return popup;
-            
-   }
     
    @Override
    public void initialize(URL location, ResourceBundle resources) {
     	
 	   mensajeError.setVisible(false);
-	   
-       usuarioDao = new UsuarioDao();
-       usuarioEncontrado = new Usuario();
        
        procesandoLogin.setVisible(false);
        procesandoRegistro.setVisible(false);

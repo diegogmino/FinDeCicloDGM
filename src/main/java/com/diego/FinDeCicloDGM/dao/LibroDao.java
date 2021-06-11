@@ -1,17 +1,13 @@
 package com.diego.FinDeCicloDGM.dao;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.util.List;
-
 import javax.persistence.Query;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-
 import com.diego.FinDeCiclo.pojos.Libro;
 import com.diego.FinDeCiclo.pojos.Usuario;
 
@@ -169,7 +165,7 @@ public class LibroDao {
 		session.getTransaction().begin();
 
 			Query query = session.createQuery("SELECT l FROM Libro l WHERE titulo LIKE :tit ");
-			List<Libro> libros = query.setParameter("tit", titulo).getResultList();
+			List<Libro> libros = query.setParameter("tit","%" + titulo + "%").getResultList();
 		
 		session.getTransaction().commit();
 
@@ -190,7 +186,7 @@ public class LibroDao {
 		session.getTransaction().begin();
 
 			Query query = session.createQuery("SELECT l FROM Libro l WHERE autor LIKE :aut ");
-			List<Libro> libros = query.setParameter("aut", autor).getResultList();
+			List<Libro> libros = query.setParameter("aut", "%" + autor + "%").getResultList();
 		
 		session.getTransaction().commit();
 

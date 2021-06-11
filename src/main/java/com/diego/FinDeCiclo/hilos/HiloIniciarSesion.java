@@ -3,33 +3,27 @@ package com.diego.FinDeCiclo.hilos;
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Usuario;
 import com.diego.FinDeCicloDGM.LoginControlador;
-import com.diego.FinDeCicloDGM.Popup;
-import com.diego.FinDeCicloDGM.SelectorColeccionControlador;
 import com.diego.FinDeCicloDGM.dao.UsuarioDao;
-
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 
 public class HiloIniciarSesion extends Thread {
 
 	private TextField usuario;
-	private TextField contrasena;
+	private PasswordField contrasena;
 	private ProgressIndicator procesando;
 	private LoginControlador controlador;
-	private Button iniciarSesion;
 	private Label mensajeError;
 	
-	public HiloIniciarSesion(TextField usuario, TextField contrasena, ProgressIndicator procesando, LoginControlador loginControlador, Button iniciarSesion, Label mensajeError) {
+	public HiloIniciarSesion(TextField usuario, PasswordField contrasena, ProgressIndicator procesando, LoginControlador loginControlador, Label mensajeError) {
 		
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.procesando = procesando;
 		this.controlador = loginControlador;
-		this.iniciarSesion = iniciarSesion;
 		this.mensajeError = mensajeError;
 		
 	}
@@ -52,7 +46,7 @@ public class HiloIniciarSesion extends Thread {
         	Platform.runLater(()->{
         		Informacion.usuario = usuarioEncontrado;
         		controlador.mostrarSelectorColeccion();
-        		Informacion.stage.setTitle("Gestor de colecciones - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos());
+        		Informacion.stage.setTitle(Informacion.TITULO_APLICACION + " - " + Informacion.usuario.getNombre() + " " + Informacion.usuario.getApellidos());
     		});
         	
         	usuario.clear();

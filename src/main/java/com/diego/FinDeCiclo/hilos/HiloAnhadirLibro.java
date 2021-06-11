@@ -1,18 +1,14 @@
 package com.diego.FinDeCiclo.hilos;
 
 import java.io.IOException;
-
+import java.net.URISyntaxException;
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCicloDGM.BuscarLibroControlador;
 import com.diego.FinDeCicloDGM.LayoutPane;
-import com.diego.FinDeCicloDGM.LoginControlador;
 import com.diego.FinDeCicloDGM.NuevoLibroControlador;
-
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -39,6 +35,11 @@ public class HiloAnhadirLibro extends Thread {
 			final Stage dialog = new Stage();
 			dialog.initModality(Modality.NONE);
 	        dialog.initOwner(Informacion.stage);
+	        
+	        try {
+				dialog.getIcons().add(new Image(getClass().getResource("../../img/icono.png").toURI().toString()));
+			} catch (URISyntaxException e) {}
+	        
 	        Scene dialogScene = new Scene(layoutPane, 800 , 650);
 	        
 	        dialog.setTitle("Nuevo libro");

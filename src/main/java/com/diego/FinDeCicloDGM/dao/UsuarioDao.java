@@ -1,28 +1,16 @@
 package com.diego.FinDeCicloDGM.dao;
 
-import java.net.ConnectException;
 import java.util.List;
-
 import javax.persistence.Query;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-
 import com.diego.FinDeCiclo.pojos.Usuario;
 
 public class UsuarioDao {
-	
-	public UsuarioDao() {
-		crearTablasSiNoExisten();
-	}
 
-	private void crearTablasSiNoExisten() {
-		
-	}
-	
 	public static List<Usuario> buscarTodos() {
 		
 		StandardServiceRegistry sr = new StandardServiceRegistryBuilder().configure().build();

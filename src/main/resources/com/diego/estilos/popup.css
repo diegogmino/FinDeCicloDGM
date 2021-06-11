@@ -1,0 +1,43 @@
+.popup {
+    -fx-background-color: #E3E3E3;
+}
+
+.popup > *.button-bar > *.container {
+    -fx-background-color: #E3E3E3;
+}
+
+.dialog-pane .button {
+    -fx-font-weight: bold;
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#3f474f;
+}
+
+.dialog-pane .button:hover {   
+    -fx-font-weight: bold;
+    -fx-background-color:#5a1265;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#FFFFFF;
+}
+ 
+.dialog-pane .button:hover:pressed {
+    -fx-font-weight: bold;
+    -fx-background-color:#d43c9b;
+    -fx-background-radius:22;
+    -fx-font-size:16;
+    -fx-text-fill:#FFFFFF;
+}
+
+
+.popup > *.label.content {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.popup:header *.header-panel *.label {
+    -fx-font-size: 15px;
+    -fx-font-style: italic;
+    -fx-fill: black;
+}

@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -149,12 +150,14 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
 					
 					Alert popup = Popup.lanzarPopup("Álbum añadido a la colección", "El álbum «" + Informacion.albumSeleccionado.getTitulo() + "» se ha añadido a tu colección "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				} else {
 					
 					Alert popup = Popup.lanzarPopup("Álbum añadido a la base de datos", "El álbum «" + Informacion.albumSeleccionado.getTitulo() + "» se ha añadido base de datos "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				}
@@ -164,6 +167,7 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
         		
     		} else {
     			Alert popup = Popup.lanzarPopup("Álbum encontrado", "Ya tienes este álbum en tu colección", 2);
+    			cargarEstilosPopup(popup);
     			popup.showAndWait();
     		}
     		
@@ -181,12 +185,14 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
 					
 					Alert popup = Popup.lanzarPopup("Álbum añadido a la colección", "El álbum «" + albumEncontrado.getTitulo() + "» se ha añadido a tu colección "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				} else {
 					
 					Alert popup = Popup.lanzarPopup("Álbum añadido a la base de datos", "El álbum «" + albumEncontrado.getTitulo() + "» se ha añadido base de datos "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				}
@@ -195,6 +201,7 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
         		
     		} else {
     			Alert popup = Popup.lanzarPopup("Álbum encontrado", "Ya tienes este álbum en tu colección", 2);
+    			cargarEstilosPopup(popup);
     			popup.showAndWait();
     		}
 
@@ -253,8 +260,7 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     		
     		if(!albumesEncontrados.isEmpty()) {
     			
-    			Informacion.albumes = albumesEncontrados;
-    			lanzarDialogoSeleccion();
+    			lanzarDialogoSeleccion(albumesEncontrados);
     			
     			if(Informacion.albumSeleccionado.getEan() != null) {
     				
@@ -280,8 +286,7 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     		
     		if(!albumesEncontrados.isEmpty()) {
 
-    			Informacion.albumes = albumesEncontrados;
-    			lanzarDialogoSeleccion();
+    			lanzarDialogoSeleccion(albumesEncontrados);
     			
     			if(Informacion.albumSeleccionado.getEan() != null) {
     				
@@ -307,8 +312,7 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     		
     		if(!albumesEncontrados.isEmpty()) {
     			
-    			Informacion.albumes = albumesEncontrados;
-    			lanzarDialogoSeleccion();
+    			lanzarDialogoSeleccion(albumesEncontrados);
     			
     			if(Informacion.albumSeleccionado.getEan() != null) {
     				
@@ -331,17 +335,16 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
     	
     }
     
-    private void lanzarDialogoSeleccion() {
+    private void lanzarDialogoSeleccion(List<Musica> albumes) {
 		
     	LayoutPane layoutPane = new LayoutPane();
     	
     	try {
-			layoutPane.cargarPantalla("elegirAlbum", ElegirAlbumControlador.class.getResource("ElegirAlbum.fxml"));
+			layoutPane.cargarAlbumesBuscadosTabla(ElegirAlbumControlador.class.getResource("ElegirAlbum.fxml"), albumes);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     	
-    	layoutPane.mostrarComoPantallaActual("elegirAlbum");
     	final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(Informacion.dialogoAnhadirLibro);
@@ -368,6 +371,20 @@ public class BuscarAlbumControlador extends ControladorConNavegabilidad implemen
 	public void aportarAlbum() {
     	this.layout.mostrarComoPantallaActual("nuevoAlbum");
     }
+	
+	private void cargarEstilosPopup(Alert popup) {
+		
+		DialogPane dialogPane = popup.getDialogPane();
+		dialogPane.getStylesheets().add(
+		   getClass().getResource("../estilos/popup.css").toExternalForm());
+		dialogPane.getStyleClass().add("popup");
+		
+		Stage stage = (Stage) dialogPane.getScene().getWindow();
+		
+		try {
+			stage.getIcons().add(new Image(getClass().getResource("../img/icono.png").toURI().toString()));
+		} catch (URISyntaxException e) {}
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

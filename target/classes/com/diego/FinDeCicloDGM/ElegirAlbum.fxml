@@ -39,6 +39,5 @@
             </columns>
         </TableView>
       <Button fx:id="seleccionar" layoutX="552.0" layoutY="330.0" mnemonicParsing="false" onAction="#seleccionar" text="Seleccionar" />
-      <Button fx:id="cargarAlbumes" layoutX="404.0" layoutY="330.0" mnemonicParsing="false" onAction="#cargarAlbumes" text="Cargar álbumes" />
    </children>
 </Pane>

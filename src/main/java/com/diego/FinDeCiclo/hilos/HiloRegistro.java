@@ -1,14 +1,9 @@
 package com.diego.FinDeCiclo.hilos;
 
-import java.time.LocalDate;
-
 import org.apache.commons.validator.routines.EmailValidator;
-
 import com.diego.FinDeCiclo.pojos.Usuario;
 import com.diego.FinDeCicloDGM.LoginControlador;
 import com.diego.FinDeCicloDGM.dao.UsuarioDao;
-
-import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -33,7 +28,6 @@ public class HiloRegistro extends Thread {
 	private Label mensajeObligatorio;
 	
 
-	
 	public HiloRegistro(TextField usuarioRegistro, PasswordField contrasenaRegistro, PasswordField repetirContrasena, TextField nombre, TextField apellidos,
 			DatePicker fechaNacimiento, TextField email, LoginControlador controlador, ProgressIndicator procesando, Label mensajeContrasena, Label mensajeEmail, 
 			Label mensajeErrorInsertar, Label mensajeNombreUsuario, Label mensajeObligatorio) {
@@ -59,7 +53,7 @@ public class HiloRegistro extends Thread {
 		
     	if(contrasenaRegistro.getText().equals(repetirContrasena.getText())) {
     		
-    		if(isValidEmail(email.getText())) {
+    		if(esEmailValido(email.getText())) {
     			
     			mensajeEmail.setVisible(false);
     			
@@ -79,7 +73,7 @@ public class HiloRegistro extends Thread {
     				Usuario usuario = new Usuario(usuarioRegistro.getText(), contrasenaRegistro.getText(), email.getText(), fechaNacimiento.getValue(), nombre.getText(), apellidos.getText(), 1);
                 	
     				if(UsuarioDao.insertarUsuario(usuario)) {
-                		controlador.mostrarIniciarSesion(null);
+                		controlador.mostrarIniciarSesion();
                 	} else {
                 		mensajeObligatorio.setVisible(false);
                 		mensajeNombreUsuario.setVisible(false);
@@ -116,7 +110,7 @@ public class HiloRegistro extends Thread {
     	}
 	}
 	
-	public static boolean isValidEmail(String email) {
+	public static boolean esEmailValido(String email) {
 	       // Creamos una instancia de EmailValidator
 	       EmailValidator validator = EmailValidator.getInstance();
 

@@ -2,22 +2,16 @@ package com.diego.FinDeCicloDGM;
 
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import com.diego.FinDeCiclo.hilos.HiloAnhadirAlbum;
-import com.diego.FinDeCiclo.hilos.HiloAnhadirLibro;
 import com.diego.FinDeCiclo.pojos.Informacion;
-import com.diego.FinDeCiclo.pojos.Libro;
 import com.diego.FinDeCiclo.pojos.Musica;
-import com.diego.FinDeCicloDGM.dao.LibroDao;
 import com.diego.FinDeCicloDGM.dao.MusicaDao;
-
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

@@ -8,11 +8,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-
 import javax.imageio.ImageIO;
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Libro;
@@ -24,14 +22,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class NuevoLibroControlador extends ControladorConNavegabilidad implements Initializable {
 
@@ -72,8 +68,8 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
     private ImageView imagenPortada;
     
     private boolean portadaValida = false;
-    Path rutaGeneros = Path.of("ficherosInfo\\generosLibros.csv");
-    Path rutaTapa = Path.of("ficherosInfo\\tapaLibros.csv");
+    private Path rutaGeneros = Path.of("ficherosInfo\\generosLibros.csv");
+    private Path rutaTapa = Path.of("ficherosInfo\\tapaLibros.csv");
 	
 	public void guardarLibro() {
 		
@@ -97,23 +93,24 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 					
 					Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro «" + libro.getTitulo() + "» se ha añadido a tu colección "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				} else {
 					
 					Alert popup = Popup.lanzarPopup("Libro añadido a la base de datos", "El libro «" + libro.getTitulo() + "» se ha añadido a la base de datos "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				}
-				
-				
-				
+		
 				Informacion.dialogoAnhadirLibro.close();
 				
 			} else {
 				
 				Alert popup = Popup.lanzarPopup("Error", "Error al guardar el libro «" + libro.getTitulo() + "»", 2);
+				cargarEstilosPopup(popup);
         		popup.showAndWait();
 				
 			}
@@ -122,6 +119,7 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 		} else {
 			
 			Alert popup = Popup.lanzarPopup("Error", "Ya existe un libro con el ISBN-13 introducido", 2);
+			cargarEstilosPopup(popup);
     		popup.showAndWait();
 			
 		}
@@ -224,6 +222,21 @@ public class NuevoLibroControlador extends ControladorConNavegabilidad implement
 			btnComprobarPortada.setDisable(true);
 		}
 		
+		
+	}
+	
+	private void cargarEstilosPopup(Alert popup) {
+		
+		DialogPane dialogPane = popup.getDialogPane();
+		dialogPane.getStylesheets().add(
+		   getClass().getResource("../estilos/popup.css").toExternalForm());
+		dialogPane.getStyleClass().add("popup");
+		
+		Stage stage = (Stage) dialogPane.getScene().getWindow();
+		
+		try {
+			stage.getIcons().add(new Image(getClass().getResource("../img/icono.png").toURI().toString()));
+		} catch (URISyntaxException e) {}
 		
 	}
 	

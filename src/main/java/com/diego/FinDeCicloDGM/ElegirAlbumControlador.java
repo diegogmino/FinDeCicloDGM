@@ -1,9 +1,9 @@
 package com.diego.FinDeCicloDGM;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import com.diego.FinDeCiclo.pojos.Informacion;
-import com.diego.FinDeCiclo.pojos.Libro;
 import com.diego.FinDeCiclo.pojos.Musica;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,10 +24,10 @@ public class ElegirAlbumControlador extends ControladorConNavegabilidad implemen
     @FXML
     private Button cargarAlbumes;
     
-    public void cargarAlbumes() {
+    public void cargarAlbumes(List<Musica> albumesBuscados) {
     	
     	ObservableList<Musica> albumes = FXCollections.observableArrayList();
-    	albumes.addAll(Informacion.albumes);
+    	albumes.addAll(albumesBuscados);
 	    tabla.setItems(albumes);
     	
     }

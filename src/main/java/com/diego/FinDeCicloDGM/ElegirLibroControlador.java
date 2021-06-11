@@ -3,10 +3,8 @@ package com.diego.FinDeCicloDGM;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import com.diego.FinDeCiclo.pojos.Informacion;
 import com.diego.FinDeCiclo.pojos.Libro;
-import com.diego.FinDeCicloDGM.dao.LibroDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,10 +24,10 @@ public class ElegirLibroControlador extends ControladorConNavegabilidad implemen
     @FXML
     private Button cargarLibros;
 	
-    public void cargarLibros() {
+    public void cargarLibros(List<Libro> librosBuscados) {
     	
     	ObservableList<Libro> libros = FXCollections.observableArrayList();
-	    libros.addAll(Informacion.libros);
+	    libros.addAll(librosBuscados);
 	    tabla.setItems(libros);  
     	
     }

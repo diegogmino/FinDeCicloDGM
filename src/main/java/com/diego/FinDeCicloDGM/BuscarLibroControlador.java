@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -137,12 +138,14 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
 					
 					Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro «" + Informacion.libroSeleccionado.getTitulo() + "» se ha añadido a tu colección "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				} else {
 					
 					Alert popup = Popup.lanzarPopup("Libro añadido a la base de datos", "El libro «" + Informacion.libroSeleccionado.getTitulo() + "» se ha añadido a la base de datos "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				}
@@ -153,6 +156,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		} else {
     			
     			Alert popup = Popup.lanzarPopup("Libro encontrado", "Ya tienes este libro en tu colección", 2);
+    			cargarEstilosPopup(popup);
     			popup.showAndWait();
     		}
     		
@@ -171,12 +175,14 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
 					
 					Alert popup = Popup.lanzarPopup("Libro añadido a la colección", "El libro «" + libroEncontrado.getTitulo() + "» se ha añadido a tu colección "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				} else {
 					
 					Alert popup = Popup.lanzarPopup("Libro añadido a la base de datos", "El libro «" + libroEncontrado.getTitulo() + "» se ha añadido a la base de datos "
 	        				+ "correctamente", 1);
+					cargarEstilosPopup(popup);
 	        		popup.showAndWait();
 					
 				}
@@ -186,6 +192,7 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		} else {
     			
     			Alert popup = Popup.lanzarPopup("Libro encontrado", "Ya tienes este libro en tu colección", 2);
+    			cargarEstilosPopup(popup);
     			popup.showAndWait();
     		}
 
@@ -232,12 +239,10 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		librosEncontrados = LibroDao.buscarLibroTitulo(titulo.getText());
     		
     		if(!librosEncontrados.isEmpty()) {
-    			Informacion.libros = librosEncontrados;
-    			lanzarDialogoSeleccion();
+    			lanzarDialogoSeleccion(librosEncontrados);
     		} else {
     			agregarAColeccion.setDisable(true);
     			aportarLibro.setDisable(false);
-    			// mostrar imagen de libro no encontrado
     		}
 
     	} else if(!autor.getText().isEmpty()) {
@@ -245,12 +250,10 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		librosEncontrados = LibroDao.buscarLibroAutor(autor.getText());
     		
     		if(!librosEncontrados.isEmpty()) {
-    			Informacion.libros = librosEncontrados;
-    			lanzarDialogoSeleccion();
+    			lanzarDialogoSeleccion(librosEncontrados);
     		} else {
     			agregarAColeccion.setDisable(true);
     			aportarLibro.setDisable(false);
-    			// mostrar imagen de libro no encontrado
     		}
     		
     	} else if(genero.getValue() != null) {
@@ -258,28 +261,25 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
     		librosEncontrados = LibroDao.buscarLibroGenero(genero.getValue());
     		
     		if(!librosEncontrados.isEmpty()) {
-    			Informacion.libros = librosEncontrados;
-    			lanzarDialogoSeleccion();
+    			lanzarDialogoSeleccion(librosEncontrados);
     		} else {
     			agregarAColeccion.setDisable(true);
     			aportarLibro.setDisable(false);
-    			// mostrar imagen de libro no encontrado
     		}
     	}
     	
     }
     
-    private void lanzarDialogoSeleccion() {
+    private void lanzarDialogoSeleccion(List<Libro> libros) {
 		
     	LayoutPane layoutPane = new LayoutPane();
     	
     	try {
-			layoutPane.cargarPantalla("elegirLibro", ElegirLibroControlador.class.getResource("ElegirLibro.fxml"));
+			layoutPane.cargarLibrosBuscadosTabla(ElegirLibroControlador.class.getResource("ElegirLibro.fxml"), libros);;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
-    	layoutPane.mostrarComoPantallaActual("elegirLibro");
+
     	final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(Informacion.dialogoAnhadirLibro);
@@ -306,6 +306,21 @@ public class BuscarLibroControlador extends ControladorConNavegabilidad implemen
 	public void aportarLibro() {
     	this.layout.mostrarComoPantallaActual("nuevoLibro");
     }
+	
+	private void cargarEstilosPopup(Alert popup) {
+		
+		DialogPane dialogPane = popup.getDialogPane();
+		dialogPane.getStylesheets().add(
+		   getClass().getResource("../estilos/popup.css").toExternalForm());
+		dialogPane.getStyleClass().add("popup");
+		
+		Stage stage = (Stage) dialogPane.getScene().getWindow();
+		
+		try {
+			stage.getIcons().add(new Image(getClass().getResource("../img/icono.png").toURI().toString()));
+		} catch (URISyntaxException e) {}
+		
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

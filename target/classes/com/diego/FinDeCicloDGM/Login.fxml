@@ -117,7 +117,7 @@
                   <Insets left="320.0" />
                </GridPane.margin>
             </ProgressIndicator>
-            <Label fx:id="mensajeNombreUsuario" layoutX="90.0" layoutY="616.0" styleClass="error" text="El usuario introducido ya existe" visible="false" GridPane.rowIndex="9">
+            <Label fx:id="mensajeNombreUsuario" layoutX="90.0" layoutY="616.0" styleClass="error" text="La información introducida ya pertenece a un usuario" visible="false" GridPane.rowIndex="9">
                <font>
                   <Font name="Yu Gothic Medium" size="14.0" />
                </font>
@@ -194,7 +194,7 @@
                   <Insets left="80.0" top="20.0" />
                </GridPane.margin>
             </Label>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#mostrarCrearCuenta" prefHeight="40.0" prefWidth="152.0" styleClass="loginButton" text="Crear una cuenta" textAlignment="CENTER" GridPane.rowIndex="3">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#mostrarCrearCuenta" prefHeight="40.0" prefWidth="152.0" styleClass="loginButton" text="Crear cuenta" textAlignment="CENTER" GridPane.rowIndex="3">
                <font>
                   <Font name="Yu Gothic Medium" size="20.0" />
                </font>

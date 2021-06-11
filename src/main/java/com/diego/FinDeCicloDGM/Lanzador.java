@@ -1,15 +1,10 @@
 package com.diego.FinDeCicloDGM;
 
 import com.diego.FinDeCiclo.pojos.Informacion;
-
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Lanzador extends Application {
 	
@@ -25,7 +20,7 @@ public class Lanzador extends Application {
         Scene escena = new Scene(layoutPane, 1200 , 650);
         primaryStage.setTitle(Informacion.TITULO_APLICACION);
         primaryStage.setResizable(false);
-        //primaryStage.getIcons().add(new Image("/img/libro.png"));
+        primaryStage.getIcons().add(new Image(getClass().getResource("../img/icono.png").toURI().toString()));
         primaryStage.setScene(escena);
         primaryStage.show();
         Informacion.stage = primaryStage;

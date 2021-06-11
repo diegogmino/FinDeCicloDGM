@@ -1,8 +1,6 @@
 package com.diego.FinDeCicloDGM;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.DialogPane;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Popup  {
@@ -22,13 +20,8 @@ public class Popup  {
 	       popup.setHeaderText(null);
 	       popup.setContentText(contenido);
 	       popup.initStyle(StageStyle.DECORATED);
-	       Stage stage = (Stage) popup.getDialogPane().getScene().getWindow();
-	       //stage.getIcons().add(new Image("/img/libro.png"));
 	       
-	        return popup;
-	}
-	 
-	 
-	 
+	       return popup;
+	}	 
 
 }

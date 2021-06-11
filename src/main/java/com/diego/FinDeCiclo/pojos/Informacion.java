@@ -1,9 +1,5 @@
 package com.diego.FinDeCiclo.pojos;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class Informacion {
@@ -15,20 +11,17 @@ public class Informacion {
 	
 	public static Stage dialogoAnhadirLibro = null;
 	public static Stage dialogoSeleccionarLibro = null;
-	public static List<Libro> libros = new ArrayList<Libro>();
 	public static Libro libroSeleccionado = new Libro();
-	public static Button refrescar;
 	
 	// Música
 	
 	public static Musica albumSeleccionado = new Musica();
-	public static List<Musica> albumes = new ArrayList<Musica>();
 	public static Stage dialogoAnhadirAlbum = null;
 	public static Stage dialogoSeleccionarAlbum = null;
 	
 	// Constantes
 	
-	public static final String TITULO_APLICACION = "Gestor de colecciones"; 
+	public static final String TITULO_APLICACION = "Mis Colecciones"; 
 
 
 }

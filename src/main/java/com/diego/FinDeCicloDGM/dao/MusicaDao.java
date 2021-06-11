@@ -186,8 +186,8 @@ public class MusicaDao {
 
 		session.getTransaction().begin();
 
-			Query query = session.createQuery("SELECT m FROM Musica m WHERE titulo = :tit ");
-			List<Musica> albumes = query.setParameter("tit", titulo).getResultList();
+			Query query = session.createQuery("SELECT m FROM Musica m WHERE titulo LIKE :tit ");
+			List<Musica> albumes = query.setParameter("tit","%" + titulo + "%").getResultList();
 	
 		session.getTransaction().commit();
 
@@ -206,8 +206,8 @@ public class MusicaDao {
 
 		session.getTransaction().begin();
 
-			Query query = session.createQuery("SELECT m FROM Musica m WHERE artista = :art ");
-			List<Musica> albumes = query.setParameter("art", grupo).getResultList();
+			Query query = session.createQuery("SELECT m FROM Musica m WHERE artista LIKE :art ");
+			List<Musica> albumes = query.setParameter("art", "%" + grupo + "%").getResultList();
 	
 		session.getTransaction().commit();
 
