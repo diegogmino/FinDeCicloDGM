@@ -1,0 +1,1 @@
+# DCentral - Gestor de colecciones
