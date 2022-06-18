@@ -19,9 +19,9 @@ Para el desarrollo de este proyecto se ha usado **Eclipse** y **XAMPP**. Por lo 
 
 En primer lugar será necesario ejecutar el script de la base de datos que se encuentra en la sección de documentación de este repositorio.
 
-Una vez que se cuente con la base de datos de DCentral correctamente instalada en el equipo, será necesario abrir la carpeta que contiene el código con el IDE Eclipse (o similares).
+Una vez que se cuente con la base de datos de **DCentral** correctamente instalada en el equipo, será necesario abrir la carpeta que contiene el código con el **IDE Eclipse** (o similares).
 
-En el caso de usar Eclipse, para poder ejecutar correctamente la aplicación, será necesario instalar **e(fx)clipse** además de tener un añadido al **VM arguments** dentro del **Run Configurations** de Eclipse el **SDK** de **JavaFX** (que se encuentra en la carpeta de **Documentación** de este repositorio) que se vaya a usar. La linea que ha sido agregada para el desarrollo de la aplicación ha sido la siguiente:
+En el caso de usar Eclipse, para poder ejecutar correctamente la aplicación, será necesario instalar **e(fx)clipse** además de tener un añadido al **VM arguments** dentro del **Run Configurations** de **Eclipse** el **SDK** de **JavaFX** (que se encuentra en la carpeta de **Documentación** de este repositorio) que se vaya a usar. La linea que ha sido agregada para el desarrollo de la aplicación ha sido la siguiente:
 
 ```bash
 --module-path "D:\JAVA\javafx-sdk-15.0.1\lib" --add-modules javafx.controls,javafx.fxml
@@ -31,18 +31,16 @@ Como es obvio, la ruta "D:\JAVA\javafx-sdk-15.0.1\lib" ha de ser modificada y aj
 Las credenciales con las que se puede acceder a la aplicación sin crear una nueva cuenta son las siguientes:
 
 - **Usuario**: admin
-- **Contraseña**: 1234
-- **Rol**: administrador
-
+  -  **Contraseña**: 1234
+  - **Rol**: administrador
 
 - **Usuario**: Diego
-- **Contraseña**: 1234
-- **Rol**: usuario estándar
-
+  - **Contraseña**: 1234
+  - **Rol**: usuario estándar
 
 - **Usuario**: JDoe
-- **Contraseña**: 1234
-- **Rol**: usuario estándar
+  - **Contraseña**: 1234
+  - **Rol**: usuario estándar
 
 ## Autor
 
